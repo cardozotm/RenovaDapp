@@ -19,7 +19,7 @@ Nos horários de pico na capital paulista, em média, o tempo das viagens de aut
 ### Estudo sobre o problema
 Dada a gravidade do problema, muitas são as propostas de solução:
 - Ampliar ciclovias;
-- Dsenvolver hidrovias como meio de transporte;
+- Desenvolver hidrovias como meio de transporte;
 - Implantar pedágio urbano;
 - Criar corredores que integrem diferentes modais;
 - Implementar sistema de rodízio;
