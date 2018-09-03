@@ -18,38 +18,64 @@ Nos horários de pico na capital paulista, em média, o tempo das viagens de aut
 
 ### Estudo sobre o problema
 Dada a gravidade do problema, muitas são as propostas de solução:
-- Ampliar ciclovias
-- Dsenvolver hidrovias como meio de transporte 
-- Implantar pedágio urbano
-- Criar corredores que integrem diferentes modais
-- Implementar sistema de rodízio
-- Incentivar as caronas
-- Cobrar pelo uso da via
+- Ampliar ciclovias;
+- Dsenvolver hidrovias como meio de transporte;
+- Implantar pedágio urbano;
+- Criar corredores que integrem diferentes modais;
+- Implementar sistema de rodízio;
+- Incentivar as caronas;
+- Cobrar pelo uso da via.
 
-### Proposta de solução - Cobrança de uso da via
+### Proposta de solução - Cobrança de uso da via e incentivo a carona
 Nossa proposta de solução é implementação de gestão da capacidade de uso de vias em função de sua demanda de uso no lugar do rodízio. 
 
 Implica o uso de uma chain (infra propria)
 
 Applicação que permite o uso de tokens para pleitear o uso do espaço da via
-contratos em bc que controlam o uso dos tokens (stake)
-contratos que define os custos de transição da via 
+contratos em bc que controlam o uso dos tokens
+contratos que define os custos de transição na via 
 sistema de fiscalização que seria implentado no atual sistema de gestão de rodízio (câmeras)
 
-token
+#### Token
 airdrop periodicos
 gastar e queimar
 não pode depender de um sistema da prefeitura
+qual o incentivo para o cara sair?
+
 
 ## Descrição do protótipo
 
+tokens compram tickets de acesso
+(refinar regras de negócio)
+
 back end
-Limitar/ gerir a capacidade do recurso
-contrato que mantem um saldo dentro de limites (capacidade de absorver o transito)
-função (gráfico) de custo de alocação de tokens pela capacidade da via
-quanto tempo o cara vai ficar?
+- Limitar/ gerir a capacidade do recurso
+- contrato que mantem um saldo dentro de limites (capacidade de absorver o transito)
+- contrato que o supply
+- função (gráfico) de custo de alocação de tokens pela porcentagem de uso da via - preço dinâmico do ticket
+- contratos de gestão de identidade (veiculo e motorista)
+- acesso ao cadastro de veiculo (gestão de identidade)
 
+apresentar no app
+- custo do ticket
+- projeção do custo no dia
+- compra do ticket que vai permitir o acesso com o token
+- transferir para outras pessoas tokens
+- saldo da conta
+- historico de uso
+- cadastro de motorista na bc
+- lista meus veiculos
 
+infra
+rodar a nossa chain (pelo menos 2 nos?)
+
+o que precisa ser feito
+- regras de criação de token (modo de distribuição, modo de alocação para usuário, supply)
+- fluxo de cadastro de usuários
+- fluxo cadastro de veiculos
+- regras de negocio do cadastro de usuários (motoristas, proprieitarios de veiculos, cidadão habilitados...)
+- regras de negócio do cadastro de veiculos (particular)
+- modelagem do custo do ticket
 
 ### Referência
 1) https://www.google.com/url?q=https://bibliotecadigital.fgv.br/dspace/bitstream/handle/10438/11576/TD%2520356%2520-%2520Marcos%2520Cintra.pdf&sa=D&source=hangouts&ust=1536081795857000&usg=AFQjCNEUSWDePqrUIY9QqaN16I_ybygeOg
