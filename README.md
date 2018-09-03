@@ -37,11 +37,10 @@ contratos que define os custos de transição na via
 sistema de fiscalização que seria implentado no atual sistema de gestão de rodízio (câmeras)
 
 #### Token
-airdrop periodicos
-gastar e queimar
-não pode depender de um sistema da prefeitura
-qual o incentivo para o cara sair?
-
+- airdrop periodicos (para o mercado)
+- gastar e queimar
+- não pode depender de um sistema da prefeitura
+- qual o incentivo para o cara sair?
 
 ## Descrição do protótipo
 
@@ -51,7 +50,10 @@ tokens compram tickets de acesso
 back end
 - Limitar/ gerir a capacidade do recurso
 - contrato que mantem um saldo dentro de limites (capacidade de absorver o transito)
-- contrato que o supply
+- contrato que cria tokens
+- contrato que gerencia uso de tokens (burn)
+- contrato de compra de ticket
+- contrato de gerenciamento de valor de ticket
 - função (gráfico) de custo de alocação de tokens pela porcentagem de uso da via - preço dinâmico do ticket
 - contratos de gestão de identidade (veiculo e motorista)
 - acesso ao cadastro de veiculo (gestão de identidade)
