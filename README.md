@@ -1,29 +1,56 @@
 # Desafio EOS Rio Hackathon 2018 - Bluchain
 
 ## Tema
-Aplicação descentralizada com foco na mobilidade urbana.
+Aplicação descentralizada de gestão de uso da malha viária pela cobrança de uso da via.
 
-(em impacto social e/ou ambiental a ser implementada na Blockchain EOS.
-Os projetos podem ser distribuidos tanto na Mainnet como em uma testnet privada a ser configurada pela equipe.)
+Como caso de estudo, será considerada a implantação no centro expandido da cidade de São Paulo, Brasil.
 
-## Critérios de Avaliação
+Mapa do centro expandido: https://www.google.com/maps/d/viewer?mid=1Xg6ACUNSiuS0IOr7p7t9c6IvLx4&msa=0&ll=-23.568949674056366%2C-46.660593500000004&z=13
 
-- Integração com a blockchain EOS. Neste quesito será avaliado o uso de recursos específicos da blockchain EOS, se o conceito do projeto faz sentido para a blockchain EOS, existe clara vantagem em desenvolver o projeto na blockchain EOS.
+## Descrição do projeto
 
-- Desenvolvimento de smart contracts para a solução. Será avaliado a utilização de contratos inteligentes no eos, bem como o grau de dificuldade da implementação.
+### Descrição do problema
+Uma das principais causas dos congestionamentos em grandes centros urbanos é o uso intensivo da malha viária, em que muitos veículos estão competindo pelo uso de um recurso limitado no mesmo intervalo de tempo.
 
-- Implementação de infraestrutura auxiliar (apis/backend/frontend). Será avaliado a capacidade da equipe de criar, implementar ou utilizar serviços auxiliares à blockchain EOS, bem como o grau de dificuldade da implementação.
+O congestionamento tem vários impactos negativos, como a redução da produtividade do transporte, o aumento da poluição do ar e o aumento da morosidade do trânsito de pessoas. Economicamente, a crise de mobilidade em São Paulo custa por ano mais de R$ 40 bilhões, valor equivalente a 1% do PIB brasileiro e 7,5% do PIB paulistano. Reduzir esse desperdício é um desafio da gestão pública [1].
 
-- Escalabilidade. Neste critério será avaliado o potencial de escalabilidade e crescimento do projeto.
+Nos horários de pico na capital paulista, em média, o tempo das viagens de automóvel é 69% maior entre as 7 e as 10 horas e entre as 17 e as 20 horas [2]. 
 
-- Criatividade. No quesito criatividade, será avaliado o quão criativo foi o time em desenvolver a solução, e o quão única ou relevante é a solução.
+### Estudo sobre o problema
+Dada a gravidade do problema, muitas são as propostas de solução:
+- Ampliar ciclovias
+- Dsenvolver hidrovias como meio de transporte 
+- Implantar pedágio urbano
+- Criar corredores que integrem diferentes modais
+- Implementar sistema de rodízio
+- Incentivar as caronas
+- Cobrar pelo uso da via
 
-- Impacto. No quesito impacto, será avaliado se o projeto contribuirá efetivamente com a melhoria de algum problema identificado e se a ideia pode funcionar no mundo real.
+### Proposta de solução - Cobrança de uso da via
+Nossa proposta de solução é implementação de gestão da capacidade de uso de vias em função de sua demanda de uso no lugar do rodízio. 
 
-## Instruções
+Implica o uso de uma chain (infra propria)
 
-1. Mantenha o código fonte dos contratos (smart contracts) e outros arquivos auxiliares para seu projeto no repositório privado da sua equipe, a nossa equipe terá acesso ao mesmo e estaremos avaliando durante todo o período da Hackathon até 20/09 (deadline).
+Applicação que permite o uso de tokens para pleitear o uso do espaço da via
+contratos em bc que controlam o uso dos tokens (stake)
+contratos que define os custos de transição da via 
+sistema de fiscalização que seria implentado no atual sistema de gestão de rodízio (câmeras)
 
-2. Modificar ester arquivo README.md na raiz do repositório para incluir a descrição do seu projeto.
+token
+airdrop periodicos
+gastar e queimar
+não pode depender de um sistema da prefeitura
 
-3. Dúvidas e acesso as calls para AMA (Ask Me Anything) com os mentores serão feitas através do grupo https://t.me/eosriohackathon
+## Descrição do protótipo
+
+back end
+Limitar/ gerir a capacidade do recurso
+contrato que mantem um saldo dentro de limites (capacidade de absorver o transito)
+função (gráfico) de custo de alocação de tokens pela capacidade da via
+quanto tempo o cara vai ficar?
+
+
+
+### Referência
+1) https://www.google.com/url?q=https://bibliotecadigital.fgv.br/dspace/bitstream/handle/10438/11576/TD%2520356%2520-%2520Marcos%2520Cintra.pdf&sa=D&source=hangouts&ust=1536081795857000&usg=AFQjCNEUSWDePqrUIY9QqaN16I_ybygeOg
+2) https://exame.abril.com.br/brasil/em-horarios-de-pico-tempo-que-paulistanos-ficam-no-transito-e-69-maior/
