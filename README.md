@@ -44,10 +44,10 @@ sistema de fiscalização que seria implentado no atual sistema de gestão de ro
 
 ## Descrição do protótipo
 
-tokens compram tickets de acesso
+### tokens compram tickets de acesso
 (refinar regras de negócio)
 
-back end
+### back end
 - Limitar/ gerir a capacidade do recurso
 - contrato que mantem um saldo dentro de limites (capacidade de absorver o transito)
 - contrato que cria tokens
@@ -58,7 +58,7 @@ back end
 - contratos de gestão de identidade (veiculo e motorista)
 - acesso ao cadastro de veiculo (gestão de identidade)
 
-apresentar no app
+### apresentar no app
 - custo do ticket
 - projeção do custo no dia
 - compra do ticket que vai permitir o acesso com o token
@@ -68,10 +68,10 @@ apresentar no app
 - cadastro de motorista na bc
 - lista meus veiculos
 
-infra
+### infra
 rodar a nossa chain (pelo menos 2 nos?)
 
-o que precisa ser feito
+### o que precisa ser feito
 - regras de criação de token (modo de distribuição, modo de alocação para usuário, supply)
 - fluxo de cadastro de usuários
 - fluxo cadastro de veiculos
