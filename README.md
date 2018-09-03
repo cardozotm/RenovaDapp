@@ -1,8 +1,10 @@
-# Desafio EOS Rio Hackathon 2018
+# Desafio EOS Rio Hackathon 2018 - Bluchain
 
 ## Tema
-Aplicação descentralizada com foco em impacto social e/ou ambiental a ser implementada na Blockchain EOS.
-Os projetos podem ser distribuidos tanto na Mainnet como em uma testnet privada a ser configurada pela equipe.
+Aplicação descentralizada com foco na mobilidade urbana.
+
+(em impacto social e/ou ambiental a ser implementada na Blockchain EOS.
+Os projetos podem ser distribuidos tanto na Mainnet como em uma testnet privada a ser configurada pela equipe.)
 
 ## Critérios de Avaliação
 
