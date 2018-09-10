@@ -39,7 +39,7 @@ Os comerciantes se cadastram na plataforma, preenchendo as informações da sua 
 ### Principais funcionalidades para o centro de reciclagem
 
 - Cadastrar interesse em receber os resíduos
-- Rceber solicitações de coleta
+- Receber solicitações de coleta
 - Criar um ID digital único
 - Chat com comerciantes
 
@@ -75,7 +75,7 @@ Os comerciantes se cadastram na plataforma, preenchendo as informações da sua 
 - Busca de usuários
 - Histórico de transações
 
-### MVP aplicativo do usuário mockado
+### MVP aplicativo do comerciante mockado
 
 ### Infraestrutura
 
