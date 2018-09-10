@@ -30,52 +30,63 @@ Os comerciantes se cadastram na plataforma, preenchendo as informações da sua 
 - Criar um ID digital único
 - Histórico de transações
 - Lista de usuários cadastrados na rede
-- Gestão de coleta de recicláveis
-- Avaliar trocas com usuários
-- Chat com comerciantes e centros de reciclagem
+- Chat com comerciantes e centros de coleta
 - Gestão de catálogos de produtos
-- Agendar coleta de recicláveis 
 
-### Principais funcionalidades para o centro de reciclagem
+### Principais funcionalidades para o centro de coleta
 
-- Cadastrar interesse em receber os resíduos
-- Receber solicitações de coleta
 - Criar um ID digital único
 - Chat com comerciantes
+- Gestão de coleta de recicláveis
 
-
-## Descrição do MVP
+## Descrição do POC
 
 ### Token Renova (RNV)
 
 - Token EOS fungível
-- Emissão de tokens pelos comerciantes em troca de embalagens recicláveis
-- Quando os tokess são gastos em troca de produtos ou serviços, eles são queimados (deixam de existir)
+- Emissão de tokens pelos centros de coleta em troca de material recicláveis
+- Quando os tokens são gastos em troca de produtos ou serviços, eles são queimados (deixam de existir)
 
 ### Blockchain
 
 - Contrato que cria tokens
-- Contrato que gerencia uso de tokens (burn)
+- Contrato consumidor
+  - Cadastro (privado)
+- Contrato comerciante
+  - Cadastro (publico)
+  - Ofertas
+- Contrato coleta
+  - Cadastro (publico)
+  - Valor pago por materiais
 - Acesso ao cadastro de IDs (gestão de identidade)
-- Gestão de chaves privadas
+- Gestão de chaves privadas (wallet padrão)
 
-### MVP aplicativo do usuário
+### POC aplicativo do usuário
 
 - Carteira de token RNV
-- Transferência para usuários
+- Transferência para comerciante
+- Lista de centros de coleta
+- Busca de centros de coleta
 - Histórico de transações
 - ID digital
 
-### MVP aplicativo do usuário mockado
+### POC aplicativo do comerciante
 
-### MVP aplicativo do comerciante
-
-- Emissão de tokens
+- Carteira de token RNV
+- Cadastro de ofertas
 - Lista de usuários
 - Busca de usuários
 - Histórico de transações
+- Transferência para centro de coleta
 
-### MVP aplicativo do comerciante mockado
+### POC aplicativo do centro de coleta
+
+- Carteira de token RNV
+- Cadastro de materiais e preços
+- Lista de usuários
+- Busca de usuários
+- Histórico de transações
+- Transferência para usuários (PDV)
 
 ### Infraestrutura
 
