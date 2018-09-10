@@ -1,7 +1,7 @@
 # Desafio EOS Rio Hackathon 2018 - Bluchain
 
 ## Tema
-Rede fidelidade em blockchain, chamada Renova, que incentiva a reciclagem de embalagens descartáveis, promovida por comerciantes preocupados com a sustentabilidade.
+Rede de fidelidade em blockchain, chamada Renova, que incentiva a reciclagem de embalagens descartáveis, promovida por comerciantes preocupados com a sustentabilidade do meio ambiente.
 
 ## Descrição do projeto
 
