@@ -7,11 +7,11 @@ Rede de fidelidade em blockchain, chamada Renova, que incentiva a reciclagem de 
 
 A proposta deste projeto é criar o token Renova (RNV), um sistema que motiva cidadãos a reciclarem o seu lixo por uma recompensa dada por estabelecimentos comerciais conectados a rede. O token pode ser utilizado para desconto em produtos e serviços nos comércios participantes, revertido em criptomoedas em exchanges, transferido entre usuários ou outras funcionalidades que a comunidade encontrar para ele.
 
-Os atores do ecossistema são consumidores, comerciantes e centros de reciclagem.
+Os atores do ecossistema são consumidores, comerciantes e centros de coleta.
 
 ### Proposta de solução
 
-A solução é voltada para comerciantes que apoiam a causa da reciclagem e querem incentivar os seus consumidores a aderirem essa prática. 
+A solução é voltada para comerciantes que apoiam a causa da reciclagem e querem incentivar os seus consumidores a aderirem essa prática.
 
 Os comerciantes se cadastram na plataforma, preenchendo as informações da sua loja, 
 
