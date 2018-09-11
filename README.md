@@ -13,7 +13,10 @@ Os atores do ecossistema são consumidores, comerciantes e centros de coleta.
 
 A solução é voltada para comerciantes que apoiam a causa da reciclagem e querem incentivar os seus consumidores a aderirem essa prática.
 
-Os comerciantes se cadastram na plataforma, preenchendo as informações da sua loja, 
+O comerciante se cadastra na plataforma, preenchendo as informações da sua loja (nome da loja, CNPJ, endereço, logo), e 
+
+Já o usuário
+Inicialmente, papel, plástico e alumínio
 
 ### Principais funcionalidades para o usuário
 
