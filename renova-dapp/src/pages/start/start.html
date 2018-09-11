@@ -1,0 +1,243 @@
+<ion-content class="start-content">
+
+  <!--Welcome-->
+  <div no-padding class="welcome view-height" *ngIf="step=='welcome'">
+    <div padding padding-vertical class="hor-center-cont">
+      <img src="assets/imgs/logo_renova_branco-01.svg">
+    </div>
+
+    <div class="hor-center-cont start-apresentacao">
+      <div padding-vertical>
+        <h2 text-center>Bem vindo ao Renova!</h2>
+      </div>
+      <div padding>
+        <button text-uppercase ion-button outline block color="dark" (click)="nextStep('onboarding')">VAMOS
+          COMEÇAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!--Onboarding Básico -->
+  <div class="onboarding view-height" *ngIf="step=='onboarding'">
+    <div padding class="hor-center-cont">
+      <img class="logo" src="assets/imgs/logo-renova.svg">
+    </div>
+    <div class="hor-center-cont start-onboarding">
+      <p>Você ainda não possui uma conta na blockchain EOS para este usuário ou dispositivo. Crie uma clicando no botão
+        abaixo.</p>
+    </div>
+    <div padding-horizontal>
+      <div padding>
+        <button text-uppercase ion-button block color="primary" (click)="nextStep('fase1')">CRIAR UMA CONTA</button>
+        <button text-uppercase ion-button block outline color="dark" (click)="importAlert()">IMPORTAR UMA CONTA</button>
+      </div>
+    </div>
+  </div>
+
+  <!--Criar Nova Carteira-->
+  <div no-padding class="criar-carteira view-height" *ngIf="step!='welcome'">
+    <div padding class="criar-carteira-header">
+      <h2>Criar conta</h2>
+    </div>
+
+    <form padding [formGroup]="signUpForm" (ngSubmit)="signUp()">
+
+      <!-- Fase 1-->
+      <div *ngIf="step==='fase1'">
+
+        <ion-grid>
+
+          <ion-row>
+            <ion-col col-12>
+              <!-- Firt Name -->
+              <ion-item>
+                <ion-label stacked class="text label">
+                  Nome / Razão Social:
+                </ion-label>
+                <ion-input type="email" formControlName="complete_name">
+                </ion-input>
+              </ion-item>
+              <span float-right padding-right *ngIf="!signUpForm.controls.complete_name.valid && signUpForm.controls.complete_name.touched"
+                class="form-error-message">
+                Nome inválido
+              </span>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-12>
+              <!-- CPF -->
+              <ion-item>
+                <ion-label stacked class="text label">
+                  CPF / CNPJ:
+                </ion-label>
+                <ion-input type="email" formControlName="gov_id">
+                </ion-input>
+              </ion-item>
+              <span float-right padding-right *ngIf="!signUpForm.controls.gov_id.valid && signUpForm.controls.gov_id.touched"
+                class="form-error-message">
+                CPF/CNPJ inválido
+              </span>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-9>
+              <!-- CEP -->
+              <ion-item>
+                <ion-label stacked class="text label">
+                  CEP:
+                </ion-label>
+                <ion-input [(ngModel)]="cepObservable" type="email" formControlName="zip" [brmasker]="{mask:'00000-000', len:9}" > 
+                </ion-input>
+              </ion-item>
+              <span float-right padding-right *ngIf="!signUpForm.controls.zip.valid && signUpForm.controls.zip.touched"
+                class="form-error-message">
+                CEP inválido
+              </span>
+              <div>
+                <a float-right style="margin-right:16px" (click)="findCep()">Buscar endereço</a>
+              </div>
+
+            </ion-col>
+            <ion-col col-3>
+              <ion-item>
+                <ion-label stacked class="text label">
+                  N.:
+                </ion-label>
+                <ion-input type="email" formControlName="number">
+                </ion-input>
+              </ion-item>
+                <span float-right padding-right *ngIf="!signUpForm.controls.number.valid && signUpForm.controls.number.touched"
+                class="form-error-message">
+                Número inválido
+              </span>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-12>
+              <ion-item>
+                <ion-label stacked class="text label">
+                  Rua:
+                </ion-label>
+                <ion-input disabled="true" [(ngModel)]="street" type="email" formControlName="street">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-12>
+              <ion-item>
+                <ion-label stacked class="text label">
+                  Bairro:
+                </ion-label>
+                <ion-input disabled="true" [(ngModel)]="neighborhood" type="email" formControlName="neighborhood">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col col-9>
+              <ion-item>
+                <ion-label stacked class="text label">
+                  Cidade:
+                </ion-label>
+                <ion-input disabled="true" [(ngModel)]="city" type="email" formControlName="city">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-3>
+              <ion-item>
+                <ion-label stacked class="text label">
+                  UF:
+                </ion-label>
+                <ion-input disabled="true" [(ngModel)]="state" type="email" formControlName="state">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div>
+          <button ion-button full class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
+        </div>
+      </div>
+
+      <!-- Fase 2 -->
+      <div *ngIf="step==='fase2'">
+        <div>
+          <ion-item>
+            <ion-label stacked class="text label">
+              Username:
+            </ion-label>
+            <ion-label stacked class="text sub-label">
+              12 caracteres (a-z 1-5)
+            </ion-label>
+            <ion-input type="email" formControlName="user" [brmasker]="{mask:'000000000000', len:12}">
+            </ion-input>
+          </ion-item>
+          <span float-left padding-left *ngIf="!signUpForm.controls.user.valid && (signUpForm.controls.user.dirty || signUpForm.controls.user.touched)"
+            class="form-error-message">{{ signUpForm.controls.user.value.length }} caracteres</span>
+          <span float-right padding-right *ngIf="!signUpForm.controls.user.valid && signUpForm.controls.user.touched"
+            class="form-error-message">
+            Nome inválido
+          </span>
+
+          <ion-item>
+            <ion-label stacked class="text label">
+              PIN:
+            </ion-label>
+            <ion-label stacked class="text sub-label">
+              6 dígitos
+            </ion-label>
+            <ion-input type="password" inputmode="numeric" pattern="[0-9]*" formControlName="pin">
+            </ion-input>
+          </ion-item>
+          <span float-right padding-right *ngIf="!signUpForm.controls.pin.valid && signUpForm.controls.pin.touched"
+            class="form-error-message">
+            Pin inválido
+          </span>
+
+          <ion-item>
+            <ion-label stacked class="text label">
+              Confirme seu PIN:
+            </ion-label>
+            <ion-label stacked class="text sub-label">
+              6 dígitos
+            </ion-label>
+            <ion-input type="password" inputmode="numeric" pattern="[0-9]*" formControlName="pinconfirm">
+            </ion-input>
+          </ion-item>
+          <span float-right padding-right *ngIf="(signUpForm.controls.pin.value!=signUpForm.controls.pinconfirm.value|| !signUpForm.controls.pinconfirm.valid) && (signUpForm.controls.pinconfirm.touched||signUpForm.controls.pinconfirm.dirty)"
+            class="form-error-message">
+            Pins diferentes
+          </span>
+
+          <div text-center padding>
+            <h3 padding-top class="text pin-inst-header">Guarde o número do seu PIN.</h3>
+            <p class="text pin-inst-content">Você não poderá recuperá-lo
+              <br>e acessá-lo novamente. </p>
+          </div>
+          <ion-row>
+            <ion-col>
+              <button text-uppercase ion-button block outline color="primary" (click)="nextStep('onboarding')">CANCELAR</button>
+            </ion-col>
+            <ion-col>
+              <button text-uppercase ion-button block color="primary" type="submit" [disabled]="!signUpForm.valid||(signUpForm.controls.pin.value!=signUpForm.controls.pinconfirm.value)">CONFIRMAR</button>
+            </ion-col>
+          </ion-row>
+        </div>
+
+      </div>
+      <!-- Fase 3-->
+
+    </form>
+
+
+  </div>
+
+</ion-content>

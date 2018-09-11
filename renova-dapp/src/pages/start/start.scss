@@ -1,0 +1,128 @@
+page-start {
+    $app-background: linear-gradient(color($colors, bg-light), color($colors, bg-dark));
+    $background-color: transparent;
+    $toolbar-background: transparent;
+    
+
+    .text{
+        color: #5e5f5f;
+    }
+
+    .view-height{
+        height: 100vh;
+    }
+
+    .welcome{
+        background: $app-background;
+        padding-top: 50px;
+    }
+
+    .onboarding {
+        padding-top: 96px;
+    }
+
+    .criar-carteira-header {
+        background: #8dc63f;
+    }
+
+    .start-content{
+        margin-bottom: 0px;
+    }
+
+    .start-menu{
+        background: transparent;
+        color: color($colors, light);
+        font-size: 32px;
+    }
+
+    .start-apresentacao {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    .start-onboarding {
+        padding-top: 16px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+    h2 {
+        color: color($colors, light);
+        font-size: 26px;
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+    h3 {
+        color: color($colors, light)
+    } 
+
+    .logo {
+        height: 120px;
+    }
+
+    .form-error-message {
+        color: #d0021b;
+        font-size: 14px;
+        font-weight: 300;
+      }
+
+    ion-label {
+    color: color($colors, text);
+
+      }
+
+    .label{
+        font-size: 16px !important;
+        line-height: 1.2;
+
+      }
+    
+    .sub-label {
+        font-size: 14px !important;
+        font-weight: 300;
+        line-height: 1.37;
+        margin-top: 0;
+      };
+
+    .pin-inst-content {
+        font-size: 14px !important;
+      }
+
+    .pin-inst-header{
+        font-size: 16px !important;
+    }
+
+  // Edit button colors for ionic here:
+
+  .button-ios-secondary.activated {
+    background-color: color($colors, secondary-active) !important;
+  }
+
+  .button-md-secondary.activated {
+    background-color: color($colors, secondary-active) !important;
+  }
+
+  .button-outline-ios-secondary.activated {
+    background: transparent !important;
+    border-color: color($colors, secondary-active) !important;
+    color: color($colors, secondary-active) !important;
+  }
+
+  .button-outline-md-secondary.activated {
+    background: transparent !important;
+    border-color: color($colors, secondary-active) !important;
+    color: color($colors, secondary-active) !important;
+  }
+
+    button {
+        border-width: 2px!important;
+    }
+
+  // remove input number increment/decrement buttons
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+
+}

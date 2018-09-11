@@ -1,9 +1,16 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+
+// --------------------------------------------------
+// Docs for overriding ionic variables here:
+// https://ionicframework.com/docs/theming/overriding-ionic-variables/
+// --------------------------------------------------
+
+
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
-$font-path: "../assets/fonts";
+$font-path: "/assets/fonts";
 
 
 // The app direction is used to include
@@ -22,7 +29,13 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
+$item-ios-divider-color: #0d7dba;
+$item-md-divider-color: #0d7dba;
+$item-wp-divider-color: #0d7dba;
 
+$font-size-base: 16px;
+$font-size-large: 20px;
+$font-size-small: 14px;
 
 
 // Named Color Variables
@@ -34,26 +47,47 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  primary:          #8dc63f,
+  primary-active:   #0a5075,
+  secondary:        #d7df23,
+  secondary-active: #5b9fa4,
+  danger:           #d0021b,
+  light:            #f4f4f4,
+  dark:             #4a4a4a,
+  info:             #76CDD3,
+  bg-light:         #d7df23,
+  bg-dark:          #8dc63f,
+  adm-bg-light:     #b6b6b6,
+  adm-bg-dark:      #313030,
+
+
+  text:             #5e5f5f,
 );
+
+$hor-background: linear-gradient(to right, color($colors, bg-light), color($colors, bg-dark));
 
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
-
+$range-ios-knob-width: 40px!important;
+$range-ios-knob-heigth: 40px!important;
+$range-ios-knob-border-radius: 4px!important;
+$range-ios-bar-height: 14px!important;
+$range-ios-bar-background-color: transparent;
+$range-ios-bar-active-background-color: color($colors, primary-active);
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
+$range-md-knob-width: 40px!important;
+$range-md-knob-heigth: 40px!important;
+$range-md-knob-border-radius: 4px!important;
+$range-md-bar-height: 20px!important;
+$range-md-bar-background-color: transparent;
+$range-md-bar-active-background-color: color($colors, primary-active);
 
 
 // App Windows Variables
