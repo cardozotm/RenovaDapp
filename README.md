@@ -106,6 +106,6 @@ Inicialmente, papel, plástico e alumínio)
 Chain lateral EOS Bluchain
 
 ## Referências
-[1] https://www.ecycle.com.br/component/content/article/38-no-mundo/1157-estimativa-revela-que-quantidade-de-lixo-produzida-no-mundo-sera-quase-70-maior-em-2030.html
-[2] http://edicaodobrasil.com.br/2017/11/10/cada-brasileiro-produz-387-kg-de-lixo-por-ano/
-[3] https://epoca.globo.com/colunas-e-blogs/blog-do-planeta/noticia/2016/06/85-dos-brasileiros-nao-tem-acesso-coleta-seletiva-mostra-estudo.html
+1. https://www.ecycle.com.br/component/content/article/38-no-mundo/1157-estimativa-revela-que-quantidade-de-lixo-produzida-no-mundo-sera-quase-70-maior-em-2030.html
+1. http://edicaodobrasil.com.br/2017/11/10/cada-brasileiro-produz-387-kg-de-lixo-por-ano/
+1. https://epoca.globo.com/colunas-e-blogs/blog-do-planeta/noticia/2016/06/85-dos-brasileiros-nao-tem-acesso-coleta-seletiva-mostra-estudo.html
