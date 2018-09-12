@@ -15,13 +15,15 @@ Inicialmente o token RNV poderá ser utilizado apenas para desconto em produtos 
 
 Os principais atores do ecossistema são consumidores, comerciantes e centros de coleta e reciclagem.
 
-Embora inicialmente o projeto esteja mais voltado para o comeciante, no futuro a rede estará mais voltada para promover os centros de coleta, que é um dos serviços públicos mais caro em todo o mundo, em que essses agentes seriam os validadores das transações da rede, recebendo tokens RNV como incentivo econômico.
+Embora inicialmente o projeto esteja mais voltado para o comeciante, no futuro a rede se voltará também para promover os centros de coleta, que é um dos serviços públicos mais caro em todo o mundo, em que essses agentes seriam os validadores das transações da rede, recebendo tokens RNV como incentivo econômico.
+
+No início da rede, os centros de coletas serão contactados pelos comerciantes para realizar a destinação correta, preferencialmente a reciclagem, dos resíduos recolhidos.
 
 ### Proposta de solução
 
-A solução é voltada para comerciantes que apoiam a causa da reciclagem e querem incentivar os seus consumidores a aderirem essa prática.
+A solução é voltada para comerciantes que apoiam a coleta seletiva e a reciclagem e querem incentivar os seus consumidores a aderirem essas práticas.
 
-O comerciante é o ator mais importante da rede pois é ele que promove o incentivo econômico para os demais atores participarem, tanto o consumidor que vai conseguir descontos 
+O comerciante é o ator mais importante da rede pois é ele que promove o incentivo econômico para os demais atores participarem, tanto o consumidor que vai conseguir vouchers de descontos quanto para o, quanto é ele que valida o time que o consumidor está descartando
 
 (O comerciante se cadastra na plataforma, preenchendo as informações da sua loja (nome da loja, CNPJ, endereço, logo), e )
 
@@ -35,7 +37,7 @@ Inicialmente, papel, plástico e alumínio)
 - Criar um ID digital único
 - Encontrar o estabelecimento comercial mais próximo para retornar embalagens
 - Visualizar ofertas de várias lojas
-- Avaliar trocas com comerciantes
+- Visualizar vouchers obtidos
 
 ### Principais funcionalidades para o comerciante
 
