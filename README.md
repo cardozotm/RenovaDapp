@@ -1,17 +1,23 @@
 # Desafio EOS Rio Hackathon 2018 - Bluchain
 
 ## Tema
-Rede de fidelidade em blockchain, chamada Renova, que incentiva a reciclagem de embalagens descartáveis, promovida por comerciantes preocupados com meio ambiente e sustentabilidade.
+Rede de fidelidade em blockchain, chamada Renova, que incentiva a coleta seletiva e reciclagem de resíduos sólidos, promovida por comerciantes preocupados com meio ambiente e sustentabilidade. A rede também conta com um sistema de vouchers em blockchain para descontos em produtos e serviços oferecidos pelos comerciantes da rede.
 
 ## Descrição do projeto
 
-A proposta deste projeto é criar o token Renova (RNV), um sistema que motiva cidadãos a reciclarem o seu lixo por uma recompensa dada por estabelecimentos comerciais conectados a rede. O token pode ser utilizado para desconto em produtos e serviços nos comércios participantes, revertido em criptomoedas em exchanges, transferido entre usuários ou outras funcionalidades que a comunidade encontrar para ele.
+A proposta deste projeto é criar o token Renova (RNV), um sistema que motiva cidadãos a recolherem e reciclarem o seu lixo por uma recompensa dada por estabelecimentos comerciais conectados a rede. A ideia é que o consumidor em vez de jogar sua garrafa plástica na cesta de lixo, misturada com outros resíduos recicláveis ou não, 
+
+O problema que queremos resolver é
+
+O token pode ser utilizado para desconto em produtos e serviços nos comércios participantes, revertido em criptomoedas em exchanges, transferido entre usuários ou outras funcionalidades que a comunidade encontrar para ele.
 
 Os atores do ecossistema são consumidores, comerciantes e centros de coleta.
 
 ### Proposta de solução
 
 A solução é voltada para comerciantes que apoiam a causa da reciclagem e querem incentivar os seus consumidores a aderirem essa prática.
+
+O comerciante é o ator mais importante da rede pois é ele que promove o incentivo econômico para os demais atores participarem, tanto o consumidor que vai conseguir descontos 
 
 (O comerciante se cadastra na plataforma, preenchendo as informações da sua loja (nome da loja, CNPJ, endereço, logo), e )
 
