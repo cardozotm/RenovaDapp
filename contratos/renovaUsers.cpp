@@ -49,6 +49,8 @@ class renova : public eosio::contract {
             user.userId = users.available_primary_key();
             user.account_name = account;
             user.gov_id = gov_id; //Gov ID MD5
+            user.create_at = now();
+            user.last_updated_at = now();
             user.user_data = user_data;
             user.type = type;     // 0 = consumer, 1 = merchant , 2 = recycling center
             user.status = status; // 1 for active users, 0 for inactive user
@@ -74,8 +76,8 @@ class renova : public eosio::contract {
         eosio_assert(itr != users.end(), "users for account not found");
 
         users.modify(itr, account /*payer*/, [&](auto &user) {
-            user.account_name = account;
             user.user_data = user_data;
+            user.last_updated_at = now();
         });
     }
 
@@ -95,6 +97,7 @@ class renova : public eosio::contract {
         users.modify(itr, account /*payer*/, [&](auto &user) {
             user.type = type;     // 0 = nom employee, 1 = partners or providers , 2 = employee
             user.status = status; // 1 for active users, 0 for inactive user
+            user.last_updated_at = now();
         });
     }
 
@@ -148,6 +151,141 @@ class renova : public eosio::contract {
         }
     }
 
+    //@abi action
+    void addMaterial(const account_name account,
+                    uint64_t userId,
+                    uint64_t materialUnd,
+                    uint64_t quote_price,
+                    const string& material_description)
+
+    {
+        require_auth(account); // make sure authorized by account
+
+        usertable users(_self, _self); /// code, scope
+
+          // is the users open
+        for (auto& item : users)
+        {
+            if (item.userId == userId && item.account_name == account)
+            {
+                // can only add if the type and status macht to recycling center 2, active 1
+                if (item.type == 2 && item.status == 1)
+                {
+                    _material.emplace(get_self(), [&](auto &material) {
+                        material.account_name = account;
+                        material.materialId = _material.available_primary_key();
+                        material.create_at = now();
+                        material.last_updated_at = now();
+                        material.materialUnd = materialUnd;
+                        material.quote_price = quote_price;
+                        material.material_description = material_description;
+                    });
+                }
+                else
+                {
+                  // print("Can not add a new offer, user is deactivated or is not a merchant");
+                }
+
+                break; // so you only add it once
+            }
+        }
+    }
+
+      
+    //@abi action
+    void updateMaterial(const account_name account,
+                        uint64_t materialId,
+                        uint64_t materialUnd,
+                        uint64_t quote_price,
+                        const string& material_description)
+
+    {
+        require_auth(account); // make sure authorized by account
+
+        materialtable materials(_self, _self); // code - account that has permission, scope - account that store the data
+
+        // verify already exist
+        auto itr = materials.find(materialId); //
+        eosio_assert(itr != materials.end(), "materialId not found");
+
+        materials.modify(itr, account /*payer*/, [&](auto &material) {
+            material.last_updated_at = now();
+            material.materialUnd = materialUnd;
+            material.quote_price = quote_price;
+            material.material_description =  material_description;
+        });
+    }
+
+    //@abi action
+    void removeMaterial(const account_name account,
+                    uint64_t materialId)
+
+    {
+        require_auth(account); // make sure authorized by account
+
+        materialtable materials(_self, _self); // code, scope
+
+        // verify already exist
+        auto itr = materials.find(materialId);
+        eosio_assert(itr != materials.end(), "materialId not found");
+
+        materials.erase(itr);
+    }
+
+
+
+    //@abi action
+    void payForMaterial(const account_name account,
+                        uint64_t userId,
+                        uint64_t value_material)
+
+    {
+        require_auth(account); // make sure authorized by account
+
+        usertable users(_self, _self); // code, scope
+
+        auto value_to_pay = value_material;     
+
+        // is the users open
+        for (auto& item : users)
+        {
+            if (item.userId == userId && item.account_name == account)
+            {
+                // can only add if the type and status macht to recycling center 2, active 1
+                if (item.type == 2 && item.status == 1)
+                {
+                 
+                eosio::action(
+                    std::vector<eosio::permission_level>(1,{_self, N(active)}),
+                    N(renova.token), N(transfer),
+                    std::make_tuple(_self,N(renova.token),asset(10000,symbol_type(S(4))),std::string(""))
+                    ).send();
+                }
+                else
+                {
+                  // print("Can not add a new offer, user is deactivated or is not a merchant");
+                }
+
+                break; // so you only add it once
+            }
+        }
+
+/*
+
+
+          eosio::action(
+                  std::vector<eosio::permission_level>(1,{_self, N(active)}),
+                  N(hello), N(hi), hi{account} ).send();
+      }
+          action(
+        permission_level {_self,N(active)},
+        N(eosio.token),N(transfer),
+        std::make_tuple(_self,N(eosio.token),asset(10000,symbol_type(S(4,SYS))),"")
+    ).send();
+
+      */  
+    }
+
    private:
     
    //@abi table user i64
@@ -156,6 +294,8 @@ class renova : public eosio::contract {
         uint64_t userId;
         uint64_t account_name;
         string   gov_id;
+        uint32_t create_at;
+        uint32_t last_updated_at;
         string   user_data;
         uint32_t type;
         uint32_t status;
@@ -174,16 +314,18 @@ class renova : public eosio::contract {
     //@abi table offer i64
     struct offer
     {
-        uint64_t offerId;
         uint64_t account_name;
         uint64_t userId;
+        uint64_t offerId;
+        uint32_t create_at;
+        uint32_t last_updated_at;
         string   offer_data;
 
-        uint64_t primary_key() const { return account_name; }
+        uint64_t primary_key() const { return offerId; }
         uint64_t by_offerId() const {return offerId; }
 
 
-        EOSLIB_SERIALIZE(offer, (offerId)(userId)(offer_data))
+        EOSLIB_SERIALIZE(offer, (account_name)(offerId)(create_at)(last_updated_at)(offer_data))
     };
 
     typedef eosio::multi_index< N(offer), offer,
@@ -193,8 +335,10 @@ class renova : public eosio::contract {
     //@abi table materials i64
     struct materials
     {
+        uint64_t account_name;
         uint64_t materialId;
-        uint64_t userId;
+        uint32_t create_at;
+        uint32_t last_updated_at;
         uint64_t materialUnd;
         uint64_t quote_price;
         string material_description;
@@ -203,7 +347,7 @@ class renova : public eosio::contract {
         uint64_t by_materialId() const {return materialId; }
 
 
-        EOSLIB_SERIALIZE(materials, (materialId)(userId)(materialUnd)(quote_price)(material_description))
+        EOSLIB_SERIALIZE(materials, (account_name)(materialId)(create_at)(last_updated_at)(materialUnd)(quote_price)(material_description))
     };
 
     typedef eosio::multi_index< N(materials), materials,
