@@ -45,7 +45,6 @@ export class EosapiProvider {
     this.txh = [];
     this.actionHistory = [];
 
-    this.auth = true;
     this.eos = EOSJS(this.baseConfig);
     this.baseConfig.keyProvider = [];
 
@@ -136,11 +135,6 @@ export class EosapiProvider {
 
               localStorage.setItem('eos_activeKeys.', JSON.stringify(store));
               const encriptedKey = JSON.parse(localStorage.getItem('eos_activeKeys.'));
-
-              /*somente para teste
-              var decriptedKey = CryptoJS.AES.decrypt(encriptedKey.eosActiveKeys.private, secret);
-              var plaintext = decriptedKey.toString(CryptoJS.enc.Utf8);
-              console.log(plaintext); */
 
             })
             .catch((error: any) => {

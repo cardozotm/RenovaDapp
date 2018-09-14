@@ -67,7 +67,7 @@ export class StartPage {
       Validators.required])),
 
       user: new FormControl('',
-        Validators.compose([Validators.maxLength(12),
+        Validators.compose([
         Validators.minLength(12),
         Validators.pattern('[a-z1-5]*'),
         Validators.required])),
@@ -169,9 +169,6 @@ export class StartPage {
     }, 3000);
 
   }
-
-
-
 
   // Other functions
 
