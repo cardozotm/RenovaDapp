@@ -11,6 +11,7 @@
 
 #include <string>
 
+using eosio::asset;
 using eosio::indexed_by;
 using eosio::const_mem_fun;
 using std::string;
@@ -26,11 +27,12 @@ class renova : public eosio::contract {
       }
 
       //@abi action
-      void addUser(  const account_name account,
+    void addUser( const account_name account,
                  const string& gov_id,
                  const string& user_data,
                  uint32_t type,
-                 uint32_t status) {
+                 uint32_t status) 
+        {
 
           // if not authorized then this action is aborted and transaction is rolled back
           // any modifications by other actions are undone
@@ -65,7 +67,8 @@ class renova : public eosio::contract {
                   N(hello), N(hi), hi{account} ).send();
       }
 
-        //@abi action
+
+    //@abi action
     void updateUser(const account_name account,
                     const string& user_data)
     {
@@ -98,7 +101,7 @@ class renova : public eosio::contract {
         eosio_assert(itr != users.end(), "users for account not found");
 
         users.modify(itr, account /*payer*/, [&](auto &user) {
-            user.type = type;     // 0 = nom employee, 1 = partners or providers , 2 = employee
+            user.type = type;     // 0 = consumer, 1 = merchant , 2 = recycling center
             user.status = status; // 1 for active users, 0 for inactive user
             user.last_updated_at = now();
         });
@@ -122,6 +125,7 @@ class renova : public eosio::contract {
     //@abi action
     void addOffer(const account_name account,
                     uint64_t userId,
+                    uint64_t offer_value,
                     const string& offer_data)
 
     {
@@ -141,6 +145,7 @@ class renova : public eosio::contract {
                         offer.offerId = users.available_primary_key();
                         offer.account_name = account;
                         offer.userId = userId;
+                        offer.value = offer_value;
                         offer.offer_data = offer_data;
                     });
                 }
@@ -152,6 +157,42 @@ class renova : public eosio::contract {
                 break; // so you only add it once
             }
         }
+    }
+
+    void updateOffer(const account_name account,
+                    uint64_t offerId,
+                    uint64_t offer_value,
+                    const string& offer_data)
+    {
+
+        require_auth(account); // make sure authorized by account
+
+        offertable offers(_self, _self); // code - account that has permission, scope - account that store the data
+
+        // verify already exist
+        auto itr = offers.find(offerId);
+        eosio_assert(itr != offers.end(), "offerId not found");
+
+        offers.modify(itr, account /*payer*/, [&](auto &offer) {
+            offer.offer_value = offer_value;
+            offer.offer_data = user_data;
+            offer.last_updated_at = now();
+        });
+
+    }
+
+    void removeOffer(const account_name account,
+                    uint64_t offerId)
+    {
+        require_auth(account); // make sure authorized by account
+
+        offertable offers(_self, _self); // code, scope
+
+        // verify already exist
+        auto itr = offers.find(offerId);
+        eosio_assert(itr != offers.end(), "offerId not found");
+
+        users.erase(itr);
     }
 
     //@abi action
@@ -237,10 +278,13 @@ class renova : public eosio::contract {
 
     //@abi action
     void payForMaterial(const account_name account,
+                        const account_name receiver,
                         uint64_t userId,
                         uint64_t value_material)
 
     {
+        // pay a token amount to a person who has delivered material for recycling
+
         require_auth(account); // make sure authorized by account
 
         usertable users(_self, _self); // code, scope   
@@ -253,11 +297,65 @@ class renova : public eosio::contract {
                 // can only add if the type and status macht to recycling center 2, active 1
                 if (item.type == 2 && item.status == 1)
                 {
-                 
                   eosio::action(
                   std::vector<eosio::permission_level>(1,{_self, N(active)}),
-                  N(eosio.token), N(transfer), 
-                  std::make_tuple(_self,N(eosio.token),std::string(""),std::string(""))
+                  N(renova.token), N(transfer), 
+                    std::make_tuple(_self,N(receiver),eosio::asset(value_material,eosio::symbol_type(S(4,RNV))),std::string("Tks for Recycling"))
+                    ).send();
+      
+                }
+                else
+                {
+                  // print("Can not add a new offer, user is deactivated or is not a merchant");
+                }
+
+                break; // so you only add it once
+            }
+        }
+
+    }
+
+    //@abi action
+    void payForOffer(const account_name account,
+                     const account_name merchant,
+                     uint64_t offerId)
+
+    {
+        // a person pays with tokens for a merchant and redeems an offer
+
+        require_auth(account); // make sure authorized by account
+
+        usertable users(_self, _self); // code, scope
+
+        // verify already exist
+        auto itru = users.find(account);
+        eosio_assert(itru != users.end(), "users for account not found");
+
+        auto itrm = users.find(merchant);
+        eosio_assert(itrm != users.end(), "merchant for account not found");
+
+        // is the users open
+        for (auto& item : users)
+        {
+            if (item.userId == userId && item.account_name == account)
+            {
+                // can only add if the type and status macht to consumer 0, active 1
+                if (item.type == 0 && item.status == 1)
+                {
+                    offertable offers(_self, _self); // code, scope
+                    auto itro = offers.find(offerId);
+                    auto offer_value = 0;
+                    for (auto&  offer : itro )
+                    {
+                        offer_value = offer.value;
+                     break; // so you only add it once
+                    }
+
+                 //transfer to merchan the amount of tokens relative to a offer
+                  eosio::action(
+                  std::vector<eosio::permission_level>(1,{_self, N(active)}),
+                  N(renova.token), N(transfer), 
+                    std::make_tuple(_self,N(merchant),eosio::asset(offer_value,eosio::symbol_type(S(4,RNV))),std::string("Tks for Recycling"))
                     ).send();
       
                 }
@@ -303,6 +401,7 @@ class renova : public eosio::contract {
         uint64_t account_name;
         uint64_t userId;
         uint64_t offerId;
+        uint64_t offer_value,
         uint32_t create_at;
         uint32_t last_updated_at;
         string   offer_data;
@@ -311,7 +410,7 @@ class renova : public eosio::contract {
         uint64_t by_offerId() const {return offerId; }
 
 
-        EOSLIB_SERIALIZE(offer, (account_name)(offerId)(create_at)(last_updated_at)(offer_data))
+        EOSLIB_SERIALIZE(offer, (account_name)(offerId)(offer_value)(create_at)(last_updated_at)(offer_data))
     };
 
     typedef eosio::multi_index< N(offer), offer,
@@ -348,4 +447,4 @@ class renova : public eosio::contract {
 
 };
 
-EOSIO_ABI( renova, (addUser)(updateUser)(changeUserStatus)(removeUser))
+EOSIO_ABI( renova, (addUser)(updateUser)(changeUserStatus)(removeUser)(addOffer)(updateOffer)(removeOffer)(addMaterial)(updateMaterial)(removeMaterial)(payForMaterial)(payForOffer))
