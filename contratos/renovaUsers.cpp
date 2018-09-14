@@ -5,7 +5,10 @@
 #include <eosiolib/eosio.hpp>
 #include <eosiolib/action.hpp>
 #include <eosiolib/contract.hpp>
+#include <eosiolib/symbol.hpp>
 #include <eosiolib/print.hpp>
+#include <eosiolib/asset.hpp>
+
 #include <string>
 
 using eosio::indexed_by;
@@ -232,8 +235,6 @@ class renova : public eosio::contract {
         materials.erase(itr);
     }
 
-
-
     //@abi action
     void payForMaterial(const account_name account,
                         uint64_t userId,
@@ -242,9 +243,7 @@ class renova : public eosio::contract {
     {
         require_auth(account); // make sure authorized by account
 
-        usertable users(_self, _self); // code, scope
-
-        auto value_to_pay = value_material;     
+        usertable users(_self, _self); // code, scope   
 
         // is the users open
         for (auto& item : users)
@@ -255,11 +254,12 @@ class renova : public eosio::contract {
                 if (item.type == 2 && item.status == 1)
                 {
                  
-                eosio::action(
-                    std::vector<eosio::permission_level>(1,{_self, N(active)}),
-                    N(renova.token), N(transfer),
-                    std::make_tuple(_self,N(renova.token),asset(10000,symbol_type(S(4))),std::string(""))
+                  eosio::action(
+                  std::vector<eosio::permission_level>(1,{_self, N(active)}),
+                  N(eosio.token), N(transfer), 
+                  std::make_tuple(_self,N(eosio.token),std::string(""),std::string(""))
                     ).send();
+      
                 }
                 else
                 {
@@ -270,20 +270,6 @@ class renova : public eosio::contract {
             }
         }
 
-/*
-
-
-          eosio::action(
-                  std::vector<eosio::permission_level>(1,{_self, N(active)}),
-                  N(hello), N(hi), hi{account} ).send();
-      }
-          action(
-        permission_level {_self,N(active)},
-        N(eosio.token),N(transfer),
-        std::make_tuple(_self,N(eosio.token),asset(10000,symbol_type(S(4,SYS))),"")
-    ).send();
-
-      */  
     }
 
    private:

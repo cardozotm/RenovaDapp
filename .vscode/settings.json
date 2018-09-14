@@ -9,6 +9,7 @@
         "tuple": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
+<<<<<<< HEAD
         "__string": "cpp",
         "algorithm": "cpp",
         "string": "cpp",
@@ -21,6 +22,20 @@
         "exception": "cpp",
         "new": "cpp",
         "stdexcept": "cpp",
+=======
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cwchar": "cpp",
+        "exception": "cpp",
+        "initializer_list": "cpp",
+        "new": "cpp",
+        "string_view": "cpp",
+>>>>>>> 615d5f2323d62f78cb3b8da493ed88432b0f0265
         "typeinfo": "cpp"
     }
 }
