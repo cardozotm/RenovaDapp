@@ -25,6 +25,7 @@ export class StartPage {
   cepObservable: Observable<object>;
   cep: any;
 
+
   signUpForm: FormGroup;
   public errorMsg: string;
 
@@ -53,24 +54,28 @@ export class StartPage {
       ),
 
       street: new FormControl('', ),
-    
+
       number: new FormControl('',
-      Validators.compose([
-      Validators.pattern('[0-9]*'),
-      Validators.required])),
-    
+        Validators.compose([
+          Validators.pattern('[0-9]*'),
+          Validators.required])),
+
       neighborhood: new FormControl('', ),
       city: new FormControl('', ),
       state: new FormControl('', ),
       zip: new FormControl('',
-      Validators.compose([
-      Validators.required])),
+        Validators.compose([
+          Validators.required])),
+
+      actor: new FormControl('',
+        Validators.compose([
+          Validators.required])),
 
       user: new FormControl('',
         Validators.compose([
-        Validators.minLength(12),
-        Validators.pattern('[a-z1-5]*'),
-        Validators.required])),
+          Validators.minLength(12),
+          Validators.pattern('[a-z1-5]*'),
+          Validators.required])),
 
       pin: new FormControl(
         '',
@@ -114,7 +119,7 @@ export class StartPage {
         this.state = resp.state;
 
       })
-    .catch((e: any) => Observable.throw(this.errorHandler(e)));
+      .catch((e: any) => Observable.throw(this.errorHandler(e)));
 
   }
   errorHandler(error: any): void {
