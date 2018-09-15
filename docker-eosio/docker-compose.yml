@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  eosio:
+    build: ./build
+    container_name: eosio
+    #    restart: always
+    ports:
+      - 8888:8888
+      - 9876:9876
+    volumes:
+      - /cb-docker/mnt/eosio/data:/mnt/dev/data
+      - /cb-docker/git/eosio/mnt/config:/mnt/dev/config
+      - /cb-docker/git/eosio/mnt/letsencrypt:/mnt/dev/letsencrypt
+      - /cb-docker/mnt/eosio/contracts:/contracts
+    stop_grace_period: 10m
+
+
