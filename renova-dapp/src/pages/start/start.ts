@@ -24,6 +24,7 @@ export class StartPage {
   step: string;
   cepObservable: Observable<object>;
   cep: any;
+  actor: any;
 
 
   signUpForm: FormGroup;
@@ -38,6 +39,7 @@ export class StartPage {
     public loadingCtrl: LoadingController, ) {
 
     this.step = 'welcome';
+    this.actor = 'consumer';
 
     this.signUpForm = new FormGroup({
 
@@ -137,6 +139,15 @@ export class StartPage {
     alert.present();
   }
 
+  dadosSeguros() {
+    let alert = this.alertCtrl.create({
+      title: 'Seus dados estão seguros aqui',
+      subTitle: 'Todos os dados informados serão criptografados com a sua chave pública e nunca estarão visíveis sem a sua expressa autorização',
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
   hasEosAccount(): boolean {
     return !!localStorage.getItem('eos_activeKeys.');
   }
@@ -157,6 +168,11 @@ export class StartPage {
 
   nextStep(step) {
     this.step = step;
+    if(step == 'fase1'){
+      this.dadosSeguros();
+    }
+
+
   }
 
   // Loading

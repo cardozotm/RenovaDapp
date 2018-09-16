@@ -11,8 +11,8 @@
         <h2 text-center>Bem vindo ao Renova!</h2>
       </div>
       <div padding>
-        <button text-uppercase ion-button outline block color="dark" (click)="nextStep('onboarding')">VAMOS
-          COMEÇAR</button>
+        <button text-uppercase ion-button outline block color="dark" (click)="nextStep('onboarding')">VAMOS COMEÇAR
+        </button>
       </div>
     </div>
   </div>
@@ -23,8 +23,8 @@
       <img class="logo" src="assets/imgs/logo-renova.svg">
     </div>
     <div class="hor-center-cont start-onboarding">
-      <p>Você ainda não possui uma conta na blockchain EOS para este usuário ou dispositivo. Crie uma clicando no botão
-        abaixo.</p>
+      <p>Você ainda não possui uma conta na blockchain EOS para este usuário ou dispositivo. Crie uma clicando no botão abaixo.
+      </p>
     </div>
     <div padding-horizontal>
       <div padding>
@@ -36,9 +36,29 @@
 
   <!--Criar Nova Carteira-->
   <div no-padding class="criar-carteira view-height" *ngIf="step!='welcome'">
+
     <div padding class="criar-carteira-header">
       <h2>Criar conta</h2>
     </div>
+
+
+    <div padding-horizontal *ngIf="step==='fase1'">
+      <ion-label stacked class="text label">
+        Sou um...
+      </ion-label>
+      <ion-segment [(ngModel)]="actor" color="primary">
+        <ion-segment-button value="consumer">
+          Heroi da Reciclagem
+        </ion-segment-button>
+        <ion-segment-button value="recycler">
+          Ecoponto
+        </ion-segment-button>
+        <ion-segment-button value="merchant">
+          Logista
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
 
     <form padding [formGroup]="signUpForm" (ngSubmit)="signUp()">
 
@@ -50,13 +70,26 @@
           <ion-row>
             <ion-col col-12>
               <!-- Firt Name -->
-              <ion-item>
-                <ion-label stacked class="text label">
-                  Nome / Razão Social:
-                </ion-label>
-                <ion-input type="email" formControlName="complete_name">
-                </ion-input>
-              </ion-item>
+              <div *ngIf="actor == 'consumer'">
+                <ion-item>
+                  <ion-label stacked class="text label">
+                    Nome:
+                  </ion-label>
+                  <ion-input type="email" formControlName="complete_name">
+                  </ion-input>
+                </ion-item>
+              </div>
+
+              <div *ngIf="actor != 'consumer'">
+                <ion-item>
+                  <ion-label stacked class="text label">
+                    Razão Social:
+                  </ion-label>
+                  <ion-input type="email" formControlName="complete_name">
+                  </ion-input>
+                </ion-item>
+              </div>
+
               <span float-right padding-right *ngIf="!signUpForm.controls.complete_name.valid && signUpForm.controls.complete_name.touched"
                 class="form-error-message">
                 Nome inválido
@@ -67,17 +100,36 @@
           <ion-row>
             <ion-col col-12>
               <!-- CPF -->
-              <ion-item>
-                <ion-label stacked class="text label">
-                  CPF / CNPJ:
-                </ion-label>
-                <ion-input type="email" formControlName="gov_id">
-                </ion-input>
-              </ion-item>
-              <span float-right padding-right *ngIf="!signUpForm.controls.gov_id.valid && signUpForm.controls.gov_id.touched"
-                class="form-error-message">
-                CPF/CNPJ inválido
-              </span>
+
+              <div *ngIf="actor == 'consumer'">
+                <ion-item>
+                  <ion-label stacked class="text label">
+                    CPF:
+                  </ion-label>
+                  <ion-input type="email" formControlName="gov_id" placeholder="000.000.000-00" [brmasker]="{mask:'000.000.000-00', len:14}">
+                  </ion-input>
+                </ion-item>
+                <span float-right padding-right *ngIf="!signUpForm.controls.gov_id.valid && signUpForm.controls.gov_id.touched" class="form-error-message">
+                  CPF inválido
+                </span>
+              </div>
+
+              <div *ngIf="actor != 'consumer'">
+                <ion-item>
+                  <ion-label stacked class="text label">
+                   CNPJ:
+                  </ion-label>
+                  <ion-input type="email" formControlName="gov_id" placeholder="00.0000.000/0000-00" [brmasker]="{mask:'00.0000.000/0000-00', len:18}">
+                  </ion-input>
+                </ion-item>
+                <span float-right padding-right *ngIf="!signUpForm.controls.gov_id.valid && signUpForm.controls.gov_id.touched" class="form-error-message">
+                  CNPJ inválido
+                </span>
+              </div>
+
+
+
+
             </ion-col>
           </ion-row>
 
@@ -88,11 +140,10 @@
                 <ion-label stacked class="text label">
                   CEP:
                 </ion-label>
-                <ion-input [(ngModel)]="cepObservable" type="email" formControlName="zip" [brmasker]="{mask:'00000-000', len:9}">
+                <ion-input [(ngModel)]="cepObservable" type="email" formControlName="zip" placeholder="00000-000" [brmasker]="{mask:'00000-000', len:9}">
                 </ion-input>
               </ion-item>
-              <span float-right padding-right *ngIf="!signUpForm.controls.zip.valid && signUpForm.controls.zip.touched"
-                class="form-error-message">
+              <span float-right padding-right *ngIf="!signUpForm.controls.zip.valid && signUpForm.controls.zip.touched" class="form-error-message">
                 CEP inválido
               </span>
               <div>
@@ -108,8 +159,7 @@
                 <ion-input type="email" formControlName="number">
                 </ion-input>
               </ion-item>
-              <span float-right padding-right *ngIf="!signUpForm.controls.number.valid && signUpForm.controls.number.touched"
-                class="form-error-message">
+              <span float-right padding-right *ngIf="!signUpForm.controls.number.valid && signUpForm.controls.number.touched" class="form-error-message">
                 Número inválido
               </span>
             </ion-col>
@@ -161,24 +211,11 @@
             </ion-col>
           </ion-row>
 
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label>Voce é:</ion-label>
-                <ion-select formControlName="actor">
-                  <ion-option value="consumer">Herói da Reciclagem</ion-option>
-                  <ion-option value="recycler">Ecoponto</ion-option>
-                  <ion-option value="merchant">Lojista</ion-option>
-                </ion-select>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-
         </ion-grid>
 
         <div>
-          <button ion-button full [disabled]="!signUpForm.controls.complete_name.valid || !signUpForm.controls.gov_id.valid || !signUpForm.controls.cep.valid || !signUpForm.controls.number.valid || !signUpForm.controls.actor.valid" class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
+          <button ion-button full [disabled]="!signUpForm.controls.complete_name.valid || !signUpForm.controls.gov_id.valid || !signUpForm.controls.zip || !signUpForm.controls.number.valid"
+            class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
         </div>
       </div>
 
@@ -197,8 +234,7 @@
           </ion-item>
           <span float-left padding-left *ngIf="!signUpForm.controls.user.valid && (signUpForm.controls.user.dirty || signUpForm.controls.user.touched)"
             class="form-error-message">{{ signUpForm.controls.user.value.length }} caracteres</span>
-          <span float-right padding-right *ngIf="!signUpForm.controls.user.valid && signUpForm.controls.user.touched"
-            class="form-error-message">
+          <span float-right padding-right *ngIf="!signUpForm.controls.user.valid && signUpForm.controls.user.touched" class="form-error-message">
             Nome inválido
           </span>
 
@@ -212,8 +248,7 @@
             <ion-input type="password" inputmode="numeric" pattern="[0-9]*" formControlName="pin">
             </ion-input>
           </ion-item>
-          <span float-right padding-right *ngIf="!signUpForm.controls.pin.valid && signUpForm.controls.pin.touched"
-            class="form-error-message">
+          <span float-right padding-right *ngIf="!signUpForm.controls.pin.valid && signUpForm.controls.pin.touched" class="form-error-message">
             Pin inválido
           </span>
 
