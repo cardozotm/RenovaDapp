@@ -5,7 +5,7 @@ Rede de fidelidade em blockchain, chamada Renova, que incentiva a coleta seletiv
 
 ## Descrição do problema
 
-Atualmente, a maior produção mundial gerada pelo homem é o descarte de lixo. Em 2018, a produção é de 1,3 bilhão de toneladas por ano e deve crescer até 2,2 bilhões de toneladas por ano até 2022, segundo as estimativas do Programa das Nações Unidas para o Meio Ambiente (Pnuma) [1]. No Brasil, são descartados mais de 79 mil toneladas por ano, segundo dados da  Associação Brasileira de Empresas de Limpeza Pública e Resíduos Especiais (Abrelpe) [2]. Para agravar a situação, apenas 18% dos municípos tem programas de coleta seletiva, que representam cerca de 15% da população brasileira. Ou seja, 85% dos brasileiros não faz a destinação correta dos resíduos [3].
+Atualmente, a maior produção mundial gerada pelo homem é o descarte de resíduos. Em 2018, a produção é de 1,3 bilhão de toneladas por ano e deve crescer até 2,2 bilhões de toneladas por ano até 2022, segundo as estimativas do Programa das Nações Unidas para o Meio Ambiente (Pnuma) [1]. No Brasil, são descartados mais de 79 mil toneladas por ano, segundo dados da  Associação Brasileira de Empresas de Limpeza Pública e Resíduos Especiais (Abrelpe) [2]. Para agravar a situação, apenas 18% dos municípos tem programas de coleta seletiva, que representam cerca de 15% da população brasileira. Ou seja, 85% dos brasileiros não faz a destinação correta dos resíduos [3].
 
 Por outro lado, uma conhecida forma para engajar consumidores são programas de fidelidade. No entanto, para que o engajamento de um programa de fidelidade vai além da compra entre o lojista e o consumidor.
 
