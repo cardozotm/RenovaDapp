@@ -33,9 +33,9 @@ Enquanto não houver nenhum produto entregue para a coleta seletiva, não há to
 
 Os tokens RNV que os ecopontos estão enviando para os heróis da reciclagem provém de um contrato que contém toda a oferta da única emissão de tokens RNV da rede. A oferta deve ser grande o suficiente para não faltar tokens a serem entregues para os heróis da reciclagem. Como os tokens serão girados na rede será explicado posteriormente.  
 
-Conforme dito, o herói da reciclagem ao entregar seu resíduo para a coleta seletiva recebe os tokens RNV. A ideia inicial de recompensa para o herói da reciclagem partiu do conceito de tornar a embalagem vazia de um produto novo e quando o produto é novamente utilizado, ele entra na cadeia com a "emissão" de novos tokens RNV. E aqueles que podem entrar na rede com novos produtos são os lojistas. A rede Renova quer atrair comerciantes preocupados com a sustentabilidade e com a destinação correta dos resíduos de seus produtos.
+Conforme dito, o herói da reciclagem ao entregar seu resíduo para a coleta seletiva recebe os tokens RNV. A ideia inicial de recompensa para o herói da reciclagem partiu do conceito de tornar a embalagem vazia de um produto novo e quando o produto é novamente utilizado, ele entra na cadeia com a "emissão" de novos tokens RNV. E aqueles que podem entrar na rede com novos produtos são os lojistas. A rede Renova quer atrair comerciantes preocupados com a sustentabilidade e com a destinação correta dos resíduos de seus produtos. A vantagem comercial para o lojista em participar dessa rede são leads para compra de seus produtos.
 
-Na plataforma dos lojistas, eles poderão criar ofertas de produtos aceitando o pagamento parcialmente ou totalmente em tokens Renova. Para incentivar o uso do token RNV pelos comerciantes, eles podem impulsionar as suas ofertas que serão mostradas na página inicial do aplicativo do herói da reciclagem de uma determinada região geográfica, seja um bairro, um cidade, um estado ou um país. Quanto maior o número de pessoas que a oferta atingir, maior vai ser o custo de tokens RNV para mostrá-la.
+Na plataforma dos lojistas, eles poderão criar ofertas de produtos aceitando o pagamento parcialmente ou totalmente em tokens Renova. Para incentivar o uso do token RNV pelos comerciantes, eles podem impulsionar as suas ofertas que serão mostradas na página inicial do aplicativo do herói da reciclagem.
 
 O herói da reciclagem pode visualizar as ofertas da lojas de três maneiras: na página inicial no campo mellhores ofertas - que são ofertas impulsionadas - a página "Ofertas" que mostra todas as ofertas, com destaque para as impulsionadas, e dentro do perfil da loja, que mostra as ofertas daquela loja.
 
@@ -127,3 +127,4 @@ Chain lateral EOS Bluchain
 1. http://edicaodobrasil.com.br/2017/11/10/cada-brasileiro-produz-387-kg-de-lixo-por-ano/
 1. https://epoca.globo.com/colunas-e-blogs/blog-do-planeta/noticia/2016/06/85-dos-brasileiros-nao-tem-acesso-coleta-seletiva-mostra-estudo.html
 1. https://docs.google.com/document/d/1I_vvpWdB5gHUv-tzg6x5ybj3RgIB7pvot4NM413Prlo/edit?usp=sharing
+1. https://www.montgomerycountymd.gov/sws/footprint/
