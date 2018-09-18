@@ -114,41 +114,48 @@ export class EosapiProvider {
         activePublicKey = ecc.privateToPublic(resp); // EOSKey
       })
         .then((resp: any) => {
-          this.createAccount(accountName, ownerPublicKey, activePublicKey)
-              const accounts: any = {
-                'accountName': accountName,
-                'ownerPublicKey': ownerPublicKey,
-                'activePublicKey': activePublicKey,
-                'ownerPrivateKey': ownerPrivateKey,
-                'activePrivateKey': activePrivateKey
-              };
-              // publickey, privkey, secret
-              this.accounts = accounts; // retirar em producao
+          this.createAccount(accountName, ownerPublicKey, activePublicKey).then(resp =>{
+            const accounts: any = {
+              'accountName': accountName,
+              'ownerPublicKey': ownerPublicKey,
+              'activePublicKey': activePublicKey,
+              'ownerPrivateKey': ownerPrivateKey,
+              'activePrivateKey': activePrivateKey
+            };
+            // publickey, privkey, secret
+           // this.accounts = accounts; // retirar em producao
 
-              const ciphertext = CryptoJS.AES.encrypt(activePrivateKey, secret);
-              const store = {};
-              store['eosActiveKeys'] = {
-                accountName: accountName,
-                public: activePublicKey,
-                private: ciphertext.toString()
-              };
+            const ciphertext = CryptoJS.AES.encrypt(activePrivateKey, secret);
+            const store = {};
+            store['eosActiveKeys'] = {
+              accountName: accountName,
+              public: activePublicKey,
+              private: ciphertext.toString()
+            };
+             
+            localStorage.setItem('eos_activeKeys.', JSON.stringify(store));
+            const encriptedKey = JSON.parse(localStorage.getItem('eos_activeKeys.'));
 
-               const cipherUserData = CryptoJS.AES.encrypt(JSON.stringify(user_data), 'secret key 123').toString();
-               const gov_idMd5 = CryptoJS.MD5(gov_id).toString();
+          }).then(resp => {
+            
+            const cipherUserData = CryptoJS.AES.encrypt(JSON.stringify(user_data), activePublicKey ).toString();
+            
+            const gov_idMd5 = CryptoJS.MD5(gov_id).toString();
 
-              this.addUser(accountName, activePrivateKey, gov_id, cipherUserData, type, status);
+            this.addUser(activePrivateKey, accountName, gov_idMd5, cipherUserData, type, status);
 
-              localStorage.setItem('eos_activeKeys.', JSON.stringify(store));
-              const encriptedKey = JSON.parse(localStorage.getItem('eos_activeKeys.'));
+          })
+              
+
 
             })
             .catch((error: any) => {
-              console.log(error);
             })
     
       resolve('success')
         // tslint:disable-next-line:no-unused-expression
         , (err) => {
+          console.log(err);
           reject(err);
         };
     });
@@ -156,22 +163,25 @@ export class EosapiProvider {
 
 
   async addUser(unProtectedKey, account, gov_id, user_data, type, status) {
-    this.reloadInstance(unProtectedKey);
-    await this.eos.transaction('renovasys', renovasys => {
-      const options = {
-        authorization: [{
-          actor: account,
-          permission: 'active'
-        }]
-      };
-      renovasys.adduser(account, gov_id, user_data, type, status, options);
-      // Returning a promise is optional (but handled as expected)
-    }).then(r => {
-      this.clearInstance();
-    });
+    this.reloadInstance(unProtectedKey).then(resp =>{
+       this.eos.transaction('renovasys', renovasys => {
+        const options = {
+          authorization: [{
+            actor: account,
+            permission: 'active'
+          }]
+        };
+        renovasys.adduser(account, gov_id, user_data, type, status, options);
+        // Returning a promise is optional (but handled as expected)
+      }).then(r => {
+        this.clearInstance();
+      })
+      .catch(err =>{
+        console.log(err);
+      })
+    })
   }
-
-
+    
   async getBlucoinActions(scope, actor) {
     const sent = [];
     const received = [];
@@ -202,8 +212,7 @@ export class EosapiProvider {
   }
 
     // Faz o reload da instancia do EOS quando o usurio libera a chave privada para executar uma action
-    reloadInstance(privkey) {
-      //  this.auth = true; // Verificar se usuario está logado
+   async reloadInstance(privkey) {
       this.baseConfig.keyProvider = [privkey];
       this.eos = EOSJS(this.baseConfig);
     }

@@ -212,7 +212,7 @@ export class StartPage {
     const user = this.signUpForm.value.user;
     const pin = this.signUpForm.value.pin;
     const gov_id = this.signUpForm.value.gov_id
-    const type:number = this.signUpForm.value.actor;
+    const type:number = 0;
     const status:number = 1;
 
     const user_data = {
