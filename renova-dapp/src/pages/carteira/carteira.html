@@ -1,0 +1,83 @@
+<ion-content>
+
+
+
+    <div padding class="carteira-header hor-center-cont">
+  
+      <div>
+  
+        <ion-grid align-items-start>
+          <ion-row>
+            <ion-col class="pd0 logo-col">
+              <ion-icon float-left padding-right menuToggle name="menu"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <h3 text-left class="pdl32">Seu saldo</h3>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+  
+      </div>
+  
+  
+      <div *ngIf="!balanceReceived">
+        <ion-spinner name="circles"></ion-spinner>
+      </div>
+  
+      <div *ngIf="saldo == 0">
+        <ion-row align-items-baseline>
+          <ion-col></ion-col>
+          <ion-col nowrap no-padding>
+            <p text-right class="carteira-header-rs">R$</p>
+          </ion-col>
+          <ion-col nowrap no-padding>
+            <p text-left class="carteira-header-saldo">0.00</p>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </div>
+  
+      <div *ngIf="saldo">
+        <ion-row align-items-baseline>
+          <ion-col></ion-col>
+          <ion-col nowrap no-padding>
+            <p text-right class="carteira-header-rs">R$</p>
+          </ion-col>
+          <ion-col nowrap no-padding>
+            <p text-left class="carteira-header-saldo"> {{ saldo| number: '1.2-2' }}</p>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </div>
+    </div>
+  
+    <div class="hor-center-cont carteira-content">
+  
+      <div *ngIf="cordovaIsAvalible">
+        <a (click)="pushPageQr('EnviarPage')">
+          <img src="assets/imgs/botao_qr_code.svg" onmousedown="this.src='assets/imgs/botao_qr_code_apertado.svg'" onmouseup="this.src='assets/imgs/botao_qr_code.svg'">
+        </a>
+        <p padding>PAGAR COM QR CODE</p>
+      </div>
+  
+      <div *ngIf="!cordovaIsAvalible">
+        <a (click)="pushPageQr('QrcodescanPage')">
+          <img class="icone-camera" src="assets/imgs/botao_qr_code.svg" onmousedown="this.src='assets/imgs/botao_qr_code_apertado.svg'"
+            onmouseup="this.src='assets/imgs/botao_qr_code.svg'">
+  
+        </a>
+  
+        <p padding>PAGAR COM QR CODE</p>
+      </div>
+  
+      <div class="carteira-btn">
+        <button ion-button outline block [disabled]="!balanceReceived" color="secondary" (click)="pushPageManual('EnviarPage')">
+          DIGITAR PAGAMENTO
+        </button>
+      </div>
+  
+    </div>
+  
+  </ion-content>
+  

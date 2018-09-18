@@ -12,23 +12,31 @@ import { EosapiProvider } from '../providers/eosapi/eosapi';
 
 import { BrMaskerModule } from 'brmasker-ionic-3';
 
+import { CarteiraPageModule } from '../pages/carteira/carteira.module';
+
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 
 @NgModule({
   declarations: [
     MyApp,
     StartPage,
-    ListPage
+    ListPage,
   ],
   imports: [
     BrowserModule,
     BrMaskerModule,
+    NgxQRCodeModule,
+    ZXingScannerModule.forRoot(),
+    CarteiraPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     StartPage,
-    ListPage
+    ListPage,
   ],
   providers: [
     StatusBar,

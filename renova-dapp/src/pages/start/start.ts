@@ -7,6 +7,8 @@ import { default as cepPromise } from 'cep-promise';
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { zip } from 'rxjs/operators';
 
+import { CarteiraPage } from '../carteira/carteira';
+
 
 @IonicPage()
 @Component({
@@ -62,11 +64,11 @@ export class StartPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StartPage');
-    //  if (this.hasEosAccount()) {
-    // this.openPage('TabsPage');
-    //}
+      if (this.hasEosAccount()) {
+     this.openPage('CarteiraPage');
+    }
   }
-
+  
 
   findCep() {
     let cepN = this.cepObservable

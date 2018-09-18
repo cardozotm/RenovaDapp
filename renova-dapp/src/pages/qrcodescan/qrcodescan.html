@@ -1,0 +1,23 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title class="nav-title">Digitalizar</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+      <div class="scanner-shell" [hidden]="!hasDevices">
+  
+          <zxing-scanner #scanner start="true" [device]="currentDevice" (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
+      
+          <p *ngIf="qrResultString">
+              Result:
+              <strong>{{ qrResultString }}</strong>
+          </p>
+      </div>
+          
+      
+  </ion-content>
+    

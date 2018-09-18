@@ -214,7 +214,7 @@
         </ion-grid>
 
         <div>
-          <button ion-button full [disabled]="!signUpForm.controls.complete_name.valid || !signUpForm.controls.gov_id.valid || !signUpForm.controls.zip || !signUpForm.controls.number.valid"
+          <button ion-button full [disabled]="!signUpForm.controls.complete_name.valid || !signUpForm.controls.gov_id.valid || !signUpForm.controls.zip || !signUpForm.controls.number.valid || !signUpForm.controls.actor.valid"
             class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
         </div>
       </div>

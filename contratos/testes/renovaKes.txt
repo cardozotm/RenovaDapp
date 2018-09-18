@@ -1,0 +1,28 @@
+Creating wallet: renova
+"PW5JgWDYTJzoLbmTa5NXSEhaxNe5dJHoGX2tpD7LwXPfPP8iP687t"
+
+PW5HvzYrbgdS99cHRiUVHapejPHohcy2biXN3GBUVGx6xyykR6bKA
+
+Account: renovasys
+
+Owner
+Private key: 5J9RDBjHahJwjayi8Kmm4hcJJ8aq4yYWwjfmNdTGmCKyURiJyrE
+Public key: EOS6i3kUzoCExzr3WnD9Aa9BFCDYukh8ih8YocAVXW2LegioyHoWV
+
+Active
+Private key: 5KZpFzEChE4wtfoBAKCu6fGr1nWJ4pSLK7dGcWca1atRGo77THT
+Public key: EOS5nQrEivFpiyj2vYB1XnVTfn1egi8CdQYcjHr31y9EYgcHUrHV6
+
+eosio 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+
+
+Creating wallet: thiago
+"PW5JWFSEhQbW7KAv9KR4NLs1w8YxUCHP8Bnkx2PLzMCjs6qxJ577q"
+
+Owner
+Private key: 5JiFzPXkv8cozfDNTFTKJs9zy7WrQ8RNdLwEnuzEeyVBBXTVfzF
+Public key: EOS8erzcKUdfhmGcbqYZKazYSFNDQP87VXwfYkcPe4krab8B8y6eH
+3
+Active
+Private key: 5Hxbu2ews3qxCGeJQTVMLdhq4CcD7k2poNHguCTRQGj9yFko4dS
+Public key: EOS6A1nGG8iYbpzfHKAkwd9j299gz6Nc9PQBL15DmWpE9e6UwqY3Y

@@ -1,0 +1,60 @@
+<!--
+  Generated template for the CallbackTransactionsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content>
+
+  <div padding class="carteira-header hor-center-cont"  *ngIf="result!='issueok'">
+    <h3 *ngIf="result=='success'">Seu saldo</h3>
+    <ion-row *ngIf="result=='success'" padding align-items-baseline>
+      <ion-col></ion-col>
+      <ion-col nowrap no-padding>
+        <p text-right class="carteira-header-rs">R$</p>
+      </ion-col>
+      <ion-col nowrap no-padding>
+        <p text-left class="carteira-header-saldo"> {{ saldo| number: '1.2-2' }}</p>
+        <p *ngIf="result=='success'" float-right class="carteira-header-spent">- R$ {{ expent| number: '1.2-2' }}</p>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+  </div>
+
+
+  <div padding class="hor-center-cont">
+
+    <!--Pagamento efetuado-->
+    <div padding *ngIf="result=='success'">
+      <img src="assets/imgs/ok.svg">
+      <p class="text" padding>Pagamento efetuado</p>
+      <button class="button" ion-button color="secondary" block outline (click)="openPage('CarteiraPage')">OK</button>
+    </div>
+
+    <!--Pagamento efetuado-->
+    <div padding *ngIf="result=='issueok'">
+      <img src="assets/imgs/ok.svg">
+      <p class="text" padding>Emissão realizada com sucesso</p>
+      <button class="button" ion-button color="secondary" block outline (click)="openPage('AdminPage')">OK</button>
+    </div>
+
+    <!--Mensagem de Erro-->
+    <div padding *ngIf="result=='failure'">
+      <img src="assets/imgs/negativo.svg">
+      <p class="text" padding>Sua transação não foi concluída</p>
+      <div padding-horizontal class="rectangle">
+        <p class="errado text">O que deu errado?</p>
+        <br>
+        <p class="errado-msg text">{{ errorMsg }}</p>
+      </div>
+      <div padding-horizontal>
+        <button text-uppercase class="button" ion-button color="secondary" block outline (click)="popPage()">Voltar</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

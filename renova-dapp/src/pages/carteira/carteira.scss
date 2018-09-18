@@ -1,0 +1,63 @@
+page-carteira {
+    .carteira-header{
+        background: $hor-background;
+        color: #fff;
+        height: 160px;
+        font-size: 20px;
+        font-weight: 500px;
+    }
+
+    .carteira-content {
+        padding-top: 48px;
+        color: color($colors, text);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 2.23;
+    }
+
+    .carteira-btn {
+        padding-left: 48px;
+        padding-right: 48px;
+        padding-top: 24px;
+        padding-bottom: 36px;
+    }
+
+    .carteira-header-rs {
+        font-size: 14px;
+    }
+    .carteira-header-saldo {
+        font-size: 50px;
+    }
+    .pdl32{
+        padding-left: 32px;
+    }
+    h3{
+        font-size: 20px;
+        font-weight: 300;
+    }
+    ion-spinner * {
+        width: 28px;
+        height: 28px;
+        stroke: #fff;
+        fill: #fff;
+      }
+
+    button{
+        border-width: 2px!important;
+    }
+
+    // Edit button colors for ionic here:
+
+    .button-outline-ios-secondary.activated {
+        background: transparent !important;
+        border-color: color($colors, secondary-active) !important;
+        color: color($colors, secondary-active) !important;
+    }
+    
+    .button-outline-md-secondary.activated {
+        background: transparent !important;
+        border-color: color($colors, secondary-active) !important;
+        color: color($colors, secondary-active) !important;
+    }
+}
+

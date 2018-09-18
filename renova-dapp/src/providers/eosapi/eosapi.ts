@@ -17,7 +17,7 @@ export class EosapiProvider {
   status = new Subject<Boolean>();
   txh: any[];
   actionHistory: any[];
-  
+
   baseConfig = {
     keyProvider: ['5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'], // WIF string or array of keys..
     httpEndpoint: 'http://dev.bluchain.tech:8888',
@@ -39,15 +39,9 @@ export class EosapiProvider {
   public eos: any;
 
   constructor() {
-    this.eosio = null;
     this.ecc = EOSJS.modules['ecc'];
     this.format = EOSJS.modules['format'];
-    this.ready = false;
-    this.txh = [];
-    this.actionHistory = [];
-
     this.eos = EOSJS(this.baseConfig);
-    this.baseConfig.keyProvider = [];
 
   }
 
@@ -84,7 +78,7 @@ export class EosapiProvider {
           owner: pubkeyOwner,
           active: pubkeyActive
         });
-        resolve();
+        resolve('success');
       }, (err) => {
         reject(err);
       });
@@ -101,8 +95,6 @@ export class EosapiProvider {
       let activePublicKey;
       const secret = password;
 
-      this.clearInstance();
-      
       // Gerar dois pares de chaves para o Owner/Active
       ecc.randomKey().then(resp => {
         ownerPrivateKey = resp; // wif
@@ -114,44 +106,40 @@ export class EosapiProvider {
         activePublicKey = ecc.privateToPublic(resp); // EOSKey
       })
         .then((resp: any) => {
-          this.createAccount(accountName, ownerPublicKey, activePublicKey).then(resp =>{
-            const accounts: any = {
-              'accountName': accountName,
-              'ownerPublicKey': ownerPublicKey,
-              'activePublicKey': activePublicKey,
-              'ownerPrivateKey': ownerPrivateKey,
-              'activePrivateKey': activePrivateKey
-            };
-            // publickey, privkey, secret
-           // this.accounts = accounts; // retirar em producao
+          this.createAccount(accountName, ownerPublicKey, activePublicKey).then(resp => {
 
-            const ciphertext = CryptoJS.AES.encrypt(activePrivateKey, secret);
-            const store = {};
-            store['eosActiveKeys'] = {
-              accountName: accountName,
-              public: activePublicKey,
-              private: ciphertext.toString()
-            };
-             
-            localStorage.setItem('eos_activeKeys.', JSON.stringify(store));
-            const encriptedKey = JSON.parse(localStorage.getItem('eos_activeKeys.'));
+            if (resp === 'success') {
 
-          }).then(resp => {
-            
-            const cipherUserData = CryptoJS.AES.encrypt(JSON.stringify(user_data), activePublicKey ).toString();
-            
-            const gov_idMd5 = CryptoJS.MD5(gov_id).toString();
+              const accounts: any = {
+                'accountName': accountName,
+                'ownerPublicKey': ownerPublicKey,
+                'activePublicKey': activePublicKey,
+                'ownerPrivateKey': ownerPrivateKey,
+                'activePrivateKey': activePrivateKey
+              };
 
-            this.addUser(activePrivateKey, accountName, gov_idMd5, cipherUserData, type, status);
+              const ciphertext = CryptoJS.AES.encrypt(activePrivateKey, secret);
+              const store = {};
+              store['eosActiveKeys'] = {
+                accountName: accountName,
+                public: activePublicKey,
+                private: ciphertext.toString()
+              };
+  
+              localStorage.setItem('eos_activeKeys.', JSON.stringify(store));
+              const encriptedKey = JSON.parse(localStorage.getItem('eos_activeKeys.'));
+  
+              const cipherUserData = CryptoJS.AES.encrypt(JSON.stringify(user_data), activePublicKey).toString();
+              const gov_idMd5 = CryptoJS.MD5(gov_id).toString();
 
+              this.reloadInstance(activePrivateKey);
+
+              setTimeout(() => {
+                this.addUser(accountName, gov_idMd5, cipherUserData, type, status)
+              }, 1000);
+            }
           })
-              
-
-
-            })
-            .catch((error: any) => {
-            })
-    
+        })
       resolve('success')
         // tslint:disable-next-line:no-unused-expression
         , (err) => {
@@ -161,27 +149,25 @@ export class EosapiProvider {
     });
   }
 
-
-  async addUser(unProtectedKey, account, gov_id, user_data, type, status) {
-    this.reloadInstance(unProtectedKey).then(resp =>{
-       this.eos.transaction('renovasys', renovasys => {
-        const options = {
-          authorization: [{
-            actor: account,
-            permission: 'active'
-          }]
-        };
-        renovasys.adduser(account, gov_id, user_data, type, status, options);
-        // Returning a promise is optional (but handled as expected)
-      }).then(r => {
-        this.clearInstance();
-      })
-      .catch(err =>{
+  addUser(account, gov_id, user_data, type, status) {
+    this.eos.transaction('renovasys', renovasys => {
+      const options = {
+        authorization: [{
+          actor: account,
+          permission: 'active'
+        }]
+      };
+      renovasys.adduser(account, gov_id, user_data, type, status, options);
+      // Returning a promise is optional (but handled as expected)
+    }).then(r => {
+     // this.clearInstance();
+    })
+      .catch(err => {
         console.log(err);
       })
-    })
+
   }
-    
+
   async getBlucoinActions(scope, actor) {
     const sent = [];
     const received = [];
@@ -211,35 +197,37 @@ export class EosapiProvider {
     return actions;
   }
 
-    // Faz o reload da instancia do EOS quando o usurio libera a chave privada para executar uma action
-   async reloadInstance(privkey) {
-      this.baseConfig.keyProvider = [privkey];
-      this.eos = EOSJS(this.baseConfig);
-    }
-  
-    // Faz a limpeza da chave privada utilizada pelo usuário após a execução de uma action
-    async clearInstance() {
-      this.baseConfig.keyProvider = ['5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'];
-      this.eos = EOSJS(this.baseConfig);
-    }
-  
-    async descrpty(protectedKey, pin) {
-      const decriptedKey = CryptoJS.AES.decrypt(protectedKey, pin);
-      const plaintext = decriptedKey.toString(CryptoJS.enc.Utf8);
-      return plaintext;
-    }
-  
-  
-    async checkAccountName(name) {
-      return this.format['encodeName'](name);
-    }
-  
-    async getAccountInfo(name) {
-      return this.eos['getAccount'](name);
-    }
-  
-    async getKeyAccounts(pubkey) {
-      return this.eos.getKeyAccounts(pubkey);
-    }
+  // Faz o reload da instancia do EOS quando o usurio libera a chave privada para executar uma action
+  reloadInstance(privkey) {
+    this.baseConfig.keyProvider.push(privkey);
+    console.log(this.baseConfig.keyProvider);
+    this.eos = EOSJS(this.baseConfig);
+  }
+
+  // Faz a limpeza da chave privada utilizada pelo usuário após a execução de uma action
+   clearInstance() {
+    this.baseConfig.keyProvider = ['5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'];
+    console.log(this.baseConfig.keyProvider);
+    this.eos = EOSJS(this.baseConfig);
+  }
+
+  async descrpty(protectedKey, pin) {
+    const decriptedKey = CryptoJS.AES.decrypt(protectedKey, pin);
+    const plaintext = decriptedKey.toString(CryptoJS.enc.Utf8);
+    return plaintext;
+  }
+
+
+  async checkAccountName(name) {
+    return this.format['encodeName'](name);
+  }
+
+  async getAccountInfo(name) {
+    return this.eos['getAccount'](name);
+  }
+
+  async getKeyAccounts(pubkey) {
+    return this.eos.getKeyAccounts(pubkey);
+  }
 
 }
