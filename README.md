@@ -31,15 +31,15 @@ O principal ojetivo da rede Renova é incentivar a destinação correta dos res�
 
 Enquanto não houver nenhum produto entregue para a coleta seletiva, não há tokens circulando na plataforma. Os primeiros tokens são entram no sistema quando um ecoponto valida a entrega de um herói da reciclagem e encaminha para ele ou ela a quantidade de token condizente aos resíduos entregues. A emissão é feita na própria plataforma do ecoponto, que consegue visualizar a lista e buscar heróis da reciclagem e emitir para eles tokens.
 
-Os tokens RNV que os ecopontos estão enviando para os heróis da reciclagem provém de um contrato que contém toda a oferta da única emissão de tokens RNV da rede. A oferta deve ser grande o suficiente para não faltar tokens a serem entregues para os heróis da reciclagem. Como os tokens serão girados na rede será explicado posteriormente.  
+Os tokens RNV que os ecopontos estão enviando para os heróis da reciclagem provém de um contrato que contém toda a oferta da única criação de tokens RNV da rede. A oferta deve ser grande o suficiente para não faltar tokens a serem entregues para os heróis da reciclagem. Como os tokens serão girados na rede será explicado posteriormente.  
 
 Conforme dito, o herói da reciclagem ao entregar seu resíduo para a coleta seletiva recebe os tokens RNV. A ideia inicial de recompensa para o herói da reciclagem partiu do conceito de tornar a embalagem vazia de um produto novo e quando o produto é novamente utilizado, ele entra na cadeia com a "emissão" de novos tokens RNV. E aqueles que podem entrar na rede com novos produtos são os lojistas. A rede Renova quer atrair comerciantes preocupados com a sustentabilidade e com a destinação correta dos resíduos de seus produtos. A vantagem comercial para o lojista em participar dessa rede são leads para compra de seus produtos.
 
 Na plataforma dos lojistas, eles poderão criar ofertas de produtos aceitando o pagamento parcialmente ou totalmente em tokens Renova. Para incentivar o uso do token RNV pelos comerciantes, eles podem impulsionar as suas ofertas que serão mostradas na página inicial do aplicativo do herói da reciclagem.
 
-O herói da reciclagem pode visualizar as ofertas da lojas de três maneiras: na página inicial no campo mellhores ofertas - que são ofertas impulsionadas - a página "Ofertas" que mostra todas as ofertas, com destaque para as impulsionadas, e dentro do perfil da loja, que mostra as ofertas daquela loja.
+O herói da reciclagem pode visualizar as ofertas da lojas de três maneiras: na página inicial no campo melhores ofertas - que são ofertas impulsionadas - a página "Ofertas" que mostra todas as ofertas, com destaque para as impulsionadas, e dentro do perfil da loja, que mostra as ofertas daquela loja.
 
-Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em troca de uma determinada quantidade de token RNV e vai receber um código/cupom de desconto para o produto, que vai mostrar para o lojista quando for retirar o produto. O token 
+Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em troca de uma determinada quantidade de token RNV e vai receber um código/cupom de desconto para o produto, que vai mostrar para o lojista quando for retirar o produto. Os tokes do resgaste da oferta ficarão com o comerciante, que poderá utilizar esses tokens para implusionar suas ofertas. Quando o lojista usar os seus 
 
 ## Descrição do Proof-of-concept (POC)
 
@@ -86,7 +86,6 @@ Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em tr
 - Onboard
   - Cadastro da conta
   - Importação da carteira
-- Carteira de token RNV
 - Cadastro de resíduos
   - Tipo
   - Unidade de medida
@@ -110,15 +109,11 @@ Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em tr
   - Desconto (%) - opcional
   - Onde resgasta: Loja ou online
 - Impulsionar oferta
-  - Região geográfica: bairro, cidade, estado, país
 - Gerenciamento de oferta
   - Ver ofertas registradas
   - Impulsionar oferta
-  - Editar oferta
-
-### Infraestrutura
-
-Chain lateral EOS Bluchain
+  - Remover oferta
+  - Editar oferta (não impulsionadas)
 
 ## Implementações Posteriores e Roadmap
 
