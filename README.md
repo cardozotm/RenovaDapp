@@ -5,23 +5,25 @@ Rede de fidelidade em blockchain, chamada Renova, que incentiva a coleta seletiv
 
 ## Descrição do problema
 
-Atualmente, a maior produção mundial gerada pelo homem é o descarte de lixo. Em 2018, a produção é de 1,3 bilhão de toneladas por ano e deve crescer até 2,2 bilhões de toneladas por ano até 2022, segundo as estimativas do Programa das Nações Unidas para o Meio Ambiente (Pnuma) [1]. No Brasil, são descartados mais de 79 mil toneladas por ano, segundo dados da  Associação Brasileira de Empresas de Limpeza Pública e Resíduos Especiais (Abrelpe) [2]. Para agravar a situação, apenas 18% dos municípos tem programas de coleta seletiva, que representam cerca de 15% da população brasileira. Ou seja, 85% dos brasileiros não faz a destinação corretas dos resíduos [3].
+Atualmente, a maior produção mundial gerada pelo homem é o descarte de resíduos. Em 2018, a produção é de 1,3 bilhão de toneladas por ano e deve crescer até 2,2 bilhões de toneladas por ano até 2022, segundo as estimativas do Programa das Nações Unidas para o Meio Ambiente (Pnuma) [1]. No Brasil, são descartados mais de 79 mil toneladas por ano, segundo dados da  Associação Brasileira de Empresas de Limpeza Pública e Resíduos Especiais (Abrelpe) [2]. Para agravar a situação, apenas 18% dos municípos tem programas de coleta seletiva, que representam cerca de 15% da população brasileira. Ou seja, 85% dos brasileiros não faz a destinação correta dos resíduos [3].
 
-Por outro lado, uma conhecida forma para engajar consumidores são programas de fidelidade. No entanto, para que o engajamento de um programa de fidelidade vai além da compra entre o lojista e o consumidor. Para que o consumidor envolva-se, ele precisa (...)
+Por outro lado, uma conhecida forma para engajar consumidores são programas de fidelidade. No entanto, para que o engajamento de um programa de fidelidade vai além da compra entre o lojista e o consumidor.
 
 A fim de conscientizar e engajar a população brasileira e mundial para a prática da coleta seletiva, a proposta deste projeto é criar o token Renova (RNV), um sistema que motiva cidadãos (heróis da reciclagem) a selecionarem corretamente o seu lixo e o encaminhar para centros de coleta (ecopontos) por desconto em produtos e dada por estabelecimentos comerciais (lojista) conectados a rede. Em resumo, o consumidor vai conseguir trocar um resíduo ao descartá-lo corretamente por um produto novo em uma loja participante. 
 
 ## Proposta de solução
 
-Como incentivo, é gerado para o consumidor uma quantidade de tokens RNV proporcional a quantidade e o tipo do resíduo entregue e verificado pelo centro de coleta.
+Como incentivo ao entregar plático, papel ou alumínio ao ecoponto, é dado para o herói da reciclagem uma quantidade de tokens RNV proporcional a quantidade e o tipo do resíduo entregue e verificado pelo centro de coleta.
 
-Com esse token, o consumidor poderá acessar um aplicativo no qual consegue visualizar promomoções de produtos e serviços das lojas participantes da Renova.
+Com esse token, o herói poderá acessar um aplicativo no qual consegue visualizar promomoções de produtos e serviços das lojas participantes da Renova.
+
+O lojista poderá criar ofertas de seus produtos em sua plataforma gratuitamente, mas ele pode "impulsionar" a sua oferta especificando para qual região geográfica ele deseja provover seu produto, de modo que o usuário receberá a notificação daquela oferta.
 
 Os benefícios para o comerciante em participar da Renova são criar um relacionamento com o consumidor baseado na mútua preocupação com o meio ambiente e um lead para a compra de seus produtos ou serviços.
 
 Inicialmente o token RNV poderá ser utilizado apenas para desconto em produtos e serviços nos comércios participantes, nas quando o token tiver sua blockchain pública, ele poderá ser revertido em criptomoedas em exchanges, transferido entre usuários ou ter outras funcionalidades que a comunidade encontrar para ele.
 
-Os principais atores do ecossistema são consumidores, comerciantes e centros de coleta e reciclagem.
+Os principais atores do ecossistema são consumidores (heróis da reciclagem), comerciantes (lojistas) e centros de coleta e reciclagem (ecopontos).
 
 ## Descrição do Proof-of-concept (POC)
 
