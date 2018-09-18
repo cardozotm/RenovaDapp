@@ -47,14 +47,14 @@
         Sou um...
       </ion-label>
       <ion-segment [(ngModel)]="actor" color="primary">
-        <ion-segment-button value="consumer">
+        <ion-segment-button value="0">
           Heroi da Reciclagem
         </ion-segment-button>
-        <ion-segment-button value="recycler">
-          Ecoponto
-        </ion-segment-button>
-        <ion-segment-button value="merchant">
+        <ion-segment-button value="1">
           Logista
+        </ion-segment-button>
+        <ion-segment-button value="2">
+          Ecoponto
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -70,7 +70,7 @@
           <ion-row>
             <ion-col col-12>
               <!-- Firt Name -->
-              <div *ngIf="actor == 'consumer'">
+              <div *ngIf="actor == '0'">
                 <ion-item>
                   <ion-label stacked class="text label">
                     Nome:
@@ -80,7 +80,7 @@
                 </ion-item>
               </div>
 
-              <div *ngIf="actor != 'consumer'">
+              <div *ngIf="actor != '0'">
                 <ion-item>
                   <ion-label stacked class="text label">
                     Razão Social:
@@ -101,7 +101,7 @@
             <ion-col col-12>
               <!-- CPF -->
 
-              <div *ngIf="actor == 'consumer'">
+              <div *ngIf="actor == '0'">
                 <ion-item>
                   <ion-label stacked class="text label">
                     CPF:
@@ -114,7 +114,7 @@
                 </span>
               </div>
 
-              <div *ngIf="actor != 'consumer'">
+              <div *ngIf="actor != '0'">
                 <ion-item>
                   <ion-label stacked class="text label">
                    CNPJ:
@@ -277,7 +277,7 @@
               <button text-uppercase ion-button block outline color="primary" (click)="nextStep('onboarding')">CANCELAR</button>
             </ion-col>
             <ion-col>
-              <button text-uppercase ion-button block color="primary" type="submit" [disabled]="!signUpForm.valid||(signUpForm.controls.pin.value!=signUpForm.controls.pinconfirm.value)">CONFIRMAR</button>
+              <button text-uppercase ion-button block color="primary" type="submit" [disabled]="(signUpForm.controls.pin.value!=signUpForm.controls.pinconfirm.value)">CONFIRMAR</button>
             </ion-col>
           </ion-row>
         </div>

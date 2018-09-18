@@ -24,7 +24,7 @@ export class StartPage {
   step: string;
   cepObservable: Observable<object>;
   cep: any;
-  actor: any;
+  actor: number;
 
 
   signUpForm: FormGroup;
@@ -39,63 +39,26 @@ export class StartPage {
     public loadingCtrl: LoadingController, ) {
 
     this.step = 'welcome';
-    this.actor = 'consumer';
+    this.actor = 0;
 
     this.signUpForm = new FormGroup({
 
-      complete_name: new FormControl('',
-        Validators.compose([
-          Validators.minLength(3),
-          Validators.required])
-      ),
-
-      gov_id: new FormControl('',
-        Validators.compose([
-          Validators.minLength(11),
-          Validators.required])
-      ),
-
+      complete_name: new FormControl('',Validators.compose([Validators.minLength(3),Validators.required])),
+      gov_id: new FormControl('',Validators.compose([Validators.minLength(11),Validators.required])),
       street: new FormControl('', ),
-
-      number: new FormControl('',
-        Validators.compose([
-          Validators.pattern('[0-9]*'),
-          Validators.required])),
-
+      number: new FormControl('',Validators.compose([Validators.pattern('[0-9]*'),Validators.required])),
       neighborhood: new FormControl('', ),
       city: new FormControl('', ),
       state: new FormControl('', ),
-      zip: new FormControl('',
-        Validators.compose([
-          Validators.required])),
-
-      actor: new FormControl('',
-        Validators.compose([
-          Validators.required])),
-
-      user: new FormControl('',
-        Validators.compose([
-          Validators.minLength(12),
-          Validators.pattern('[a-z1-5]*'),
-          Validators.required])),
-
-      pin: new FormControl(
-        '',
-        Validators.compose([Validators.minLength(6),
-        Validators.maxLength(6),
-        Validators.required,
-        Validators.pattern('[0-9]*')
-        ])),
-
-      pinconfirm: new FormControl('', Validators.compose([
-        Validators.minLength(6), Validators.maxLength(6), Validators.required, Validators.pattern('[0-9]*')
-      ]))
-    });
+      zip: new FormControl('',Validators.compose([Validators.required])),
+      actor: new FormControl('',Validators.compose([Validators.required])),
+      user: new FormControl('',Validators.compose([Validators.minLength(12),Validators.pattern('[a-z1-5]*'),Validators.required])),
+      pin: new FormControl('',Validators.compose([Validators.minLength(6),Validators.maxLength(6),Validators.required,Validators.pattern('[0-9]*')])),
+      pinconfirm: new FormControl('', Validators.compose([Validators.minLength(6), Validators.maxLength(6), Validators.required, Validators.pattern('[0-9]*')]))});
 
     this.errorMsg = '';
 
   }
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StartPage');
@@ -106,28 +69,21 @@ export class StartPage {
 
 
   findCep() {
-
     let cepN = this.cepObservable
-
     console.log(cepN);
-
     cepPromise(cepN.toString())
-
       .then(resp => {
         console.log(resp);
         this.street = resp.street;
         this.city = resp.city;
         this.neighborhood = resp.neighborhood;
         this.state = resp.state;
-
       })
       .catch((e: any) => Observable.throw(this.errorHandler(e)));
-
   }
   errorHandler(error: any): void {
     console.log(error);
     this.cepIncorreto()
-
   }
 
   cepIncorreto() {
@@ -171,8 +127,6 @@ export class StartPage {
     if(step == 'fase1'){
       this.dadosSeguros();
     }
-
-
   }
 
   // Loading
@@ -251,29 +205,40 @@ export class StartPage {
   }
 
 
-  signIn(user: string, pin: any) {
-    // this.auth.login();
+  signUp() {
+
+    this.presentLoading();
+    
+    const user = this.signUpForm.value.user;
+    const pin = this.signUpForm.value.pin;
+    const gov_id = this.signUpForm.value.gov_id
+    const type:number = this.signUpForm.value.actor;
+    const status:number = 1;
+
+    const user_data = {
+      complete_name: this.signUpForm.value.complete_name,
+      gov_id: this.signUpForm.value.gov_id,
+      street: this.signUpForm.value.street,
+      number: this.signUpForm.value.number,
+      neighborhood: this.signUpForm.value.neighborhood,
+      city: this.signUpForm.value.city,
+      state: this.signUpForm.value.state,
+      zip: this.signUpForm.value.zip,
+    };
+
     this.eosapi.getAccountInfo(user)
-      .then(resp => {
+      .then(hasAccount => {
         this.hasAccountAlert();
       })
-      .catch(err => {
-        this.eosapi.createAccountForUser(user, pin).then(resp => {
+      .catch(newAccount => {
+        this.eosapi.createAccountForUser(user, pin,  gov_id, user_data, type.valueOf(), status.valueOf()).then(resp => {
           if (resp === 'success') {
-            this.openPage('CarteiraPage');
+            this.openPage('CarteiraPage'); 
           }
         });
-      });
+      })
   }
 
-
-
-  signUp() {
-    this.presentLoading();
-    //    console.log(this.signUpForm.value);
-    //    console.log('Validade do formulário: ' + this.signUpForm.valid);
-    this.verifyForm();
-  }
 
   navToWallet() {
     /*   if (this.auth.isLoginSubject.value) {
@@ -281,30 +246,6 @@ export class StartPage {
        }
    */
   }
-
-  verifyForm() {
-    this.errorMsg = '';
-    if (this.signUpForm.valid) {
-      // Confere se os PINs digitados sao iguais
-      if (this.signUpForm.value.pin === this.signUpForm.value.pinconfirm) {
-        this.signIn(this.signUpForm.value.user, this.signUpForm.value.pin);
-      } else {
-        this.errorMsg = 'Os PINs digitados não conferem';
-        //     this.presentCallback('failure', this.errorMsg);
-      }
-    } else {
-      if (this.signUpForm.controls.user.status === 'INVALID') {
-        this.errorMsg += ' Nome de usuário inválido.';
-      }
-      if (this.signUpForm.controls.pin.status === 'INVALID') {
-        this.errorMsg += ' PIN inválido.';
-      }
-      if (this.signUpForm.controls.pinconfirm.status === 'INVALID') {
-        this.errorMsg += ' Os PINs digitados não conferem.';
-      }
-      // this.presentCallback('failure', this.errorMsg);
-    }
-  } s
 
   hasAccountAlert() {
     const alert = this.alertCtrl.create({

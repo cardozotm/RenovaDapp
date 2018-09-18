@@ -17,9 +17,10 @@ export class EosapiProvider {
   status = new Subject<Boolean>();
   txh: any[];
   actionHistory: any[];
+  
   baseConfig = {
     keyProvider: ['5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'], // WIF string or array of keys..
-    httpEndpoint: 'https://dev.bluchain.tech:9888',
+    httpEndpoint: 'http://dev.bluchain.tech:8888',
     expireInSeconds: 60,
     broadcast: false,
     debug: true,
@@ -91,7 +92,7 @@ export class EosapiProvider {
   }
 
 
-  createAccountForUser(name, password) {
+  createAccountForUser(name, password, gov_id, user_data, type, status) {
     return new Promise((resolve, reject) => {
       const accountName = name;
       let ownerPrivateKey;
@@ -100,6 +101,8 @@ export class EosapiProvider {
       let activePublicKey;
       const secret = password;
 
+      this.clearInstance();
+      
       // Gerar dois pares de chaves para o Owner/Active
       ecc.randomKey().then(resp => {
         ownerPrivateKey = resp; // wif
@@ -112,7 +115,6 @@ export class EosapiProvider {
       })
         .then((resp: any) => {
           this.createAccount(accountName, ownerPublicKey, activePublicKey)
-            .then((account: any) => {
               const accounts: any = {
                 'accountName': accountName,
                 'ownerPublicKey': ownerPublicKey,
@@ -131,7 +133,10 @@ export class EosapiProvider {
                 private: ciphertext.toString()
               };
 
-              this.addUser(accountName, activePrivateKey);
+               const cipherUserData = CryptoJS.AES.encrypt(JSON.stringify(user_data), 'secret key 123').toString();
+               const gov_idMd5 = CryptoJS.MD5(gov_id).toString();
+
+              this.addUser(accountName, activePrivateKey, gov_id, cipherUserData, type, status);
 
               localStorage.setItem('eos_activeKeys.', JSON.stringify(store));
               const encriptedKey = JSON.parse(localStorage.getItem('eos_activeKeys.'));
@@ -139,8 +144,8 @@ export class EosapiProvider {
             })
             .catch((error: any) => {
               console.log(error);
-            });
-        });
+            })
+    
       resolve('success')
         // tslint:disable-next-line:no-unused-expression
         , (err) => {
@@ -150,21 +155,22 @@ export class EosapiProvider {
   }
 
 
-  async addUser(accountName, unProtectedKey) {
+  async addUser(unProtectedKey, account, gov_id, user_data, type, status) {
     this.reloadInstance(unProtectedKey);
-    await this.eos.transaction('bluclient', bluclient => {
+    await this.eos.transaction('renovasys', renovasys => {
       const options = {
         authorization: [{
-          actor: accountName,
+          actor: account,
           permission: 'active'
         }]
       };
-      bluclient.add(accountName, '0', '0', '0', '0', '0', 0, 1, 2, options);
+      renovasys.adduser(account, gov_id, user_data, type, status, options);
       // Returning a promise is optional (but handled as expected)
     }).then(r => {
       this.clearInstance();
     });
   }
+
 
   async getBlucoinActions(scope, actor) {
     const sent = [];
@@ -213,7 +219,6 @@ export class EosapiProvider {
       const plaintext = decriptedKey.toString(CryptoJS.enc.Utf8);
       return plaintext;
     }
-  
   
   
     async checkAccountName(name) {
