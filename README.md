@@ -15,7 +15,7 @@ A fim de conscientizar e engajar a população brasileira e mundial para a prát
 
 Como incentivo ao entregar plático, papel ou alumínio ao ecoponto, é dado para o herói da reciclagem uma quantidade de tokens RNV proporcional a quantidade e o tipo do resíduo entregue e verificado pelo centro de coleta.
 
-Com esse token, o herói poderá acessar um aplicativo no qual consegue visualizar promomoções de produtos e serviços das lojas participantes da Renova.
+Com esse token, o herói poderá acessar um aplicativo no qual consegue visualizar promoções de produtos das lojas participantes da Renova.
 
 O lojista poderá criar ofertas de seus produtos em sua plataforma gratuitamente, mas ele pode "impulsionar" a sua oferta especificando para qual região geográfica ele deseja provover seu produto, de modo que o usuário receberá a notificação daquela oferta.
 
@@ -24,6 +24,22 @@ Os benefícios para o comerciante em participar da Renova são criar um relacion
 Inicialmente o token RNV poderá ser utilizado apenas para desconto em produtos e serviços nos comércios participantes, nas quando o token tiver sua blockchain pública, ele poderá ser revertido em criptomoedas em exchanges, transferido entre usuários ou ter outras funcionalidades que a comunidade encontrar para ele.
 
 Os principais atores do ecossistema são consumidores (heróis da reciclagem), comerciantes (lojistas) e centros de coleta e reciclagem (ecopontos).
+
+## Economia e funcionamento da Renova
+
+O principal ojetivo da rede Renova é incentivar a destinação correta dos resíduos sólidos a atores que podem promover isso, seja ele reciclagem, reutilização, queima para a produção de energia, etc. Assim, o ecoponto - um ponto de coleta de material reciclável - se registra na plataforma da Renova e está apto a começar a validar a entrega de resíduos para coleta. Quando um herói da reciclagem (um usuário) chega até o ecoponto, o ecoponto valida o tipo, a quantidade (com base em uma unidade de medida) e a recompensa em token RNV para o herói. O valor da recompensa será definido previamente pelo ecoponto e pode variar entre eles.
+
+Enquanto não houver nenhum produto entregue para a coleta seletiva, não há tokens circulando na plataforma. Os primeiros tokens são entram no sistema quando um ecoponto valida a entrega de um herói da reciclagem e encaminha para ele ou ela a quantidade de token condizente aos resíduos entregues. A emissão é feita na própria plataforma do ecoponto, que consegue visualizar a lista e buscar heróis da reciclagem e emitir para eles tokens.
+
+Os tokens RNV que os ecopontos estão enviando para os heróis da reciclagem provém de um contrato que contém toda a oferta da única criação de tokens RNV da rede. A oferta deve ser grande o suficiente para não faltar tokens a serem entregues para os heróis da reciclagem. Como os tokens serão girados na rede será explicado posteriormente.  
+
+Conforme dito, o herói da reciclagem ao entregar seu resíduo para a coleta seletiva recebe os tokens RNV. A ideia inicial de recompensa para o herói da reciclagem partiu do conceito de tornar a embalagem vazia de um produto novo e quando o produto é novamente utilizado, ele entra na cadeia com a "emissão" de novos tokens RNV. E aqueles que podem entrar na rede com novos produtos são os lojistas. A rede Renova quer atrair comerciantes preocupados com a sustentabilidade e com a destinação correta dos resíduos de seus produtos. A vantagem comercial para o lojista em participar dessa rede são leads para compra de seus produtos.
+
+Na plataforma dos lojistas, eles poderão criar ofertas de produtos aceitando o pagamento parcialmente ou totalmente em tokens Renova. Para incentivar o uso do token RNV pelos comerciantes, eles podem impulsionar as suas ofertas que serão mostradas na página inicial do aplicativo do herói da reciclagem.
+
+O herói da reciclagem pode visualizar as ofertas da lojas de três maneiras: na página inicial no campo melhores ofertas - que são ofertas impulsionadas - a página "Ofertas" que mostra todas as ofertas, com destaque para as impulsionadas, e dentro do perfil da loja, que mostra as ofertas daquela loja.
+
+Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em troca de uma determinada quantidade de token RNV e vai receber um código/cupom de desconto para o produto, que vai mostrar para o lojista quando for retirar o produto. Os tokes do resgaste da oferta ficarão com o comerciante, que poderá utilizar esses tokens para implusionar suas ofertas. Quando o lojista usar os seus 
 
 ## Descrição do Proof-of-concept (POC)
 
@@ -70,29 +86,34 @@ Os principais atores do ecossistema são consumidores (heróis da reciclagem), c
 - Onboard
   - Cadastro da conta
   - Importação da carteira
-- Carteira de token RNV
-- Cadastro de materiais
-  - Tpois
+- Cadastro de resíduos
+  - Tipo
+  - Unidade de medida
   - Valores em RNV
 - Calculadora de resíduo para RNV
   - Nome da conta
   - Tipo
   - Quantidade
-  - Unidade
+  - Unidade de medida
   - Envio RNV
 - Exportar carteira
 
 ### POC aplicativo do comerciante
 
 - Saldo de token RNV
-- Cadastro de ofertas
-  - Descrição
-  - RNV
+- Cadastro de ofertas [4]
+  - Nome do produto
+  - Código de referência (REF)
+  - Preço (R$) - opcional
+  - Preço (RNV)
+  - Desconto (%) - opcional
+  - Onde resgasta: Loja ou online
+- Impulsionar oferta
 - Gerenciamento de oferta
-
-### Infraestrutura
-
-Chain lateral EOS Bluchain
+  - Ver ofertas registradas
+  - Impulsionar oferta
+  - Remover oferta
+  - Editar oferta (não impulsionadas)
 
 ## Implementações Posteriores e Roadmap
 
@@ -100,4 +121,5 @@ Chain lateral EOS Bluchain
 1. https://www.ecycle.com.br/component/content/article/38-no-mundo/1157-estimativa-revela-que-quantidade-de-lixo-produzida-no-mundo-sera-quase-70-maior-em-2030.html
 1. http://edicaodobrasil.com.br/2017/11/10/cada-brasileiro-produz-387-kg-de-lixo-por-ano/
 1. https://epoca.globo.com/colunas-e-blogs/blog-do-planeta/noticia/2016/06/85-dos-brasileiros-nao-tem-acesso-coleta-seletiva-mostra-estudo.html
-1. https://www.ecommerceceo.com/customer-loyalty-programs/
+1. https://docs.google.com/document/d/1I_vvpWdB5gHUv-tzg6x5ybj3RgIB7pvot4NM413Prlo/edit?usp=sharing
+1. https://www.montgomerycountymd.gov/sws/footprint/
