@@ -16,9 +16,11 @@
     using std::string;
 
     class renova : public eosio::contract {
+        
+    
     public:
         explicit renova(action_name self)
-                : contract(self), _user(self, self), _offer(self, self), _material(self, self) {
+                : contract(self), _user(self, self), _offer(self, self), _material(self, self), _boost(self, self), _accounts(self, self) {
         }
 
         //@abi action
@@ -56,8 +58,6 @@
                 user.status = status; // 1 for active users, 0 for inactive user
 
             });
-
-            
         }
 
 
@@ -102,6 +102,7 @@
 
         //@abi action
         void removeuser(const account_name account)
+       
         {
 
             require_auth(account); // make sure authorized by account
@@ -152,6 +153,7 @@
             }
         }
 
+
         //@abi action
         void updateoffer(const account_name account,
                         uint64_t offerId,
@@ -167,14 +169,32 @@
             auto itr = offers.find(offerId);
             eosio_assert(itr != offers.end(), "offerId not found");
 
-            offers.modify(itr, account /*payer*/, [&](auto &offer) {
-                offer.offer_value = offer_value;
-                offer.offer_data = offer_data;
-                offer.last_updated_at = now();
-            });
+             for (auto& item : offers)
+            {
+                if (item.offerId == offerId)
+                {
+                    // can't update if offer was boosted once
+                    if (item.is_boosted != 0)
+                    {
+                        offers.modify(itr, account /*payer*/, [&](auto &offer) {
+                            offer.offer_value = offer_value;
+                            offer.offer_data = offer_data;
+                            offer.last_updated_at = now();
+                    });
+
+                    }
+                      else
+                    {
+                    // print("Can not add a new offer, user is deactivated or is not a merchant");
+                    }
+
+                    break; // so you only add it once
+                }
+            }
 
         }
 
+        //@abi action
         void removeoffer(const account_name account,
                         uint64_t offerId)
         {
@@ -187,6 +207,50 @@
             eosio_assert(itr != offers.end(), "offerId not found");
 
             offers.erase(itr);
+        }
+
+        
+        //@abi action
+        void setbprice(const account_name account,
+                        uint64_t value)
+        {
+            require_auth(_self); // make sure authorized by account
+
+            boostpricetable prices(_self, _self); // code, scope
+
+            auto toitr = _boost.find(account);
+                if( toitr == _boost.end() ) {
+                    _boost.emplace(get_self(), [&]( auto& a ) {
+                        a.account_name = account;
+                        a.bpricelId = prices.available_primary_key();  
+                        a.boostprice = value; 
+                        a.last_updated_at = now();
+                  });
+                } else {
+                    _boost.modify( toitr, 0, [&]( auto& a ) {
+                        a.boostprice = value; 
+                        a.last_updated_at = now();
+                  });
+                }
+            
+        }
+
+        //@abi action
+        void payforboost(const account_name account,
+                        uint64_t offerId,
+                        uint64_t offer_value)
+
+        {
+            require_auth(account); // make sure authorized by account
+
+
+            offertable offers(_self, _self); // code - account that has permission, scope - account that store the data
+
+             // verify already exist
+            auto itr = offers.find(offerId);
+            eosio_assert(itr != offers.end(), "offerId not found");
+
+
         }
 
         //@abi action
@@ -291,12 +355,7 @@
                     // can only add if the type and status macht to recycling center 2, active 1
                     if (item.type == 2 && item.status == 1)
                     {
-                    eosio::action(
-                    std::vector<eosio::permission_level>(1,{_self, N(active)}),
-                    N(renova.token), N(transfer), 
-                        std::make_tuple(_self,N(receiver),eosio::asset(value_material,eosio::symbol_type(S(4,RNV))),std::string("Tks for Recycling"))
-                        ).send();
-        
+                        renova::issue(receiver, value_material);
                     }
                     else
                     {
@@ -351,11 +410,7 @@
                         }
 
                     //transfer to merchan the amount of tokens relative to a offer
-                    eosio::action(
-                    std::vector<eosio::permission_level>(1,{_self, N(active)}),
-                    N(renova), N(transfer), 
-                        std::make_tuple(_self,N(merchant),eosio::asset(to_pay,eosio::symbol_type(S(4,RNV))),std::string("Tks for Recycling"))
-                        ).send();
+  
                         
                     }  
                 break; // so you only add it once
@@ -364,10 +419,79 @@
             }                       
         }
 
+
+      
+
+
     private:
+
+        void transfer( account_name from, account_name to, uint64_t quantity ) {
+            const auto& fromacnt = _accounts.get( from );
+            eosio_assert( fromacnt.balance >= quantity, "overdrawn balance" );
+            _accounts.modify( fromacnt, from, [&]( auto& a ){ a.balance -= quantity; } );
+
+            add_balance( from, to, quantity );
+
+        }
+
+
+        void issue( account_name to, uint64_t value ) {
+            auto quantity = eosio::symbol_type(S(value,RNV));
+            add_balance( _self, to, quantity );
+        }
+
+        void boostoffer(const account_name account,
+                        uint64_t offerId,
+                        uint64_t offer_value)
+
+        {
+            require_auth(account); // make sure authorized by account
+
+            offertable offers(_self, _self); // code - account that has permission, scope - account that store the data
+
+             // verify already exist
+            auto itr = offers.find(offerId);
+            eosio_assert(itr != offers.end(), "offerId not found");
+
+            offers.modify(itr, account /*payer*/, [&](auto &offer) {
+                offer.is_boosted = 1;
+                offer.last_updated_at = now();
+            });
+
+        }
+
+    
+    
+    //@abi table account i64
+        struct account 
+        {   
+         account_name owner;
+         uint64_t     balance;
+
+         uint64_t primary_key()const { return owner; }
+      };
+
+      typedef eosio::multi_index<N(accounts), account> accountstable;
+
+
+      void add_balance( account_name payer, account_name to, uint64_t q ) {
+         auto toitr = _accounts.find( to );
+         if( toitr == _accounts.end() ) {
+           _accounts.emplace( payer, [&]( auto& a ) {
+              a.owner = to;
+              a.balance = q;
+           });
+         } else {
+           _accounts.modify( toitr, 0, [&]( auto& a ) {
+              a.balance += q;
+              eosio_assert( a.balance >= q, "overflow detected" );
+           });
+         }
+      }
+
         
-    //@abi table user i64
-    struct user
+        //@abi table user i64
+        struct user
         {
             uint64_t userId;
             uint64_t account_name;
@@ -397,6 +521,7 @@
             uint64_t offerId;
             uint64_t offer_value;
             uint32_t create_at;
+            uint32_t is_boosted;
             uint32_t last_updated_at;
             string   offer_data;
 
@@ -410,6 +535,19 @@
         typedef eosio::multi_index< N(offer), offer,
             indexed_by< N(offerId), const_mem_fun<offer, uint64_t, &offer::by_offerId> >
         > offertable;
+
+        //@abi table boostprice i64
+        struct boostprice 
+        {
+            uint64_t bpricelId;
+            uint64_t account_name;
+            uint64_t boostprice;
+            uint64_t last_updated_at;
+
+            uint64_t primary_key()const { return bpricelId; }
+        };
+
+      typedef eosio::multi_index<N(boostprice), boostprice> boostpricetable;
 
         //@abi table materials i64
         struct materials
@@ -434,9 +572,12 @@
         > materialtable;     
 
         // local instances of the multi indexes
+        accountstable _accounts;
         usertable _user;
         offertable _offer;
+        boostpricetable _boost;
         materialtable _material;
-    };
+    
 
-    EOSIO_ABI( renova, (adduser)(updateuser)(changeuserst)(removeuser)(addoffer)(updateoffer)(removeoffer)(addmaterial)(updatemat)(removemat)(payformat)(payforoffer))
+    };
+    EOSIO_ABI( renova, (adduser)(updateuser)(changeuserst)(removeuser)(addoffer)(updateoffer)(removeoffer)(payforboost)(addmaterial)(updatemat)(removemat)(payformat)(payforoffer)(transfer)(issue));
