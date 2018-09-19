@@ -123,7 +123,8 @@ export class EosapiProvider {
               store['eosActiveKeys'] = {
                 accountName: accountName,
                 public: activePublicKey,
-                private: ciphertext.toString()
+                private: ciphertext.toString(),
+                role: type
               };
   
               localStorage.setItem('eos_activeKeys.', JSON.stringify(store));

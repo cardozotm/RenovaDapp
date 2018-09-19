@@ -41,7 +41,6 @@ export class StartPage {
     public loadingCtrl: LoadingController, ) {
 
     this.step = 'welcome';
-    this.actor = 0;
 
     this.signUpForm = new FormGroup({
 
@@ -182,7 +181,8 @@ export class StartPage {
       inputs: [
         {
           name: 'PIN',
-          placeholder: 'PIN 6 Digitos'
+          placeholder: 'PIN 6 Digitos',
+          type: 'password'
         },
       ],
       buttons: [
