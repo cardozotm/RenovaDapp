@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Platform, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { EosapiProvider } from '../../providers/eosapi/eosapi';
 //import { CallbackTransactionsPage } from '../modals/callback-transactions/callback-transactions';
 import { StartPage } from '../start/start';
-
-
+import { Content } from 'ionic-angular';
 
 
 @IonicPage()
@@ -13,9 +12,15 @@ import { StartPage } from '../start/start';
   selector: 'page-carteira',
   templateUrl: 'carteira.html',
 })
+
 // tslint:disable-next-line:component-class-suffix
 export class CarteiraPage {
+  @ViewChild(Content) content: Content;
+
   qrerror: any;
+ 
+  section: string = 'two';
+  somethings: any = new Array(20);
 
   public accountName: string;
   public saldo: any;

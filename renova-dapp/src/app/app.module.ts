@@ -16,6 +16,7 @@ import { CarteiraPageModule } from '../pages/carteira/carteira.module';
 
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ScrollingHeaderModule } from 'ionic-scrolling-header';
 
 
 @NgModule({
@@ -23,12 +24,14 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     MyApp,
     StartPage,
     ListPage,
-  ],
+
+    ],
   imports: [
     BrowserModule,
     BrMaskerModule,
     NgxQRCodeModule,
     ZXingScannerModule.forRoot(),
+    ScrollingHeaderModule,
     CarteiraPageModule,
     IonicModule.forRoot(MyApp),
   ],

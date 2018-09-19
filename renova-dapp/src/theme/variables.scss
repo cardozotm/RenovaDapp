@@ -64,7 +64,7 @@ $colors: (
   text:             #5e5f5f,
 );
 
-$hor-background: linear-gradient(to right, color($colors, bg-light), color($colors, bg-dark));
+$hor-background: linear-gradient(to right, color($colors, bg-dark), color($colors, bg-light));
 
 
 // App iOS Variables
