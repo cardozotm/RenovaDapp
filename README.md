@@ -31,7 +31,7 @@ O principal objetivo da rede Renova é incentivar a destinação correta dos res
 
 Enquanto não houver nenhum produto entregue para a coleta seletiva, não há tokens circulando na plataforma. Os primeiros tokens entram no sistema quando um ecoponto valida a entrega de um herói da reciclagem e encaminha para ele ou ela a quantidade de token condizente aos resíduos entregues. A emissão é feita na própria plataforma do ecoponto, que consegue visualizar a lista e buscar heróis da reciclagem e emitir para eles tokens.
 
-Os tokens RNV que os ecopontos estão enviando para os heróis da reciclagem provém de tokens criados em uma oferta única. A oferta deve ser grande o suficiente para não faltar tokens a serem entregues para os heróis da reciclagem. Como os tokens serão retornados na rede será explicado posteriormente.  
+Os tokens RNV que os ecopontos estão enviando para os heróis da reciclagem provém de tokens criados pelo contrato inteligente 
 
 Conforme dito, o herói da reciclagem ao entregar seu resíduo para a coleta seletiva recebe os tokens RNV. A ideia inicial de recompensa para o herói da reciclagem partiu do conceito de tornar a embalagem vazia de um produto novo e quando o produto é novamente utilizado, ele entra na cadeia com a "emissão" de novos tokens RNV. E aqueles que podem entrar na rede com novos produtos são os lojistas. A rede Renova quer atrair comerciantes preocupados com a sustentabilidade e com a destinação correta dos resíduos de seus produtos. A vantagem comercial para o lojista em participar dessa rede são leads para compra de seus produtos.
 
@@ -39,7 +39,7 @@ Na plataforma dos lojistas, eles poderão criar ofertas de produtos aceitando o 
 
 O herói da reciclagem pode visualizar as ofertas da lojas de três maneiras: na página inicial no campo melhores ofertas - que são ofertas impulsionadas - a página "Ofertas" que mostra todas as ofertas, com destaque para as impulsionadas, e dentro do perfil da loja, que mostra as ofertas daquela loja.
 
-Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em troca de uma determinada quantidade de token RNV e vai receber um código/cupom de desconto para o produto, que vai mostrar para o lojista quando for retirar o produto. Os tokes resgastados na oferta ficarão com o comerciante, que poderá utilizar esses tokens para impulsionar suas ofertas. Quando o lojista usar os seus tokens para impulsionar uma oferta, esses tokens são reservados para os ecopontos utilizarem para entregarem para os heróis da reciclagem quando esses vierem entregar novos materiais para a coleta seletiva. Antes de todos os tokens estiverem sido emitidos, a ideia é que o ponto de equilíbrio entre tokens entregues pela coleta de resíduos e tokens gastos em impulsionamento de ofertas varie dentro de um número coberto por essa oferta.
+Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em troca de uma determinada quantidade de token RNV e vai receber um código/cupom de desconto para o produto, que vai mostrar para o lojista quando for retirar o produto. Os tokes resgastados na oferta ficarão com o comerciante, que poderá utilizar esses tokens para impulsionar suas ofertas. Quando o lojista usar os seus tokens para impulsionar uma oferta, esses tokens são queimados.
 
 ## Descrição do Proof-of-concept (POC)
 
