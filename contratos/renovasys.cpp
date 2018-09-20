@@ -10,17 +10,24 @@
 
     #include <string>
 
+    using std::string;
     using eosio::asset;
     using eosio::indexed_by;
     using eosio::const_mem_fun;
-    using std::string;
+    using eosio::print;
 
     class renova : public eosio::contract {
         
     
     public:
         explicit renova(action_name self)
-                : contract(self), _user(self, self), _offer(self, self), _material(self, self), _boost(self, self), _accounts(self, self) {
+                : contract(self), 
+                _user(self, self),
+                _offer(self, self), 
+                _material(self, self),
+                _voucher(self, self), 
+                _boost(self, self), 
+                _accounts(self, self) {
         }
 
         //@abi action
@@ -181,14 +188,13 @@
                             offer.offer_data = offer_data;
                             offer.last_updated_at = now();
                     });
-
+                        break; // so you only add it once
                     }
                       else
                     {
                     // print("Can not add a new offer, user is deactivated or is not a merchant");
                     }
-
-                    break; // so you only add it once
+                break; // so you only add it once
                 }
             }
 
@@ -237,20 +243,51 @@
 
         //@abi action
         void payforboost(const account_name account,
-                        uint64_t offerId,
-                        uint64_t offer_value)
+                        uint64_t offerId)
 
         {
             require_auth(account); // make sure authorized by account
 
-
-            offertable offers(_self, _self); // code - account that has permission, scope - account that store the data
+            offertable offers(_self, _self);
 
              // verify already exist
             auto itr = offers.find(offerId);
             eosio_assert(itr != offers.end(), "offerId not found");
 
+            usertable users(_self, _self); /// code, scope
 
+              for (auto& item : users)
+            {
+                if (item.type == 1 && item.status == 1)
+                {
+                   
+                    boostpricetable boost(_self, _self); // code, scope
+                    for (auto& item : boost)
+                    {
+                        if(item.boostprice != 0)
+                        {
+
+                        auto to_pay = item.boostprice;
+                        auto quantity = eosio::symbol_type(S(to_pay,RNV));
+                        
+                         renova::transfer(account, _self, quantity);
+                 
+                        renova::boostoffer(account, offerId);
+                        
+                        break; // so you only add it once
+
+                        }
+                    break; // so you only add it once
+
+                    }
+
+                }
+                else{
+                    
+                    print("Can not pay to boost that offer, user is deactivated, is not a merchant or doesn't have enough balance");
+
+                }
+            }
         }
 
         //@abi action
@@ -285,12 +322,15 @@
                     }
                     else
                     {
-                    // print("Can not add a new offer, user is deactivated or is not a merchant");
+                     print("Can not add a new material, user is deactivated or is not a reclycle center");
                     }
 
                     break; // so you only add it once
                 }
             }
+
+            print("material created");
+
         }
 
         
@@ -316,6 +356,9 @@
                 material.quote_price = quote_price;
                 material.material_description =  material_description;
             });
+
+            print("material updated");
+
         }
 
         //@abi action
@@ -332,17 +375,19 @@
             eosio_assert(itr != materials.end(), "materialId not found");
 
             materials.erase(itr);
+
+            print("material removed");
+
         }
 
         //@abi action
-        void payformat(const account_name account,
-                            const account_name receiver,
-                            uint64_t userId,
-                            uint64_t value_material)
+        void payformat( const account_name account,
+                        const account_name receiver,
+                        uint64_t userId,
+                        uint64_t value_material)
 
         {
             // pay a token amount to a person who has delivered material for recycling
-
             require_auth(account); // make sure authorized by account
 
             usertable users(_self, _self); // code, scope   
@@ -359,7 +404,7 @@
                     }
                     else
                     {
-                    // print("Can not add a new offer, user is deactivated or is not a merchant");
+                     print("Can not pay for material, check your user data and status");
                     }
 
                     break; // so you only add it once
@@ -376,7 +421,6 @@
 
         {
             // pay a token amount to a person who has delivered material for recycling
-
             require_auth(account); // make sure authorized by account
 
             usertable users(_self, _self); // code, scope   
@@ -404,13 +448,17 @@
                     {
                         if(item.offerId == offerId)
                         {
-                            to_pay = item.offer_value;
+                            
+                            //transfer to merchan the amount of tokens relative to a offer
+                            auto to_pay = item.offer_value;
+                            auto quantity = eosio::symbol_type(S(to_pay,RNV));
+
+                            renova::transfer(account, merchant, quantity);
+
+                            renova::createvoucher(merchant, account, offerId);
                             
                             break; // so you only add it once
                         }
-
-                    //transfer to merchan the amount of tokens relative to a offer
-  
                         
                     }  
                 break; // so you only add it once
@@ -419,13 +467,44 @@
             }                       
         }
 
+        //@abi action
+        void redeemvoucher( const account_name voucher_owner, const account_name voucher_issuer, uint64_t voucherId){
 
-      
+            require_auth(voucher_owner); // make sure authorized by account
 
+            vouchertable voucher(_self, _self); // code, scope
+
+            // verify already exist
+            auto itr = voucher.find(voucherId);
+            eosio_assert(itr != voucher.end(), "voucherId not found");
+
+             for (auto& item : voucher)
+            {
+                // can only erase a voucher if it exist and actors match
+                if (item.voucher_issuer == voucher_issuer && item.voucher_owner == voucher_owner)
+                {
+                     if(item.voucherId == voucherId)
+                        {
+                            voucher.erase(itr);
+                        }
+                    
+                    break; // so you only add it once
+                }
+                else {
+                     print("Can not redeem this voucheeId");
+                }
+
+            }
+        }
+
+
+
+
+    
 
     private:
 
-        void transfer( account_name from, account_name to, uint64_t quantity ) {
+        void transfer(const account_name from, account_name to, uint64_t quantity ) {
             const auto& fromacnt = _accounts.get( from );
             eosio_assert( fromacnt.balance >= quantity, "overdrawn balance" );
             _accounts.modify( fromacnt, from, [&]( auto& a ){ a.balance -= quantity; } );
@@ -434,33 +513,49 @@
 
         }
 
-
-        void issue( account_name to, uint64_t value ) {
+        void issue( const account_name to, uint64_t value ) {
             auto quantity = eosio::symbol_type(S(value,RNV));
             add_balance( _self, to, quantity );
+
+            print(value + "RNV was issued to " + to );
+
         }
 
-        void boostoffer(const account_name account,
-                        uint64_t offerId,
-                        uint64_t offer_value)
+        void boostoffer(const account_name to, uint64_t offerId)
 
         {
-            require_auth(account); // make sure authorized by account
-
             offertable offers(_self, _self); // code - account that has permission, scope - account that store the data
 
              // verify already exist
             auto itr = offers.find(offerId);
             eosio_assert(itr != offers.end(), "offerId not found");
 
-            offers.modify(itr, account /*payer*/, [&](auto &offer) {
+            offers.modify(itr, to /*payer*/, [&](auto &offer) {
                 offer.is_boosted = 1;
                 offer.last_updated_at = now();
             });
 
         }
 
-    
+        // create a new voucher
+        void createvoucher( const account_name voucher_issuer, 
+                            const account_name voucher_owner,
+                            uint64_t offerId)
+        {
+            auto id = _voucher.available_primary_key();
+            
+             _voucher.emplace(get_self(), [&](auto &voucher) {
+                voucher.voucherId = id;
+                voucher.offerId = offerId;
+                voucher.voucher_issuer = voucher_issuer;
+                voucher.voucher_owner = voucher_owner;
+                voucher.buy_date = now();
+            });
+
+            print("Your voucherId is: " + id);
+
+        }
+
     
     //@abi table account i64
         struct account 
@@ -472,7 +567,6 @@
       };
 
       typedef eosio::multi_index<N(accounts), account> accountstable;
-
 
       void add_balance( account_name payer, account_name to, uint64_t q ) {
          auto toitr = _accounts.find( to );
@@ -487,6 +581,9 @@
               eosio_assert( a.balance >= q, "overflow detected" );
            });
          }
+            
+            print("Balance was changed");
+
       }
 
         
@@ -536,18 +633,26 @@
             indexed_by< N(offerId), const_mem_fun<offer, uint64_t, &offer::by_offerId> >
         > offertable;
 
-        //@abi table boostprice i64
-        struct boostprice 
+             
+        //@abi voucher offer i64
+        struct voucher
         {
-            uint64_t bpricelId;
-            uint64_t account_name;
-            uint64_t boostprice;
-            uint64_t last_updated_at;
+            uint64_t voucher_issuer;
+            uint64_t voucher_owner;
+            uint64_t voucherId;
+            uint64_t offerId;
+            uint64_t buy_date;
 
-            uint64_t primary_key()const { return bpricelId; }
+            uint64_t primary_key() const { return voucherId; }
+            uint64_t by_voucherId() const {return offerId; }
+
+
+            EOSLIB_SERIALIZE(voucher, (voucher_issuer)(voucher_owner)(voucherId)(offerId)(buy_date))
+
         };
 
-      typedef eosio::multi_index<N(boostprice), boostprice> boostpricetable;
+        typedef eosio::multi_index<N(voucher), voucher> vouchertable;
+
 
         //@abi table materials i64
         struct materials
@@ -571,13 +676,45 @@
             indexed_by< N(materialId), const_mem_fun<materials, uint64_t, &materials::by_materialId> >
         > materialtable;     
 
+        //@abi table boostprice i64
+        struct boostprice 
+        {
+            uint64_t bpricelId;
+            uint64_t account_name;
+            uint64_t boostprice;
+            uint64_t last_updated_at;
+
+            uint64_t primary_key()const { return bpricelId; }
+        };
+
+      typedef eosio::multi_index<N(boostprice), boostprice> boostpricetable;
+
+   
+
         // local instances of the multi indexes
         accountstable _accounts;
         usertable _user;
         offertable _offer;
         boostpricetable _boost;
         materialtable _material;
+        vouchertable _voucher;
     
 
     };
-    EOSIO_ABI( renova, (adduser)(updateuser)(changeuserst)(removeuser)(addoffer)(updateoffer)(removeoffer)(payforboost)(addmaterial)(updatemat)(removemat)(payformat)(payforoffer)(transfer)(issue));
+    EOSIO_ABI( renova, 
+        (adduser)
+        (updateuser)
+        (changeuserst)
+        (removeuser)
+        (addoffer)
+        (updateoffer)
+        (removeoffer)
+        (setbprice)
+        (payforboost)
+        (addmaterial)
+        (updatemat)
+        (removemat)
+        (payformat)
+        (payforoffer)
+        (redeemvoucher)
+    );
