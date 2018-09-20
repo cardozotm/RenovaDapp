@@ -49,7 +49,7 @@
             // verify does not already exist
             // multi_index find on primary index which in our case is account
             auto itr = users.find(account);
-            eosio_assert(itr == users.end(), "user for account already exists");
+            eosio_assert(itr == users.end(), "user already registered");
 
             // add to table, first argument is account to bill for storage
             // each entry will be pilled to the associated account
@@ -79,7 +79,7 @@
 
             // verify already exist
             auto itr = users.find(account);
-            eosio_assert(itr != users.end(), "users for account not found");
+            eosio_assert(itr != users.end(), "users not registered");
 
             users.modify(itr, account /*payer*/, [&](auto &user) {
                 user.user_data = user_data;
@@ -98,7 +98,7 @@
 
             // verify already exist
             auto itr = users.find(account);
-            eosio_assert(itr != users.end(), "users for account not found");
+            eosio_assert(itr != users.end(), "user not registered");
 
             users.modify(itr, account /*payer*/, [&](auto &user) {
                 user.type = type;     // 0 = consumer, 1 = merchant , 2 = recycling center
@@ -118,7 +118,7 @@
 
             // verify already exist
             auto itr = users.find(account);
-            eosio_assert(itr != users.end(), "users for account not found");
+            eosio_assert(itr != users.end(), "user not registered");
 
             users.erase(itr);
         }
@@ -139,7 +139,7 @@
             {
                 if (item.userId == userId)
                 {
-                    // can only add if the type and status macht to active 1, merchant 1
+                    // can only add if type and status match active 1, merchant 1
                     if (item.type == 1 && item.status == 1)
                     {
                         _offer.emplace(get_self(), [&](auto &offer) {
@@ -262,7 +262,7 @@
 
             usertable users(_self, _self); /// code, scope
 
-              for (auto& item : users)
+            for (auto& item : users)
             {
                 if (item.type == 1 && item.status == 1)
                 {
@@ -313,7 +313,7 @@
             {
                 if (item.userId == userId && item.account_name == account)
                 {
-                    // can only add if the type and status macht to recycling center 2, active 1
+                    // can only add if the type and status match to recycling center 2, active 1
                     if (item.type == 2 && item.status == 1)
                     {
                         _material.emplace(get_self(), [&](auto &material) {
@@ -328,7 +328,7 @@
                     }
                     else
                     {
-                     print("Can not add a new material, user is deactivated or is not a reclycle center");
+                     print("Can not add a new material, user is deactivated or is not a reciclying center");
                     }
 
                     break; // so you only add it once
