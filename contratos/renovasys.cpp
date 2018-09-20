@@ -20,14 +20,7 @@
         
     
     public:
-        explicit renova(action_name self)
-                : contract(self), 
-                _user(self, self),
-                _offer(self, self), 
-                _material(self, self),
-                _voucher(self, self), 
-                _boost(self, self), 
-                _accounts(self, self) {
+        explicit renova(action_name self) : contract(self), _user(self, self), _offer(self, self), _material(self, self), _voucher(self, self), _boost(self, self), _accounts(self, self) {
         }
 
         //@abi action
@@ -474,7 +467,7 @@
         }
 
         //@abi action
-        void redeemvoucher( const account_name voucher_owner, const account_name voucher_issuer, uint64_t voucherId){
+        void redeemvouche( const account_name voucher_owner, const account_name voucher_issuer, uint64_t voucherId){
 
             require_auth(voucher_owner); // make sure authorized by account
 
@@ -708,20 +701,4 @@
     
 
     };
-    EOSIO_ABI( renova, 
-        (adduser)
-        (updateuser)
-        (changeuserst)
-        (removeuser)
-        (addoffer)
-        (updateoffer)
-        (removeoffer)
-        (setbprice)
-        (payforboost)
-        (addmaterial)
-        (updatemat)
-        (removemat)
-        (payformat)
-        (payforoffer)
-        (redeemvoucher)
-    );
+    EOSIO_ABI( renova,(adduser)(updateuser)(changeuserst)(removeuser)(addoffer)(updateoffer)(removeoffer)(setbprice)(payforboost)(addmaterial)(updatemat)(removemat)(payformat)(payforoffer)(redeemvouche));
