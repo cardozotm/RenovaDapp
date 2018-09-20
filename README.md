@@ -113,7 +113,6 @@ Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em tr
   - Ver ofertas registradas
   - Impulsionar oferta
   - Remover oferta
-  - Editar oferta (não impulsionadas)
 
 ## Implementações Posteriores e Roadmap
 
