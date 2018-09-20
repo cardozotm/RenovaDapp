@@ -137,7 +137,7 @@
             // is the users open
             for (auto& item : users)
             {
-                if (item.userId == userId)
+                if (item.userId == userId && item.account_name == account)
                 {
                     // can only add if the type and status macht to active 1, merchant 1
                     if (item.type == 1 && item.status == 1)
@@ -503,9 +503,6 @@
             }
         }
 
-
-
-
     
 
     private:
@@ -663,7 +660,24 @@
             indexed_by< N(materialId), const_mem_fun<materials, uint64_t, &materials::by_materialId> >
         > materialtable;  
 
-             
+   
+
+        //@abi table boostprice i64
+        struct boostprice 
+        {
+            uint64_t bpricelId;
+            uint64_t account_name;
+            uint64_t boostprice;
+            uint64_t last_updated_at;
+
+            uint64_t primary_key()const { return bpricelId; }
+
+            EOSLIB_SERIALIZE(materials, (bpricelId)(account_name)(boostprice)(last_updated_at)(last_updated_at))
+        };
+
+      typedef eosio::multi_index<N(boostprice), boostprice> boostpricetable;
+
+   
         //@abi voucher offer i64
         struct voucher
         {
@@ -683,23 +697,6 @@
 
         typedef eosio::multi_index<N(voucher), voucher> vouchertable;
 
-
-   
-
-        //@abi table boostprice i64
-        struct boostprice 
-        {
-            uint64_t bpricelId;
-            uint64_t account_name;
-            uint64_t boostprice;
-            uint64_t last_updated_at;
-
-            uint64_t primary_key()const { return bpricelId; }
-        };
-
-      typedef eosio::multi_index<N(boostprice), boostprice> boostpricetable;
-
-   
 
         // local instances of the multi indexes
         accountstable _accounts;
