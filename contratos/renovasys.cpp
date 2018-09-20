@@ -170,20 +170,26 @@
 
             require_auth(account); // make sure authorized by account
 
-            offertable offers(_self, _self); // code - account that has permission, scope - account that store the data
+            vouchertable voucher(_self, _self); 
 
             // verify already exist
-            auto itr = offers.find(offerId);
-            eosio_assert(itr != offers.end(), "offerId not found");
+            auto itr = voucher.find(offerId);
+            eosio_assert(itr == voucher.end(), "it's not possible to update an offer that has already been redeemed");
+
+            offertable offers(_self, _self); 
+
+            // verify already exist
+            auto itr2 = offers.find(offerId);
+            eosio_assert(itr2 != offers.end(), "offerId not found");
 
              for (auto& item : offers)
             {
                 if (item.offerId == offerId)
                 {
                     // can't update if offer was boosted once
-                    if (item.is_boosted != 0)
+                    if (item.is_boosted != 1)
                     {
-                        offers.modify(itr, account /*payer*/, [&](auto &offer) {
+                        offers.modify(itr2, account /*payer*/, [&](auto &offer) {
                             offer.offer_value = offer_value;
                             offer.offer_data = offer_data;
                             offer.last_updated_at = now();
@@ -192,7 +198,7 @@
                     }
                       else
                     {
-                    // print("Can not add a new offer, user is deactivated or is not a merchant");
+                     print("Can not update that offer, user is deactivated or is not a merchant");
                     }
                 break; // so you only add it once
                 }
@@ -517,7 +523,9 @@
             auto quantity = eosio::symbol_type(S(value,RNV));
             add_balance( _self, to, quantity );
 
-            print(value + "RNV was issued to " + to );
+            print(value);
+            print("RNV was issued to ");
+            print(to);
 
         }
 
@@ -537,7 +545,6 @@
 
         }
 
-        // create a new voucher
         void createvoucher( const account_name voucher_issuer, 
                             const account_name voucher_owner,
                             uint64_t offerId)
@@ -551,13 +558,13 @@
                 voucher.voucher_owner = voucher_owner;
                 voucher.buy_date = now();
             });
-
-            print("Your voucherId is: " + id);
+            print("Your voucherId is: ");
+            print(id);
 
         }
 
     
-    //@abi table account i64
+        //@abi table account i64
         struct account 
         {   
          account_name owner;
@@ -633,6 +640,29 @@
             indexed_by< N(offerId), const_mem_fun<offer, uint64_t, &offer::by_offerId> >
         > offertable;
 
+        
+        //@abi table materials i64
+        struct materials
+        {
+            uint64_t account_name;
+            uint64_t materialId;
+            uint32_t create_at;
+            uint32_t last_updated_at;
+            uint64_t materialUnd;
+            uint64_t quote_price;
+            string material_description;
+
+            uint64_t primary_key() const { return materialId; }
+            uint64_t by_materialId() const {return materialId; }
+
+
+            EOSLIB_SERIALIZE(materials, (account_name)(materialId)(create_at)(last_updated_at)(materialUnd)(quote_price)(material_description))
+        };
+
+        typedef eosio::multi_index< N(materials), materials,
+            indexed_by< N(materialId), const_mem_fun<materials, uint64_t, &materials::by_materialId> >
+        > materialtable;  
+
              
         //@abi voucher offer i64
         struct voucher
@@ -654,27 +684,7 @@
         typedef eosio::multi_index<N(voucher), voucher> vouchertable;
 
 
-        //@abi table materials i64
-        struct materials
-        {
-            uint64_t account_name;
-            uint64_t materialId;
-            uint32_t create_at;
-            uint32_t last_updated_at;
-            uint64_t materialUnd;
-            uint64_t quote_price;
-            string material_description;
-
-            uint64_t primary_key() const { return materialId; }
-            uint64_t by_materialId() const {return materialId; }
-
-
-            EOSLIB_SERIALIZE(materials, (account_name)(materialId)(create_at)(last_updated_at)(materialUnd)(quote_price)(material_description))
-        };
-
-        typedef eosio::multi_index< N(materials), materials,
-            indexed_by< N(materialId), const_mem_fun<materials, uint64_t, &materials::by_materialId> >
-        > materialtable;     
+   
 
         //@abi table boostprice i64
         struct boostprice 
