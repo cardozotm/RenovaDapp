@@ -114,7 +114,13 @@ Quando o herói visualiza a oferta, ele tem a opção de resgatar a oferta em tr
   - Impulsionar oferta
   - Remover oferta
 
-## Implementações Posteriores e Roadmap
+## Mockups
+
+![alt text](https://github.com/EOSRioHackathon/ERH18-bluchain/blob/master/mockups/MOBILE%20RENOVA%2001.png)
+
+![alt text](https://github.com/EOSRioHackathon/ERH18-bluchain/blob/master/mockups/MOBILE%20RENOVA%20Menu%20aberto.png)
+
+![alt text](https://github.com/EOSRioHackathon/ERH18-bluchain/blob/master/mockups/PAINEL%20ADM%20(1).png)
 
 ## Referências
 1. https://www.ecycle.com.br/component/content/article/38-no-mundo/1157-estimativa-revela-que-quantidade-de-lixo-produzida-no-mundo-sera-quase-70-maior-em-2030.html
