@@ -235,12 +235,12 @@
                     _boost.emplace(get_self(), [&]( auto& a ) {
                         a.account_name = account;
                         a.bpricelId = prices.available_primary_key();  
-                        a.boostprice = value; 
+                        a.bprice = value; 
                         a.last_updated_at = now();
                   });
                 } else {
                     _boost.modify( toitr, 0, [&]( auto& a ) {
-                        a.boostprice = value; 
+                        a.bprice = value; 
                         a.last_updated_at = now();
                   });
                 }
@@ -270,10 +270,10 @@
                     boostpricetable boost(_self, _self); // code, scope
                     for (auto& item : boost)
                     {
-                        if(item.boostprice != 0)
+                        if(item.bprice != 0)
                         {
 
-                        auto to_pay = item.boostprice;
+                        auto to_pay = item.bprice;
                         auto quantity = eosio::symbol_type(S(to_pay,RNV));
                         
                          renova::transfer(account, _self, quantity);
@@ -667,12 +667,12 @@
         {
             uint64_t bpricelId;
             uint64_t account_name;
-            uint64_t boostprice;
+            uint64_t bprice;
             uint64_t last_updated_at;
 
             uint64_t primary_key()const { return bpricelId; }
 
-            EOSLIB_SERIALIZE(materials, (bpricelId)(account_name)(boostprice)(last_updated_at)(last_updated_at))
+            EOSLIB_SERIALIZE(boostprice, (bpricelId)(account_name)(bprice)(last_updated_at)(last_updated_at))
         };
 
       typedef eosio::multi_index<N(boostprice), boostprice> boostpricetable;
