@@ -32,6 +32,7 @@ export class CarteiraPage {
   public balanceBlux: any;
   public history: any;
   public cordovaIsAvalible: boolean;
+  public offer: object;
 
   constructor(
     public navCtrl: NavController,
@@ -42,6 +43,13 @@ export class CarteiraPage {
     public plt: Platform) {
 
     this.qrerror = navParams.get('qrerror');
+    this.offer = {
+      title: "Bolsa Feminina Azul",
+      merchant: "Loja da Tia Joana",
+      thumbnail: "",
+      discount: "20%",
+      value: "50 RNV",
+    }
 
   }
   ionViewWillEnter() {
