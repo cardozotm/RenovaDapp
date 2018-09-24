@@ -1,5 +1,3 @@
-
-
 <ion-content>
 
 
@@ -23,19 +21,22 @@
     <div *ngIf="!balanceReceived">
       <ion-spinner name="circles"></ion-spinner>
     </div>
- 
+
     <div *ngIf="saldo == 0">
       <ion-grid>
         <ion-row align-items-baseline>
           <ion-col col-12 text-center>
-            <p  class="firstClass">0</p>
-            <p  class="secondClass">RNV</p>
+            <p class="firstClass">0</p>
+            <p class="secondClass">RNV</p>
           </ion-col>
         </ion-row>
       </ion-grid>
     </div>
 
     <div *ngIf="saldo">
+      <ion-row>
+        <h2>Seu saldo</h2>
+      </ion-row>
       <ion-row align-items-baseline>
         <ion-col></ion-col>
         <ion-col nowrap no-padding>
@@ -63,12 +64,26 @@
         <ion-col>
           <p>Ecopontos</p>
         </ion-col>
-        <ion-button color="primary">Encontrar o mais próximo</ion-button>
+        <button ion-button color="primary">Encontrar o mais próximo</button>
       </ion-row>
     </ion-card>
 
+    <h2>Melhores ofertas</h2>
     <ion-card>
-      
+      <h2>{{ offer.title }}</h2>
+      <ion-row>
+        <ion-col>
+          {{ offer.thumbnail}}
+        </ion-col>
+        <ion-col>
+          {{ offer.merchant }}
+          {{ offer.discount }}
+          {{ offer.value }}
+        </ion-col>
+      </ion-row>
+      <button ion-button color="primary">Ver oferta</button>
     </ion-card>
+
+    <button>Ver todas as ofertas <ion-icon name="arrow-forward"></ion-icon></button>
 
 </ion-content>
