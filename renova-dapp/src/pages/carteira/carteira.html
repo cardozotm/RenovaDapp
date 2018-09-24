@@ -53,15 +53,18 @@
   <div class="hor-center-cont carteira-content">
 
     <ion-card padding>
-      <h2 text-center>Pesquisar</h2>
+      <h2 text-center margin-bottom>Pesquisar</h2>
       <ion-row>
-        <ion-col>
+        <ion-col text-center>
+          <img src="/assets/imgs/localizacao.svg" margin-bottom>
           <p>Localização</p>
         </ion-col>
-        <ion-col>
+        <ion-col text-center>
+            <img src="/assets/imgs/loja.svg" margin-bottom>
           <p>Lojas</p>
         </ion-col>
-        <ion-col>
+        <ion-col text-center>
+            <img src="/assets/imgs/ecoponto.svg" margin-bottom>
           <p>Ecopontos</p>
         </ion-col>
       </ion-row>
@@ -71,11 +74,15 @@
     </ion-card>
 
     <h2 text-center>Melhores ofertas</h2>
+    <div text-center>
+      <img src="/assets/imgs/estrelas.svg">
+    </div>
+
     <ion-card padding>
-      <h2 text-center>{{ offer.title }}</h2>
+      <h2 text-center margin-bottom>{{ offer.title }}</h2>
       <ion-row>
         <ion-col>
-          {{ offer.thumbnail }}
+          <img src="/assets/imgs/bolsa.jpg">
         </ion-col>
         <ion-col>
           <p>{{ offer.merchant }}</p>
