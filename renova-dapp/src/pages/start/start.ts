@@ -26,7 +26,7 @@ export class StartPage {
   step: string;
   cepObservable: Observable<object>;
   cep: any;
-  actor: number;
+  actor: any;
 
 
   signUpForm: FormGroup;
@@ -51,8 +51,8 @@ export class StartPage {
       neighborhood: new FormControl('', ),
       city: new FormControl('', ),
       state: new FormControl('', ),
-      zip: new FormControl('',Validators.compose([Validators.required])),
-      actor: new FormControl('',Validators.compose([Validators.required])),
+      zip: new FormControl('',Validators.compose([Validators.minLength(8),Validators.required])),
+      actor: new FormControl('',Validators.compose([Validators.minLength(1),Validators.required])),
       user: new FormControl('',Validators.compose([Validators.minLength(12),Validators.pattern('[a-z1-5]*'),Validators.required])),
       pin: new FormControl('',Validators.compose([Validators.minLength(6),Validators.maxLength(6),Validators.required,Validators.pattern('[0-9]*')])),
       pinconfirm: new FormControl('', Validators.compose([Validators.minLength(6), Validators.maxLength(6), Validators.required, Validators.pattern('[0-9]*')]))});
@@ -63,11 +63,13 @@ export class StartPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StartPage');
-      if (this.hasEosAccount()) {
+      
+    let eos_activeKeys = JSON.parse(this.hasEosAccount())
+    if ( eos_activeKeys.eosActiveKeys.role == '1') {
      this.openPage('CarteiraPage');
     }
   }
-  
+
 
   findCep() {
     let cepN = this.cepObservable
@@ -105,8 +107,8 @@ export class StartPage {
     alert.present();
   }
 
-  hasEosAccount(): boolean {
-    return !!localStorage.getItem('eos_activeKeys.');
+  hasEosAccount() {
+    return localStorage.getItem('eos_activeKeys.');
   }
 
   // Nav Functions
@@ -147,7 +149,6 @@ export class StartPage {
   }
 
   // Other functions
-
   restoreAlert() {
     const alert = this.alertCtrl.create({
       title: 'Restaurar carteira',
@@ -213,9 +214,10 @@ export class StartPage {
     
     const user = this.signUpForm.value.user;
     const pin = this.signUpForm.value.pin;
-    const gov_id = this.signUpForm.value.gov_id
-    const type:number = 0;
-    const status:number = 1;
+    const gov_id = this.signUpForm.value.gov_id;
+    const type = this.signUpForm.value.actor;
+    console.log()
+    const status = 1;
 
     const user_data = {
       complete_name: this.signUpForm.value.complete_name,
@@ -259,7 +261,7 @@ export class StartPage {
   }
 
   userLocalAccount() {
-    return localStorage.getItem('eos_activeKeys.');
+    return localStorage.getItem('eos_activeKeys.role');
   }
 
 }
