@@ -41,29 +41,29 @@
       <h2>Criar conta</h2>
     </div>
 
-
-    <div padding-horizontal *ngIf="step==='fase1'">
-      <ion-label stacked class="text label">
-        Sou um...
-      </ion-label>
-      <ion-segment [(ngModel)]="actor" color="primary">
-        <ion-segment-button value="0">
-          Heroi da Reciclagem
-        </ion-segment-button>
-        <ion-segment-button value="1">
-          Logista
-        </ion-segment-button>
-        <ion-segment-button value="2">
-          Ecoponto
-        </ion-segment-button>
-      </ion-segment>
-    </div>
-
-
     <form padding [formGroup]="signUpForm" (ngSubmit)="signUp()">
 
       <!-- Fase 1-->
       <div *ngIf="step==='fase1'">
+
+        <div padding-horizontal *ngIf="step==='fase1'">
+          <ion-label stacked class="text label">
+            Sou um...
+          </ion-label>
+          <ion-segment [(ngModel)]="actor" color="primary" formControlName="actor">
+            <ion-segment-button value="0">
+              Heroi da Reciclagem
+            </ion-segment-button>
+            <ion-segment-button value="1">
+              Logista
+            </ion-segment-button>
+            <ion-segment-button value="2">
+              Ecoponto
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+
+
 
         <ion-grid>
 
@@ -209,9 +209,14 @@
           </ion-row>
 
         </ion-grid>
-
+<!--
+      <div>
+          <button ion-button full [disabled]="!signUpForm.controls.actor.valid || !signUpForm.controls.complete_name.valid || !signUpForm.controls.gov_id.valid || !signUpForm.controls.zip.valid || !signUpForm.controls.number.valid"
+            class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
+        </div>
+-->
         <div>
-          <button ion-button full [disabled]="!signUpForm.controls.complete_name.valid || !signUpForm.controls.gov_id.valid || !signUpForm.controls.zip || !signUpForm.controls.number.valid || !signUpForm.controls.actor.valid"
+          <button ion-button full
             class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
         </div>
       </div>
