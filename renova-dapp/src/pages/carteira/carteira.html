@@ -28,7 +28,7 @@
       <ion-grid>
         <ion-row align-items-baseline>
           <ion-col col-12 text-center>
-            <p  class="firstClass">0.00</p>
+            <p  class="firstClass">0</p>
             <p  class="secondClass">RNV</p>
           </ion-col>
         </ion-row>
@@ -41,7 +41,7 @@
         <ion-col nowrap no-padding>
         </ion-col>
         <ion-col nowrap no-padding>
-          <p text-left class="carteira-header-saldo"> {{ saldo| number: '1.2-2' }}</p>
+          <p text-left class="carteira-header-saldo"> {{ saldo| number: '1.0-0' }}</p>
           <p class="rnv">RNV</p>
         </ion-col>
         <ion-col></ion-col>
@@ -51,29 +51,24 @@
 
   <div class="hor-center-cont carteira-content">
 
-    <div *ngIf="cordovaIsAvalible">
-      <a (click)="pushPageQr('EnviarPage')">
-        <img src="assets/imgs/botao_qr_code.svg" onmousedown="this.src='assets/imgs/botao_qr_code_apertado.svg'" onmouseup="this.src='assets/imgs/botao_qr_code.svg'">
-      </a>
-      <p padding>PAGAR COM QR CODE</p>
-    </div>
+    <ion-card>
+      <h2>Pesquisar</h2>
+      <ion-row>
+        <ion-col>
+          <p>Localização</p>
+        </ion-col>
+        <ion-col>
+          <p>Lojas</p>
+        </ion-col>
+        <ion-col>
+          <p>Ecopontos</p>
+        </ion-col>
+        <ion-button color="primary">Encontrar o mais próximo</ion-button>
+      </ion-row>
+    </ion-card>
 
-    <div *ngIf="!cordovaIsAvalible">
-      <a (click)="pushPageQr('QrcodescanPage')">
-        <img class="icone-camera" src="assets/imgs/botao_qr_code.svg" onmousedown="this.src='assets/imgs/botao_qr_code_apertado.svg'"
-          onmouseup="this.src='assets/imgs/botao_qr_code.svg'">
-
-      </a>
-
-      <p padding>PAGAR COM QR CODE</p>
-    </div>
-
-    <div class="carteira-btn">
-      <button ion-button outline block [disabled]="!balanceReceived" color="secondary" (click)="pushPageManual('EnviarPage')">
-        DIGITAR PAGAMENTO
-      </button>
-    </div>
-
-  </div>
+    <ion-card>
+      
+    </ion-card>
 
 </ion-content>
