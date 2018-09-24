@@ -52,7 +52,7 @@
 
   <div class="hor-center-cont carteira-content">
 
-    <ion-card>
+    <ion-card padding>
       <h2 text-center>Pesquisar</h2>
       <ion-row>
         <ion-col>
@@ -65,14 +65,14 @@
           <p>Ecopontos</p>
         </ion-col>
       </ion-row>
-        <div text-center>
-          <button ion-button color="secondary">Encontrar o mais próximo</button>
+        <div text-center padding>
+          <button block ion-button color="secondary">Encontrar o mais próximo</button>
         </div>
     </ion-card>
 
-    <h2>Melhores ofertas</h2>
+    <h2 text-center>Melhores ofertas</h2>
     <ion-card padding>
-      <h2>{{ offer.title }}</h2>
+      <h2 text-center>{{ offer.title }}</h2>
       <ion-row>
         <ion-col>
           {{ offer.thumbnail }}
@@ -83,11 +83,13 @@
           <p>{{ offer.value }}</p>
         </ion-col>
       </ion-row>
-      <button ion-button color="secondary" padding>Ver oferta</button>
+      <div padding>
+        <button block ion-button color="secondary">Ver oferta</button>
+      </div>
     </ion-card>
 
-    <div text-center>
-      <button ion-button color="secondary">Ver todas as ofertas <ion-icon name="arrow-forward"></ion-icon> </button>
+    <div text-center padding>
+      <button block ion-button color="secondary">Ver todas as ofertas <ion-icon name="arrow-forward" padding></ion-icon> </button>
     </div>
 
   </div>

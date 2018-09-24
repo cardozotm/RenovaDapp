@@ -37,6 +37,11 @@ page-carteira {
         font-size: 14px;
         font-weight: 500;
         line-height: 2.23;
+        background-color: #f7f9d3;
+        button {
+            color: color($colors, text);
+            text-transform: none;
+        }
     }
 
     .carteira-btn {
