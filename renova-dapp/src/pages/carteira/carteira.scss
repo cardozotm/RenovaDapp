@@ -157,5 +157,9 @@ page-carteira {
     .swiper-pagination-bullet {
         background-color: color($colors, primary) !important;
     }
+
+    .swiper-slide img {
+        height: 157px;
+    }
 }
 
