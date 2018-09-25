@@ -1,18 +1,16 @@
 <ion-header>
+  <!--Cabeçalho-->
   <div class="carteira-header hor-center-cont">
 
     <div>
-
       <ion-grid align-items-start>
         <ion-row>
-          <ion-col col-12>
-            <ion-icon float-left padding-right menuToggle name="menu"></ion-icon>
+          <ion-col col-12 no-padding>
+            <ion-icon float-left padding-right menuToggle class="menu-icon" name="menu"></ion-icon>
             <h3 class="seu-saldo">Seu saldo</h3>
           </ion-col>
         </ion-row>
       </ion-grid>
-
-
     </div>
 
 
@@ -20,55 +18,53 @@
       <ion-spinner name="circles"></ion-spinner>
     </div>
 
-    <div *ngIf="balanceReceived">
-      <ion-grid>
+    <div no-padding *ngIf="balanceReceived">
         <ion-row align-items-baseline>
           <ion-col col-12 text-center>
             <p class="firstClass">{{ saldo| number: '1.0-0' }}</p>
             <p class="secondClass">RNV</p>
           </ion-col>
         </ion-row>
-      </ion-grid>
     </div>
 
   </div>
 </ion-header>
 
+
 <ion-content>
-
-
-
 
   <div class="hor-center-cont carteira-content">
 
+    <!--Pesquisar-->
     <ion-card padding>
-      <h2 text-center margin-bottom>Pesquisar</h2>
+      <h2 text-center margin-bottom class="carteira-subtitle">Pesquisar</h2>
       <ion-row>
         <ion-col text-center>
-          <img src="/assets/imgs/localizacao.svg" margin-bottom>
+          <img src="/assets/imgs/localizacao.svg" class="search-logo" margin-bottom>
           <p>Localização</p>
         </ion-col>
         <ion-col text-center>
-            <img src="/assets/imgs/loja.svg" margin-bottom>
+            <img src="/assets/imgs/loja.svg" class="search-logo" margin-bottom>
           <p>Lojas</p>
         </ion-col>
         <ion-col text-center>
-            <img src="/assets/imgs/ecoponto.svg" margin-bottom>
+            <img src="/assets/imgs/ecoponto.svg" class="search-logo" margin-bottom>
           <p>Ecopontos</p>
         </ion-col>
       </ion-row>
         <div text-center padding>
-          <button block ion-button color="secondary">Encontrar o mais próximo</button>
+          <button block ion-button color="secondary" class="carteira-btn">Encontrar o mais próximo</button>
         </div>
     </ion-card>
 
-    <h2 text-center>Melhores ofertas</h2>
+    <!--Ofertas-->
+    <h2 text-center class="carteira-subtitle" padding-top>Melhores ofertas</h2>
     <div text-center>
       <img src="/assets/imgs/estrelas.svg">
     </div>
 
     <ion-card padding>
-      <h2 text-center margin-bottom>{{ offer.title }}</h2>
+      <h2 text-center margin-bottom class="carteira-subtitle">{{ offer.title }}</h2>
       <ion-row>
         <ion-col>
           <img src="/assets/imgs/bolsa.jpg">
@@ -80,12 +76,12 @@
         </ion-col>
       </ion-row>
       <div padding>
-        <button block ion-button color="secondary">Ver oferta</button>
+        <button block ion-button color="secondary" class="carteira-btn">Ver oferta</button>
       </div>
     </ion-card>
 
     <div text-center padding>
-      <button block ion-button color="secondary">Ver todas as ofertas <ion-icon name="arrow-forward" padding></ion-icon> </button>
+      <button block ion-button color="secondary" class="carteira-btn">Ver todas as ofertas <ion-icon name="md-arrow-forward" padding></ion-icon> </button>
     </div>
 
   </div>
