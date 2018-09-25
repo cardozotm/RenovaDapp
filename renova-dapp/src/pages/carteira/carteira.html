@@ -1,7 +1,5 @@
-<ion-content>
-
-
-  <div padding class="carteira-header hor-center-cont">
+<ion-header>
+  <div class="carteira-header hor-center-cont">
 
     <div>
 
@@ -18,37 +16,28 @@
     </div>
 
 
-    <div *ngIf="!balanceReceived">
+    <div text-center *ngIf="!balanceReceived">
       <ion-spinner name="circles"></ion-spinner>
     </div>
 
-    <div *ngIf="saldo == 0">
+    <div *ngIf="balanceReceived">
       <ion-grid>
         <ion-row align-items-baseline>
           <ion-col col-12 text-center>
-            <p class="firstClass">0</p>
+            <p class="firstClass">{{ saldo| number: '1.0-0' }}</p>
             <p class="secondClass">RNV</p>
           </ion-col>
         </ion-row>
       </ion-grid>
     </div>
 
-    <div *ngIf="saldo">
-      <ion-row>
-        <h2>Seu saldo</h2>
-      </ion-row>
-      <ion-row align-items-baseline>
-        <ion-col></ion-col>
-        <ion-col nowrap no-padding>
-        </ion-col>
-        <ion-col nowrap no-padding>
-          <p text-left class="carteira-header-saldo"> {{ saldo| number: '1.0-0' }}</p>
-          <p class="rnv">RNV</p>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-    </div>
   </div>
+</ion-header>
+
+<ion-content>
+
+
+
 
   <div class="hor-center-cont carteira-content">
 
