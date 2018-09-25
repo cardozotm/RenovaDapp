@@ -72,16 +72,25 @@
               <img src="{{ '/assets/imgs/' + offer.thumbnail }}">
             </ion-col>
             <ion-col class="item-text-wrap">
-              <p class="offer-merchant">{{ offer.merchant }}</p>
-              <span class="offer-discount"><ion-icon name="pricetag"></ion-icon> {{ offer.discount }}</span>
-              <span class="offer-disc-text">Desconto</span>
-              <br />
+              <p style="margin-top: -16px;" class="offer-merchant">{{ offer.merchant }}</p>
+              <ion-row no-padding>
+                <ion-col no-padding>
+                  <span no-padding class="offer-discount">
+                    <ion-icon name="pricetag"></ion-icon> {{ offer.discount }}
+                  </span>
+                </ion-col>
+              </ion-row>
+              <ion-row no-padding style="margin-top: -16px;">
+                <ion-col no-padding>
+                  <span no-padding class="offer-disc-text">Desconto</span>
+                </ion-col>
+              </ion-row>
               <span class="offer-value">{{ offer.value }}</span>
               <span class="offer-token">RNV</span>
             </ion-col>
           </ion-row>
           <div padding>
-            <button block ion-button color="secondary" class="carteira-btn">Ver oferta</button>
+            <button block ion-button color="secondary" class="carteira-btn" style="margin-top: -24px;">Ver oferta</button>
           </div>
         </ion-card>
       </ion-slide>
