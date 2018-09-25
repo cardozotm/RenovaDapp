@@ -209,18 +209,14 @@
           </ion-row>
 
         </ion-grid>
-<!--
+
       <div>
           <button ion-button full [disabled]="!signUpForm.controls.actor.valid || !signUpForm.controls.complete_name.valid || !signUpForm.controls.gov_id.valid || !signUpForm.controls.zip.valid || !signUpForm.controls.number.valid"
             class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
         </div>
--->
-        <div>
-          <button ion-button full
-            class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
-        </div>
-      </div>
 
+      </div>
+    
       <!-- Fase 2 -->
       <div *ngIf="step==='fase2'">
         <div>

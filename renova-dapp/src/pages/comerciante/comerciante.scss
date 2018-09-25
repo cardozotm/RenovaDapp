@@ -1,3 +1,106 @@
 page-comerciante {
+    shrinking-segment-header {
+ 
+        background-color: #363636;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+ 
+        img {
+            border-radius: 50%;
+            width: 75px;
+            height: auto;
+            margin-right: 15px;
+        }
+ 
+    }
+    
+    .carteira-header{
+        background: $hor-background;
+        color: #fff;
+        width: 100%;
+        height: 136px;
+        font-size: 18px;
+        font-weight: 500px;
+    }
 
+    .carteira-header-saldo{
+        float:left;
+        width:auto
+    }
+
+    .carteira-content {
+        padding-top: 48px;
+        color: color($colors, text);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 2.23;
+        background-color: #f7f9d3;
+        button {
+            color: color($colors, text);
+            text-transform: none;
+        }
+    }
+
+    .carteira-btn {
+        padding-left: 48px;
+        padding-right: 48px;
+        padding-top: 24px;
+        padding-bottom: 36px;
+    }
+
+    .carteira-header-rs {
+        font-size: 14px;
+    }
+    .carteira-header-saldo {
+        font-size: 50px;
+    }
+
+    .seu-saldo {
+        width: 148px;
+        height: 24px;
+        font-family: Roboto;
+        font-size: 24px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.07;
+        letter-spacing: normal;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        color: #ffffff;
+      }
+
+    .firstClass, .secondClass {display: inline!important;}
+
+    .firstClass {
+        width: 279px;
+        height: 48px;
+        font-family: Roboto;
+        font-size: 70px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .secondClass{
+        width: 279px;
+        height: 24px;
+        font-family: Roboto;
+        font-size: 24px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+
+      }
 }

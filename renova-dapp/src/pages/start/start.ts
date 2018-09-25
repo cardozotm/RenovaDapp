@@ -7,8 +7,6 @@ import { default as cepPromise } from 'cep-promise';
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { zip } from 'rxjs/operators';
 
-import { CarteiraPage } from '../carteira/carteira';
-
 
 @IonicPage()
 @Component({
@@ -44,18 +42,19 @@ export class StartPage {
 
     this.signUpForm = new FormGroup({
 
-      complete_name: new FormControl('',Validators.compose([Validators.minLength(3),Validators.required])),
-      gov_id: new FormControl('',Validators.compose([Validators.minLength(11),Validators.required])),
-      street: new FormControl('', ),
-      number: new FormControl('',Validators.compose([Validators.pattern('[0-9]*'),Validators.required])),
-      neighborhood: new FormControl('', ),
-      city: new FormControl('', ),
-      state: new FormControl('', ),
-      zip: new FormControl('',Validators.compose([Validators.minLength(8),Validators.required])),
-      actor: new FormControl('',Validators.compose([Validators.minLength(1),Validators.required])),
-      user: new FormControl('',Validators.compose([Validators.minLength(12),Validators.pattern('[a-z1-5]*'),Validators.required])),
-      pin: new FormControl('',Validators.compose([Validators.minLength(6),Validators.maxLength(6),Validators.required,Validators.pattern('[0-9]*')])),
-      pinconfirm: new FormControl('', Validators.compose([Validators.minLength(6), Validators.maxLength(6), Validators.required, Validators.pattern('[0-9]*')]))});
+      complete_name: new FormControl('', Validators.compose([Validators.minLength(3), Validators.required])),
+      gov_id: new FormControl('', Validators.compose([Validators.minLength(11), Validators.required])),
+      street: new FormControl(''),
+      number: new FormControl('', Validators.compose([Validators.pattern('[0-9]*'), Validators.required])),
+      neighborhood: new FormControl(''),
+      city: new FormControl(''),
+      state: new FormControl(''),
+      zip: new FormControl('', Validators.compose([Validators.minLength(8), Validators.required])),
+      actor: new FormControl('', Validators.compose([Validators.minLength(1), Validators.required])),
+      user: new FormControl('', Validators.compose([Validators.minLength(12), Validators.pattern('[a-z1-5]*'), Validators.required])),
+      pin: new FormControl('', Validators.compose([Validators.minLength(6), Validators.maxLength(6), Validators.required, Validators.pattern('[0-9]*')])),
+      pinconfirm: new FormControl('', Validators.compose([Validators.minLength(6), Validators.maxLength(6), Validators.required, Validators.pattern('[0-9]*')]))
+    });
 
     this.errorMsg = '';
 
@@ -63,11 +62,20 @@ export class StartPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StartPage');
-      
-    let eos_activeKeys = JSON.parse(this.hasEosAccount())
-    if ( eos_activeKeys.eosActiveKeys.role == '1') {
-     this.openPage('CarteiraPage');
+    if (this.hasEosAccount()) {
+      let eos_activeKeys = JSON.parse(localStorage.getItem('eos_activeKeys.'));
+
+      if (eos_activeKeys.eosActiveKeys.role == '0') {
+        this.openPage('CarteiraPage');
+      }
+      if (eos_activeKeys.eosActiveKeys.role == '1') {
+        this.openPage('ComerciantePage');
+      }
+      if (eos_activeKeys.eosActiveKeys.role == '2') {
+        this.openPage('CentroColetaPage');
+      }
     }
+
   }
 
 
@@ -107,8 +115,8 @@ export class StartPage {
     alert.present();
   }
 
-  hasEosAccount() {
-    return localStorage.getItem('eos_activeKeys.');
+  hasEosAccount(): boolean {
+    return !!localStorage.getItem('eos_activeKeys.');
   }
 
   // Nav Functions
@@ -127,7 +135,7 @@ export class StartPage {
 
   nextStep(step) {
     this.step = step;
-    if(step == 'fase1'){
+    if (step == 'fase1') {
       this.dadosSeguros();
     }
   }
@@ -211,7 +219,7 @@ export class StartPage {
   signUp() {
 
     this.presentLoading();
-    
+
     const user = this.signUpForm.value.user;
     const pin = this.signUpForm.value.pin;
     const gov_id = this.signUpForm.value.gov_id;
@@ -235,9 +243,9 @@ export class StartPage {
         this.hasAccountAlert();
       })
       .catch(newAccount => {
-        this.eosapi.createAccountForUser(user, pin,  gov_id, user_data, type.valueOf(), status.valueOf()).then(resp => {
+        this.eosapi.createAccountForUser(user, pin, gov_id, user_data, type.valueOf(), status.valueOf()).then(resp => {
           if (resp === 'success') {
-            this.openPage('CarteiraPage'); 
+            this.openPage('CarteiraPage');
           }
         });
       })
