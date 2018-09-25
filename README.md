@@ -21,7 +21,7 @@ O lojista poderá criar ofertas de seus produtos em sua plataforma gratuitamente
 
 Os benefícios para o comerciante em participar da Renova são criar um relacionamento com o consumidor baseado na mútua preocupação com o meio ambiente e um lead para a compra de seus produtos ou serviços.
 
-Inicialmente o token RNV poderá ser utilizado apenas para desconto em produtos e serviços nos comércios participantes, nas quando o token tiver sua blockchain pública, ele poderá ser revertido em criptomoedas em exchanges, transferido entre usuários ou ter outras funcionalidades que a comunidade encontrar para ele.
+Inicialmente o token RNV poderá ser utilizado apenas para desconto em produtos e serviços nos comércios participantes, nas quando o token tiver sua blockchain pública, ele poderá ter outras funcionalidades que a comunidade desenvolver.
 
 Os principais atores do ecossistema são consumidores (heróis da reciclagem), comerciantes (lojistas) e centros de coleta e reciclagem (ecopontos).
 
