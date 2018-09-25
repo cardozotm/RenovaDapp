@@ -161,5 +161,27 @@ page-carteira {
     .swiper-slide img {
         height: 157px;
     }
+
+    .offer-merchant {
+        border-bottom: 1px solid color($colors, secondary) !important;
+    }
+
+    .offer-discount {
+        font-size: 28px;
+    }
+
+    .offer-disc-text {
+        font-size: 14px;
+    }
+
+    .offer-value {
+        color: color($colors, primary) !important;
+        font-size: 32px;
+    }
+
+    .offer-token {
+        color: color($colors, primary) !important;
+        font-size: 14x;
+    }
 }
 

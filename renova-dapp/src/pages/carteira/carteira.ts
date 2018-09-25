@@ -49,21 +49,21 @@ export class CarteiraPage {
         merchant: "Loja da Tia Joana",
         thumbnail: "bolsa.jpg",
         discount: "20%",
-        value: "50 RNV",
+        value: "50",
       },
       {
         title: "Amaciante Ariel 1L",
         merchant: "Mercado do Bairro",
         thumbnail: "amaciante.jpg",
         discount: "100%",
-        value: "120 RNV",
+        value: "120",
       },
       {
         title: "Coca-cola 2L",
         merchant: "Padaria Pão Doce",
         thumbnail: "coca.jpg",
         discount: "75%",
-        value: "80 RNV",
+        value: "80",
       },
     ]
 

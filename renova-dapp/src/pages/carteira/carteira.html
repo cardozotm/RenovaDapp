@@ -71,10 +71,13 @@
             <ion-col>
               <img src="{{ '/assets/imgs/' + offer.thumbnail }}">
             </ion-col>
-            <ion-col>
-              <p>{{ offer.merchant }}</p>
-              <p>{{ offer.discount }}</p>
-              <p>{{ offer.value }}</p>
+            <ion-col class="item-text-wrap">
+              <p class="offer-merchant">{{ offer.merchant }}</p>
+              <span class="offer-discount"><ion-icon name="pricetag"></ion-icon> {{ offer.discount }}</span>
+              <span class="offer-disc-text">Desconto</span>
+              <br />
+              <span class="offer-value">{{ offer.value }}</span>
+              <span class="offer-token">RNV</span>
             </ion-col>
           </ion-row>
           <div padding>
