@@ -16,6 +16,23 @@
 // automatically applied to the <body> element in the app.
 
 
-.backgroud {
-    background-image: linear-gradient(to right, #8dc63f, #d7df23);
+.background {
+    background: linear-gradient(to right, #8dc63f, #d7df23);
+  }
+
+  .no-background {
+    background-color: transparent;
+    // $item-ios-divider-color: transparent;
+  }
+
+  .divider {
+    // $item-ios-divider-color: #d7df23;
+  }
+
+  .menu {
+    .item{
+      color: #fff!important;
+      font-weight: 500;
+      font-size: 18px;
+    }
   }
