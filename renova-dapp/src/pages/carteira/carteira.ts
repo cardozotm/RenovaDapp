@@ -18,7 +18,7 @@ export class CarteiraPage {
   @ViewChild(Content) content: Content;
 
   qrerror: any;
- 
+
   section: string = 'two';
   somethings: any = new Array(20);
 
@@ -32,7 +32,7 @@ export class CarteiraPage {
   public balanceBlux: any;
   public history: any;
   public cordovaIsAvalible: boolean;
-  public offer: object;
+  public offerList: any;
 
   constructor(
     public navCtrl: NavController,
@@ -43,13 +43,29 @@ export class CarteiraPage {
     public plt: Platform) {
 
     this.qrerror = navParams.get('qrerror');
-    this.offer = {
-      title: "Bolsa Feminina Azul",
-      merchant: "Loja da Tia Joana",
-      thumbnail: "",
-      discount: "20%",
-      value: "50 RNV",
-    }
+    this.offerList = [
+      {
+        title: "Bolsa Feminina Azul",
+        merchant: "Loja da Tia Joana",
+        thumbnail: "",
+        discount: "20%",
+        value: "50 RNV",
+      },
+      {
+        title: "Bolsa Feminina Azul",
+        merchant: "Loja da Tia Joana",
+        thumbnail: "",
+        discount: "20%",
+        value: "50 RNV",
+      },
+      {
+        title: "Bolsa Feminina Azul",
+        merchant: "Loja da Tia Joana",
+        thumbnail: "",
+        discount: "20%",
+        value: "50 RNV",
+      },
+    ]
 
   }
   ionViewWillEnter() {
@@ -64,23 +80,23 @@ export class CarteiraPage {
     console.log('ionViewDidLoad CarteiraPage');
     this.isCordovaAvaible();
     if (this.qrerror === 'error') {
-   /*   this.presentCallback('failure',
-      'Verifique se você possui um QR Code válido',
-      '', ''); */
+      /*   this.presentCallback('failure',
+         'Verifique se você possui um QR Code válido',
+         '', ''); */
     }
   }
-/*
-  presentCallback(valid, err, newBalance, expense) {
-      const profileModal = this.modalCtrl.create(CallbackTransactionsPage,
-        {
-          result: valid,
-          error: err,
-          balance: newBalance,
-          expense: expense
-        });
-      profileModal.present();
-  }
-*/
+  /*
+    presentCallback(valid, err, newBalance, expense) {
+        const profileModal = this.modalCtrl.create(CallbackTransactionsPage,
+          {
+            result: valid,
+            error: err,
+            balance: newBalance,
+            expense: expense
+          });
+        profileModal.present();
+    }
+  */
 
   isCordovaAvaible() {
     if (!this.plt.is('cordova')) {

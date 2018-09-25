@@ -153,5 +153,9 @@ page-carteira {
         margin-left: auto;
         margin-right: auto;
     }
+
+    .swiper-pagination-bullet {
+        background-color: color($colors, primary) !important;
+    }
 }
 

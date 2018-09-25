@@ -19,12 +19,12 @@
     </div>
 
     <div no-padding *ngIf="balanceReceived">
-        <ion-row align-items-baseline>
-          <ion-col col-12 text-center>
-            <p class="firstClass">{{ saldo| number: '1.0-0' }}</p>
-            <p class="secondClass">RNV</p>
-          </ion-col>
-        </ion-row>
+      <ion-row align-items-baseline>
+        <ion-col col-12 text-center>
+          <p class="firstClass">{{ saldo| number: '1.0-0' }}</p>
+          <p class="secondClass">RNV</p>
+        </ion-col>
+      </ion-row>
     </div>
 
   </div>
@@ -44,17 +44,17 @@
           <p>Localização</p>
         </ion-col>
         <ion-col text-center>
-            <img src="/assets/imgs/loja.svg" class="search-logo" margin-bottom>
+          <img src="/assets/imgs/loja.svg" class="search-logo" margin-bottom>
           <p>Lojas</p>
         </ion-col>
         <ion-col text-center>
-            <img src="/assets/imgs/ecoponto.svg" class="search-logo" margin-bottom>
+          <img src="/assets/imgs/ecoponto.svg" class="search-logo" margin-bottom>
           <p>Ecopontos</p>
         </ion-col>
       </ion-row>
-        <div text-center padding>
-          <button block ion-button color="secondary" class="carteira-btn">Encontrar o mais próximo</button>
-        </div>
+      <div text-center padding>
+        <button block ion-button color="secondary" class="carteira-btn">Encontrar o mais próximo</button>
+      </div>
     </ion-card>
 
     <!--Ofertas-->
@@ -63,25 +63,30 @@
       <img src="/assets/imgs/estrelas.svg">
     </div>
 
-    <ion-card padding>
-      <h2 text-center margin-bottom class="carteira-subtitle">{{ offer.title }}</h2>
-      <ion-row>
-        <ion-col>
-          <img src="/assets/imgs/bolsa.jpg">
-        </ion-col>
-        <ion-col>
-          <p>{{ offer.merchant }}</p>
-          <p>{{ offer.discount }}</p>
-          <p>{{ offer.value }}</p>
-        </ion-col>
-      </ion-row>
-      <div padding>
-        <button block ion-button color="secondary" class="carteira-btn">Ver oferta</button>
-      </div>
-    </ion-card>
+    <ion-slides pager>
+      <ion-slide *ngFor="let offer of offerList">
+        <ion-card padding>
+          <h2 text-center margin-bottom class="carteira-subtitle">{{ offer.title }}</h2>
+          <ion-row>
+            <ion-col>
+              <img src="/assets/imgs/bolsa.jpg">
+            </ion-col>
+            <ion-col>
+              <p>{{ offer.merchant }}</p>
+              <p>{{ offer.discount }}</p>
+              <p>{{ offer.value }}</p>
+            </ion-col>
+          </ion-row>
+          <div padding>
+            <button block ion-button color="secondary" class="carteira-btn">Ver oferta</button>
+          </div>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
 
     <div text-center padding>
-      <button block ion-button color="secondary" class="carteira-btn">Ver todas as ofertas <ion-icon name="md-arrow-forward" padding></ion-icon> </button>
+      <button block ion-button color="secondary" class="carteira-btn">Ver todas as ofertas <ion-icon name="md-arrow-forward"
+          padding></ion-icon> </button>
     </div>
 
   </div>
