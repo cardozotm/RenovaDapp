@@ -13,6 +13,13 @@ page-lista-ofertas {
         .menu-icon {
             font-size: 36px;
             padding-left: 24px;
+            background-color: color($colors, secondary);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            margin: auto;
+            padding-top: 7px!important;
+            padding-left: 11px!important;
         }
     
         .carteira-header-saldo{

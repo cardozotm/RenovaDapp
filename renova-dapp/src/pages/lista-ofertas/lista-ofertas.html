@@ -6,7 +6,12 @@
 -->
 
 <ion-content class="carteira-content">
-<ion-card *ngFor="let offer of offerList" padding>
+  <ion-fab padding>
+    <ion-icon class="menu-icon" name="md-arrow-back" (click)="navCtrl.pop()"></ion-icon>
+  </ion-fab>
+
+
+  <ion-card *ngFor="let offer of offerList" padding>
     <h2 text-center margin-bottom class="carteira-subtitle">{{ offer.title }}</h2>
     <ion-row style="margin-top: 8px;">
       <ion-col>
