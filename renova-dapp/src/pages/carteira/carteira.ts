@@ -65,6 +65,13 @@ export class CarteiraPage {
         discount: "75%",
         value: "80",
       },
+      {
+        title: "Coca-cola 2L",
+        merchant: "Padaria Pão Doce",
+        thumbnail: "coca.jpg",
+        discount: "75%",
+        value: "80",
+      },
     ]
 
   }
