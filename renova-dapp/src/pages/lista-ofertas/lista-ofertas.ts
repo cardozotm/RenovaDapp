@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
  * Generated class for the ListaOfertasPage page.
@@ -16,6 +17,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ListaOfertasPage {
 
   offerList
+  public accountName: string;
+  public hasAccount = new BehaviorSubject<boolean>(this.userHasAccount());
+  private localAccount: any = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.offerList = [
@@ -66,6 +70,28 @@ export class ListaOfertasPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaOfertasPage');
+  }
+
+
+
+  // Eos Functions
+
+  // Verifica se o usuário possui um par de chaves armazenado no storageLocation e retorna false ou true
+  userHasAccount(): boolean {
+    return !!localStorage.getItem('eos_activeKeys.');
+  }
+
+  // Instancia uma account salva no storageLocation para ser usada pela aplicação
+  setLocalAccount() {
+    if (this.userHasAccount() === true) {
+      this.localAccount = JSON.parse(this.userLocalAccount());
+      this.accountName = this.localAccount.eosActiveKeys.accountName;
+    }
+  }
+
+  // Retorna o conteúdo das chaves armazenadas no storageLocation
+  userLocalAccount() {
+    return localStorage.getItem('eos_activeKeys.');
   }
 
 }
