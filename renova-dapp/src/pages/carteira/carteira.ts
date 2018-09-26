@@ -47,23 +47,30 @@ export class CarteiraPage {
       {
         title: "Bolsa Feminina Azul",
         merchant: "Loja da Tia Joana",
-        thumbnail: "",
+        thumbnail: "bolsa.jpg",
         discount: "20%",
-        value: "50 RNV",
+        value: "50",
       },
       {
-        title: "Bolsa Feminina Azul",
-        merchant: "Loja da Tia Joana",
-        thumbnail: "",
-        discount: "20%",
-        value: "50 RNV",
+        title: "Amaciante Ariel 1L",
+        merchant: "Mercado do Bairro",
+        thumbnail: "amaciante.jpg",
+        discount: "100%",
+        value: "120",
       },
       {
-        title: "Bolsa Feminina Azul",
-        merchant: "Loja da Tia Joana",
-        thumbnail: "",
-        discount: "20%",
-        value: "50 RNV",
+        title: "Coca-cola 2L",
+        merchant: "Padaria Pão Doce",
+        thumbnail: "coca.jpg",
+        discount: "75%",
+        value: "80",
+      },
+      {
+        title: "Coca-cola 2L",
+        merchant: "Padaria Pão Doce",
+        thumbnail: "coca.jpg",
+        discount: "75%",
+        value: "80",
       },
     ]
 
@@ -78,42 +85,9 @@ export class CarteiraPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CarteiraPage');
-    this.isCordovaAvaible();
-    if (this.qrerror === 'error') {
-      /*   this.presentCallback('failure',
-         'Verifique se você possui um QR Code válido',
-         '', ''); */
-    }
-  }
-  /*
-    presentCallback(valid, err, newBalance, expense) {
-        const profileModal = this.modalCtrl.create(CallbackTransactionsPage,
-          {
-            result: valid,
-            error: err,
-            balance: newBalance,
-            expense: expense
-          });
-        profileModal.present();
-    }
-  */
-
-  isCordovaAvaible() {
-    if (!this.plt.is('cordova')) {
-      this.cordovaIsAvalible = false;
-    } else {
-      this.cordovaIsAvalible = true;
-    }
   }
 
-  cordovaNotAvaible() {
-    const prompt = this.alertCtrl.create({
-      title: 'Não conseguimos acessar a câmera :(',
-      message: 'A leitura de QR code não está habilitada para a versão web. Experimente nosso App!',
-      buttons: ['Voltar']
-    });
-    prompt.present();
-  }
+
 
   // Nav Functions
   openPage(page) {
@@ -181,20 +155,6 @@ export class CarteiraPage {
   }
 
   getUserBalance(account_name) {
-    /*
-     this.eos.getBalance('blucoin', account_name, 'BLUM').then(blum => {
-       var obj = blum;
-       var result = Object.keys(obj).map(function (key) {
-         return [Number(key), obj[key]];
-       });
-       if (result.length > 0) {
-         this.balanceBlum = parseFloat(blum.toString().slice(0, -7));
-       }
-       else {
-         this.balanceBlum = 0;
-       }
-     });
-    */
     this.eos.getBalance('blucoin', account_name, 'BLUX').then(blux => {
       const obj = blux;
       const result = Object.keys(obj).map(function (key) {
@@ -211,7 +171,6 @@ export class CarteiraPage {
       });
 
     this.saldo = this.balanceBlux;
-    // this.saldo =  this.saldo.toString().slice(0,-7);
   }
 
 }

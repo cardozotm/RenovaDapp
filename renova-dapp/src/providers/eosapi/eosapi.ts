@@ -118,6 +118,8 @@ export class EosapiProvider {
                 'activePrivateKey': activePrivateKey
               };
 
+              console.log(accounts);
+
               const ciphertext = CryptoJS.AES.encrypt(activePrivateKey, secret);
               const store = {};
               store['eosActiveKeys'] = {
@@ -133,11 +135,11 @@ export class EosapiProvider {
               const cipherUserData = CryptoJS.AES.encrypt(JSON.stringify(user_data), activePublicKey).toString();
               const gov_idMd5 = CryptoJS.MD5(gov_id).toString();
 
-              this.reloadInstance(activePrivateKey);
+             // this.reloadInstance(activePrivateKey);
 
               setTimeout(() => {
-                this.addUser(accountName, gov_idMd5, cipherUserData, type, status)
-              }, 1000);
+                this.addUser(activePrivateKey, accountName, gov_idMd5, cipherUserData, type, status)
+              }, 2000);
             }
           })
         })
@@ -150,22 +152,21 @@ export class EosapiProvider {
     });
   }
 
-  addUser(account, gov_id, user_data, type, status) {
-    this.eos.transaction('renovasys', renovasys => {
-      const options = {
-        authorization: [{
-          actor: account,
-          permission: 'active'
-        }]
-      };
-      renovasys.adduser(account, gov_id, user_data, type, status, options);
-      // Returning a promise is optional (but handled as expected)
-    }).then(r => {
-     // this.clearInstance();
+  async addUser(unProtectedKey, accountName, govId, userData, type, status) {
+    this.reloadInstance(unProtectedKey).then(resp => {
+      this.eos.transaction('renovasys', renovasys => {
+        const options = {
+          authorization: [{
+            actor: accountName,
+            permission: 'active'
+          }]
+        };
+        renovasys.adduser(accountName, govId, userData, type, status, options);
+        // Returning a promise is optional (but handled as expected)
+      }).then(r => {
+        this.clearInstance();
+      });
     })
-      .catch(err => {
-        console.log(err);
-      })
 
   }
 
@@ -178,7 +179,7 @@ export class EosapiProvider {
     };
     // Atualmente ,busca as últimas 1 milhão de transações, refatorar para buscar sempre todas as transações.
     const actions = (await this.eos.getActions(scope, 0, 1000000)).actions;
-    console.log(actions);
+   // console.log(actions);
     actions.forEach(e => {
       if (e.action_trace.act.data.from === actor) {
         sent.push(e);
@@ -187,7 +188,7 @@ export class EosapiProvider {
         received.push(e);
       }
     });
-    console.log(history);
+   // console.log(history);
     return history;
   }
 
@@ -199,16 +200,15 @@ export class EosapiProvider {
   }
 
   // Faz o reload da instancia do EOS quando o usurio libera a chave privada para executar uma action
-  reloadInstance(privkey) {
+  async reloadInstance(privkey) {
     this.baseConfig.keyProvider.push(privkey);
     console.log(this.baseConfig.keyProvider);
     this.eos = EOSJS(this.baseConfig);
   }
 
   // Faz a limpeza da chave privada utilizada pelo usuário após a execução de uma action
-   clearInstance() {
+  async clearInstance() {
     this.baseConfig.keyProvider = ['5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'];
-    console.log(this.baseConfig.keyProvider);
     this.eos = EOSJS(this.baseConfig);
   }
 
@@ -217,7 +217,6 @@ export class EosapiProvider {
     const plaintext = decriptedKey.toString(CryptoJS.enc.Utf8);
     return plaintext;
   }
-
 
   async checkAccountName(name) {
     return this.format['encodeName'](name);
