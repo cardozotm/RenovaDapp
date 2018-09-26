@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, AlertController, Platform } from 'ionic-angular';
+import { Nav, AlertController, Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -26,7 +26,8 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public eosapi: EosapiProvider,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public navCtrl: NavController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -65,7 +66,7 @@ export class MyApp {
 
       const doc = new jsPDF();
       doc.setFontSize(40);
-      doc.text(90, 30, 'Blucoin');
+      doc.text(90, 30, 'Renova');
       doc.setFontSize(12);
       doc.text(10, 50, 'AccountName:');
       doc.text(10, 55, 'PubKey:');
@@ -74,7 +75,7 @@ export class MyApp {
       doc.addImage(logo, 'svg', 15, 10, 30, 30);
       doc.addImage(imgData, 'JPEG', 15, 70, 180, 180);
       doc.text(10, 270, 'Utilize esse QR code para a importação da sua carteira. Salve o documento em um local seguro.');
-      doc.save('Blucoin.pdf');    }, 500);
+      doc.save('Renova_' + accountName + '.pdf');    }, 500);
   }
 
 
