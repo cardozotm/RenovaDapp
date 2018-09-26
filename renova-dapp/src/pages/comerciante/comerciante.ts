@@ -23,6 +23,8 @@ export class ComerciantePage {
   public balanceReceived = false;
   public balanceBlux: any;
   public history: any;
+  public localAccount: any;
+  public hasAddedOffer: any;
 
 
 
@@ -30,7 +32,12 @@ export class ComerciantePage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private eosapi: EosapiProvider,
+<<<<<<< HEAD
     public loadingCtrl: LoadingController)
+=======
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,)
+>>>>>>> e014ee8eb9f38f0fafafacd721ecf92601eabe66
     {
    
     this.signOfferForm = new FormGroup({
@@ -124,6 +131,7 @@ export class ComerciantePage {
     this.saldo = this.balanceBlux;
   }
 
+<<<<<<< HEAD
   signOffer() {
 
     this.presentLoading();
@@ -228,6 +236,11 @@ export class ComerciantePage {
         });
     }
 
+=======
+  addOffer() {
+    console.log(this.signOfferForm.value)
+  }
+>>>>>>> e014ee8eb9f38f0fafafacd721ecf92601eabe66
 
 
 }

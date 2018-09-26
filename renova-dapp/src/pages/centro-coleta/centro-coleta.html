@@ -5,14 +5,86 @@
   Ionic pages and navigation.
 -->
 <ion-header>
+  <!--Cabeçalho-->
+  <div padding class="carteira-header hor-center-cont">
 
-  <ion-navbar>
-    <ion-title>centro-coleta</ion-title>
-  </ion-navbar>
+    <ion-icon float-left menuToggle class="menu-icon" name="menu"></ion-icon>
+    <h2 text-center>Centro de Coleta</h2>
 
+  </div>
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+  <form padding [formGroup]="signMatForm" (ngSubmit)="addMat()">
+
+    <ion-grid>
+
+      <ion-row>
+        <ion-col col-12>
+          <!-- Criar Material -->
+          <div>
+            <ion-item>
+              <ion-label stacked class="text label">
+                Nome do Material:
+              </ion-label>
+              <ion-input type="email" formControlName="mat_name">
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div>
+            <ion-item>
+              <ion-label stacked class="text label">
+                Descrição do Material:
+              </ion-label>
+              <ion-input type="email" formControlName="mat_description">
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div>
+            <ion-item>
+              <ion-label stacked class="text label">
+                Código Ref.:
+              </ion-label>
+              <ion-input type="email" formControlName="mat_id">
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div>
+            <ion-item>
+              <ion-label stacked class="text label">
+                Img Url:
+              </ion-label>
+              <ion-input type="email" formControlName="mat_img">
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div>
+            <ion-item>
+              <ion-label stacked class="text label">
+                Preço Renovas:
+              </ion-label>
+              <ion-input type="email" formControlName="mat_price">
+              </ion-input>
+            </ion-item>
+          </div>
+
+          <div>
+            <button ion-button full class="button-bottom" color="primary">Inserir Material</button>
+          </div>
+
+
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+
 
 </ion-content>

@@ -40,3 +40,5 @@
   .hidden{
     visibility: hidden;
 }
+
+.item-disabled, item-disabled * { opacity: 0.5; pointer-events: none; }

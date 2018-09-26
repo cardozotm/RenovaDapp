@@ -244,7 +244,15 @@ export class StartPage {
       .catch(newAccount => {
         this.eosapi.createAccountForUser(user, pin, gov_id, user_data, type, status.valueOf()).then(resp => {
           if (resp === 'success') {
-            this.openPage('CarteiraPage');
+            if (this.actor==0){
+              this.openPage('CarteiraPage');
+            }
+            if (this.actor==1){
+              this.openPage('ComerciantePage');
+            }
+            if (this.actor==2){
+              this.openPage('CentroColetaPage')
+            }
           }
         });
       })
