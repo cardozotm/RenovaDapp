@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, AlertController, Platform, NavController } from 'ionic-angular';
+import { Nav, AlertController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -26,8 +26,7 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public eosapi: EosapiProvider,
-    public alertCtrl: AlertController,
-    public navCtrl: NavController) {
+    public alertCtrl: AlertController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
