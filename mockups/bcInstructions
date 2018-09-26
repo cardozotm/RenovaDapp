@@ -1,0 +1,50 @@
+Private key: 5Jtt4zmfrhxFdbAeDiaoKFZG5AcNEdxJ6KeQeySvYzKHRuWZEck
+Public key: EOS6gWySZMSpcN73Ya4xoka7byKm4tVj6RGSJEPZgtfWRePAcqE58
+
+cleos create account eosio userrenova11 EOS6gWySZMSpcN73Ya4xoka7byKm4tVj6RGSJEPZgtfWRePAcqE58 EOS6gWySZMSpcN73Ya4xoka7byKm4tVj6RGSJEPZgtfWRePAcqE58
+
+cleos push action renovasys adduser '["userrenova11", "111.111.111-11", "{\"name\":\"Jose da Silva\"}", 0, 1]' -p userrenova11
+
+cleos create account eosio userrenova21 EOS6gWySZMSpcN73Ya4xoka7byKm4tVj6RGSJEPZgtfWRePAcqE58 EOS6gWySZMSpcN73Ya4xoka7byKm4tVj6RGSJEPZgtfWRePAcqE58
+
+cleos push action renovasys adduser '["userrenova21", "11.1111.111/1111-11", "{\"name\":\"Loja da Tia Joana\"}", 1, 1]' -p userrenova21
+
+cleos create account eosio userrenova31 EOS6gWySZMSpcN73Ya4xoka7byKm4tVj6RGSJEPZgtfWRePAcqE58 EOS6gWySZMSpcN73Ya4xoka7byKm4tVj6RGSJEPZgtfWRePAcqE58
+
+cleos push action renovasys adduser '["userrenova31", "11.1111.111/1111-22", "{\"name\":\"Asmare\"}", 2, 1]' -p userrenova31
+
+{
+  "rows": [{
+      "userId": 0,
+      "account_name": "15426372070662570512",
+      "gov_id": "111.111.111-11",
+      "create_at": 1537982678,
+      "last_updated_at": 1537982678,
+      "user_data": "{\"name\":\"Jose da Silva\"}",
+      "type": 0,
+      "status": 1
+    },{
+      "userId": "15426372070662570513",
+      "account_name": "15426372070662571024",
+      "gov_id": "11.1111.111/1111-11",
+      "create_at": 1537983025,
+      "last_updated_at": 1537983025,
+      "user_data": "{\"name\":\"Loja da Tia Joana\"}",
+      "type": 1,
+      "status": 1
+    },{
+      "userId": "15426372070662571025",
+      "account_name": "15426372070662571536",
+      "gov_id": "11.1111.111/1111-22",
+      "create_at": 1537983035,
+      "last_updated_at": 1537983035,
+      "user_data": "{\"name\":\"Asmare\"}",
+      "type": 2,
+      "status": 1
+    }
+  ],
+  "more": false
+}
+
+cleos push action renovasys addoffer '["userrenova21", "15426372070662570513", "50","{\"offerName\":\"Bolsa Feminina Azul\", \"offerDiscount\":\"20\%\", \"offerOriginal\":\"150\"}"]' -p userrenova21
+
