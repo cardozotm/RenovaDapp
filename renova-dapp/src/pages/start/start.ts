@@ -223,8 +223,7 @@ export class StartPage {
     const user = this.signUpForm.value.user;
     const pin = this.signUpForm.value.pin;
     const gov_id = this.signUpForm.value.gov_id;
-    const type = this.signUpForm.value.actor;
-    console.log()
+    const type = parseInt(this.signUpForm.value.actor);
     const status = 1;
 
     const user_data = {
@@ -243,7 +242,7 @@ export class StartPage {
         this.hasAccountAlert();
       })
       .catch(newAccount => {
-        this.eosapi.createAccountForUser(user, pin, gov_id, user_data, type.valueOf(), status.valueOf()).then(resp => {
+        this.eosapi.createAccountForUser(user, pin, gov_id, user_data, type, status.valueOf()).then(resp => {
           if (resp === 'success') {
             this.openPage('CarteiraPage');
           }

@@ -25,10 +25,12 @@ export class ComerciantePage {
   public history: any;
 
 
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private eosapi: EosapiProvider)
+    private eosapi: EosapiProvider,
+    public loadingCtrl: LoadingController)
     {
    
     this.signOfferForm = new FormGroup({
@@ -47,7 +49,8 @@ export class ComerciantePage {
 
     this.errorMsg = '';
 
-  
+    this.getUserInfo();
+
   }
 
 
@@ -120,6 +123,110 @@ export class ComerciantePage {
 
     this.saldo = this.balanceBlux;
   }
+
+  signOffer() {
+
+    this.presentLoading();
+
+    const store_name = this.signOfferForm.value.store_name;
+    const product_name = this.signOfferForm.value.product_name;
+    const product_description = this.signOfferForm.value.product_description;
+    const product_ref_code = this.signOfferForm.value.product_ref_code;
+    const product_img_url = this.signOfferForm.value.product_img_url;
+    const original_price_brl = this.signOfferForm.value.original_price_brl;
+    const offer_price_rnv = this.signOfferForm.value.offer_price_rnv;
+    const product_discount = this.signOfferForm.value.product_discount;
+    const constfinal_price_rnv = this.signOfferForm.value.constfinal_price_rnv;
+
+    
+
+
+    console.log()
+    const status = 1;
+
+    const offer_data = {
+       store_name: this.signOfferForm.value.store_name,
+       product_name: this.signOfferForm.value.product_name,
+       product_description: this.signOfferForm.value.product_description,
+       product_ref_code: this.signOfferForm.value.product_ref_code,
+       product_img_url:  this.signOfferForm.value.product_img_url,
+       original_price_brl: this.signOfferForm.value.original_price_brl,
+       offer_price_rnv: this.signOfferForm.value.offer_price_rnv,
+       product_discount: this.signOfferForm.value.product_discount,
+       constfinal_price_rnv: this.signOfferForm.value.constfinal_price_rnv
+    };
+/*
+        this.eosapi.createAccountForUser(user, pin, gov_id, user_data, type.valueOf(), status.valueOf()).then(resp => {
+          if (resp === 'success') {
+            this.openPage('CarteiraPage');
+          }
+        });
+  */
+  
+      }
+
+    // Loading
+    presentLoading() {
+      console.log('presentLoading called');
+      const loading = this.loadingCtrl.create({
+        spinner: 'bubbles',
+  
+      });
+  
+      loading.present();
+  
+      setTimeout(() => {
+        loading.dismiss();
+      }, 3000);
+  
+    }
+
+
+    async getUserInfo() {
+      const account = 'renovasys';
+      const contract = 'renovasys';
+      const table = 'user';
+
+      const localAccount = JSON.parse(this.userLocalAccount());
+      const accountName = localAccount.eosActiveKeys.accountName;
+
+      console.log(accountName);
+
+      await this.eosapi.eos.getTableRows(
+        { json: true, scope: account, code: contract, table: table, key_type: 'name' })
+        .then(res => {
+          const row = res.rows;
+          console.log(row);
+          row.map(client => {
+            const clientName = this.eosapi.format.decodeName(client.account_name, false);
+            console.log(clientName);
+            // Atribui os valores do usuario de acordo com a resposta na chain
+  
+            if (clientName === accountName) {
+              const parsedUserData = JSON.parse(client.user_data);
+              console.log(parsedUserData);
+  /*
+              this.userProfile = {
+                name: parsedUserData.name,
+                surname: parsedUserData.surname,
+                postalCode: parsedUserData.postalCode,
+                street: parsedUserData.street,
+                addNumber: parsedUserData.addNumber,
+                city: parsedUserData.city,
+                state: parsedUserData.state,
+              };
+  */
+              // console.log(this.userProfile);
+            }
+  
+          });
+        })
+  
+        // Tratar erros de requisição
+        .catch(err => {
+          console.log(err);
+        });
+    }
 
 
 
