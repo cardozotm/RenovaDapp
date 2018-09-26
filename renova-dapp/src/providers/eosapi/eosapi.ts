@@ -178,7 +178,7 @@ export class EosapiProvider {
     };
     // Atualmente ,busca as últimas 1 milhão de transações, refatorar para buscar sempre todas as transações.
     const actions = (await this.eos.getActions(scope, 0, 1000000)).actions;
-    console.log(actions);
+   // console.log(actions);
     actions.forEach(e => {
       if (e.action_trace.act.data.from === actor) {
         sent.push(e);
@@ -187,7 +187,7 @@ export class EosapiProvider {
         received.push(e);
       }
     });
-    console.log(history);
+   // console.log(history);
     return history;
   }
 

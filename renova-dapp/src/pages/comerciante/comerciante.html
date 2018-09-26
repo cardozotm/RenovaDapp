@@ -1,61 +1,35 @@
-<!--
-  Generated template for the ComerciantePage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-  <div padding class="carteira-header hor-center-cont">
-
-    <div>
-      <ion-grid align-items-start>
-        <ion-row>
-          <ion-col col-12>
-            <ion-icon float-left padding-right menuToggle name="menu"></ion-icon>
-            <h3 class="seu-saldo">Seu saldo</h3>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-    </div>
-
-    <!--
-        <div *ngIf="!balanceReceived">
-          <ion-spinner name="circles"></ion-spinner>
-        </div>
-
-    -->
-
-    <div *ngIf="saldo == 0">
-      <ion-grid>
+    <!--Cabeçalho-->
+    <div class="carteira-header hor-center-cont">
+  
+      <div>
+        <ion-grid align-items-start>
+          <ion-row>
+            <ion-col col-12 no-padding>
+                <ion-icon float-left padding-right menuToggle class="menu-icon" name="menu"></ion-icon>
+                <h3 class="seu-saldo">Seu saldo</h3>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+  
+  
+      <div text-center *ngIf="!balanceReceived">
+        <ion-spinner name="circles"></ion-spinner>
+      </div>
+  
+      <div no-padding *ngIf="balanceReceived">
         <ion-row align-items-baseline>
           <ion-col col-12 text-center>
-            <p class="firstClass">0</p>
+            <p class="firstClass">{{ saldo| number: '1.0-0' }}</p>
             <p class="secondClass">RNV</p>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </div>
+  
     </div>
-
-    <div *ngIf="saldo">
-      <ion-row>
-        <h2>Seu saldo</h2>
-      </ion-row>
-      <ion-row align-items-baseline>
-        <ion-col></ion-col>
-        <ion-col nowrap no-padding>
-        </ion-col>
-        <ion-col nowrap no-padding>
-          <p text-left class="carteira-header-saldo"> {{ saldo| number: '1.0-0' }}</p>
-          <p class="rnv">RNV</p>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-    </div>
-  </div>
-
-
-</ion-header>
+  </ion-header>
 
 
 <ion-content>
@@ -66,7 +40,7 @@
 
       <ion-row>
         <ion-col col-12>
-          <!-- Firt Name -->
+          <!-- Criar Oferta -->
 
           <div>
             <ion-item>
@@ -159,7 +133,7 @@
           </div>
 
           <div>
-              <button ion-button full class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir dados</button>
+              <button ion-button full class="button-bottom" color="primary" (click)="nextStep('fase2')">Inserir Oferta</button>
           </div>
 
 

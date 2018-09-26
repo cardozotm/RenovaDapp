@@ -26,8 +26,8 @@ page-comerciante {
     }
 
     .carteira-header-saldo{
-        float:left;
-        width:auto
+        font-size: 40px;
+        display: inline!important;
     }
 
     .carteira-content {
@@ -61,7 +61,7 @@ page-comerciante {
         width: 148px;
         height: 24px;
         font-family: Roboto;
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 500;
         font-style: normal;
         font-stretch: normal;
@@ -71,36 +71,42 @@ page-comerciante {
         margin-left: auto;
         margin-right: auto;
         color: #ffffff;
+        padding-top: 8px;
       }
 
-    .firstClass, .secondClass {display: inline!important;}
+      .firstClass, .secondClass {display: inline!important;}
 
-    .firstClass {
-        width: 279px;
-        height: 48px;
-        font-family: Roboto;
-        font-size: 70px;
-        font-weight: 500;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #ffffff;
-      }
-
-      .secondClass{
-        width: 279px;
-        height: 24px;
-        font-family: Roboto;
-        font-size: 24px;
-        font-weight: 500;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        color: #ffffff;
-
-      }
+      .firstClass {
+          width: 279px;
+          height: 48px;
+          font-family: Roboto;
+          font-size: 36px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: center;
+          color: #ffffff;
+        }
+  
+        .secondClass{
+          width: 279px;
+          height: 24px;
+          font-family: Roboto;
+          font-size: 24px;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: center;
+          color: #ffffff;
+  
+        }
+        .menu-icon {
+            font-size: 36px;
+            padding-left: 24px;
+        }
+      
 }
