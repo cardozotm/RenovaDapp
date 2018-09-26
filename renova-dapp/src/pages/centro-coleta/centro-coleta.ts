@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, Form } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { EosapiProvider } from '../../providers/eosapi/eosapi';
 
 /**
  * Generated class for the CentroColetaPage page.
@@ -15,11 +19,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CentroColetaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  signMatForm: FormGroup;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public eosapi: EosapiProvider,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
+
+      this.signMatForm = new FormGroup({
+        mat_name: new FormControl (''),
+        mat_description: new FormControl (''),
+        mat_id: new FormControl (''),
+        mat_img: new FormControl (''),
+        mat_price: new FormControl (''),
+      });
+
+
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CentroColetaPage');
+  }
+
+  addMat() {
+    console.log(this.signMatForm.value)
   }
 
 }
