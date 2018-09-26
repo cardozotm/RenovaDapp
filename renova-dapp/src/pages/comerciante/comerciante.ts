@@ -23,12 +23,16 @@ export class ComerciantePage {
   public balanceReceived = false;
   public balanceBlux: any;
   public history: any;
+  public localAccount: any;
+  public hasAddedOffer: any;
 
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private eosapi: EosapiProvider)
+    private eosapi: EosapiProvider,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,)
     {
    
     this.signOfferForm = new FormGroup({
@@ -121,6 +125,9 @@ export class ComerciantePage {
     this.saldo = this.balanceBlux;
   }
 
+  addOffer() {
+
+  }
 
 
 }
