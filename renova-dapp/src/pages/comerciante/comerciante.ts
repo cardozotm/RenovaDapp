@@ -126,7 +126,7 @@ export class ComerciantePage {
   }
 
   addOffer() {
-
+    console.log(this.signOfferForm.value)
   }
 
 
