@@ -23,11 +23,11 @@
     using eosio::const_mem_fun;
     using eosio::print;
 
-    class rnvsys : public eosio::contract {
+    class renovasys : public eosio::contract {
         
     
     public:
-        explicit rnvsys(action_name self) : contract(self) {
+        explicit renovasys(action_name self) : contract(self) {
         }
 
         //@abi action
@@ -225,4 +225,4 @@
 
 
     };
-    EOSIO_ABI( rnvsys,(adduser)(updateuser)(changeuserst)(removeuser)(addoffer)(updateoffer)(removeoffer)(setbprice)(payforboost)(addmaterial)(updatemat)(removemat)(payformat)(payforoffer)(redeemvouche));
+    EOSIO_ABI( renovasys,(adduser)(updateuser)(changeuserst)(removeuser)(addoffer)(updateoffer)(removeoffer)(setbprice)(payforboost)(addmaterial)(updatemat)(removemat)(payformat)(payforoffer)(redeemvouche));

@@ -18,11 +18,10 @@
 
     class rnvuser : public eosio::contract {
         
-    
     public:
         explicit rnvuser(action_name self) : contract(self), _user(self, self) {
         }
-
+        
         auto& getUserByAccount(const account_name account) 
         {
 
