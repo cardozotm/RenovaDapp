@@ -32,16 +32,16 @@
         <ion-item class="no-background">
             <ion-icon name="md-person" padding-right></ion-icon> Perfil
         </ion-item>
-        <ion-item class="no-background">
+        <ion-item class="no-background" (click)="navCtrl.push('ListaOfertasPage')">
             <ion-icon name="basket" padding-right></ion-icon> Ofertas
         </ion-item>
         <ion-item class="no-background">
             <ion-icon name="pricetag" padding-right></ion-icon> Meus Cupons
         </ion-item>
-        <ion-item class="no-background divider">
+        <ion-item class="no-background divider" (click)="createPDF()">
             <ion-icon name="md-download" padding-right></ion-icon> Exportar Carteira
         </ion-item>
-        <ion-item class="no-background">
+        <ion-item class="no-background" (click)="confirmLogout()">
             <ion-icon name="md-exit" padding-right></ion-icon> Sair
         </ion-item>
       </ion-list>

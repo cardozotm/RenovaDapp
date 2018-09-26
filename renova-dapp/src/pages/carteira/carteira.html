@@ -64,29 +64,43 @@
     </div>
 
     <ion-slides pager>
-      <ion-slide *ngFor="let offer of offerList">
+      <ion-slide *ngFor="let offer of offerList.slice(0,3)">
         <ion-card padding>
           <h2 text-center margin-bottom class="carteira-subtitle">{{ offer.title }}</h2>
-          <ion-row>
+          <ion-row style="margin-top: 8px;">
             <ion-col>
-              <img src="/assets/imgs/bolsa.jpg">
+              <img src="{{ '/assets/imgs/' + offer.thumbnail }}">
             </ion-col>
-            <ion-col>
-              <p>{{ offer.merchant }}</p>
-              <p>{{ offer.discount }}</p>
-              <p>{{ offer.value }}</p>
+            <ion-col class="item-text-wrap">
+              <p style="margin-top: -16px;" class="offer-merchant">{{ offer.merchant }}</p>
+              <ion-row no-padding>
+                <ion-col no-padding>
+                  <span no-padding class="offer-discount">
+                    <ion-icon name="pricetag"></ion-icon> {{ offer.discount }}
+                  </span>
+                </ion-col>
+              </ion-row>
+              <ion-row no-padding style="margin-top: -16px;">
+                <ion-col no-padding>
+                  <span no-padding class="offer-disc-text">Desconto</span>
+                </ion-col>
+              </ion-row>
+              <span class="offer-value">{{ offer.value }}</span>
+              <span class="offer-token">RNV</span>
             </ion-col>
           </ion-row>
           <div padding>
-            <button block ion-button color="secondary" class="carteira-btn">Ver oferta</button>
+            <button block ion-button color="secondary" class="carteira-btn" style="margin-top: -8px;">Ver oferta</button>
           </div>
         </ion-card>
       </ion-slide>
     </ion-slides>
 
     <div text-center padding>
-      <button block ion-button color="secondary" class="carteira-btn">Ver todas as ofertas <ion-icon name="md-arrow-forward"
-          padding></ion-icon> </button>
+      <button block ion-button color="secondary" class="carteira-btn" (click)="navCtrl.push('ListaOfertasPage')">
+        Ver todas as ofertas 
+        <ion-icon name="md-arrow-forward" padding></ion-icon> 
+      </button>
     </div>
 
   </div>
